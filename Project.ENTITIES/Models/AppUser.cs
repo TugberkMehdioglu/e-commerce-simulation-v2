@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Project.ENTITIES.Models
 {
-    public class AppUser : IdentityUser, IEntity<string>
+    public class AppUser : IdentityUser, IEntity
     {
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }

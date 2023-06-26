@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.ENTITIES", "Project.ENTITIES\Project.ENTITIES.csproj", "{128B380F-E12F-4DED-A7E9-666B0F7510EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.ENTITIES", "Project.ENTITIES\Project.ENTITIES.csproj", "{128B380F-E12F-4DED-A7E9-666B0F7510EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.MAP", "Project.MAP\Project.MAP.csproj", "{7D8FF027-E7E6-465D-BCC1-382C1AA88A90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{128B380F-E12F-4DED-A7E9-666B0F7510EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{128B380F-E12F-4DED-A7E9-666B0F7510EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{128B380F-E12F-4DED-A7E9-666B0F7510EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D8FF027-E7E6-465D-BCC1-382C1AA88A90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D8FF027-E7E6-465D-BCC1-382C1AA88A90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D8FF027-E7E6-465D-BCC1-382C1AA88A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D8FF027-E7E6-465D-BCC1-382C1AA88A90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
