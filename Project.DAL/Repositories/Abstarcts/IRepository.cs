@@ -18,25 +18,25 @@ namespace Project.DAL.Repositories.Abstarcts
         IQueryable<T> GetPassives();
 
         //Modify Commands
-        void Add(T entity);
-        void AddRange(ICollection<T> entities);
-        void Update(T entity);
-        void UpdateRange(ICollection<T> entities);
-        void Delete(T entity);
-        void DeleteRange(ICollection<T> entities);
+        void AddAsync(T entity);
+        void AddRangeAsync(ICollection<T> entities);
+        void UpdateAsync(T entity);
+        void UpdateRangeAsync(ICollection<T> entities);
+        void DeleteAsync(T entity);
+        void DeleteRangeAsync(ICollection<T> entities);
         void Destroy(T entity);
         void DestroyRange(ICollection<T> entities);
 
         //Expression Commands
         IQueryable<T> Where(Expression<Func<T, bool>> expression);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
-        Task<T?> FirstOrDefault(Expression<Func<T, bool>> expression);
+        Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> expression);
         object Select(Expression<Func<T, object>> expression);
-        Task<X?> SelectViaDTO<X>(Expression<Func<T, X>> expression) where X : class;//For DTO Classes without unboxing
+        Task<X?> SelectViaDTOAsync<X>(Expression<Func<T, X>> expression) where X : class;//For DTO Classes without unboxing
 
         //Find Commands
-        Task<T?> Find(int id);
-        Task<T?> FindFirstData();
-        Task<T?> FindLastData();
+        Task<T?> FindAsync(int id);
+        Task<T?> FindFirstDataAsync();
+        Task<T?> FindLastDataAsync();
     }
 }

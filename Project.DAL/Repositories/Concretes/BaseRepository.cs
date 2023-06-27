@@ -26,13 +26,13 @@ namespace Project.DAL.Repositories.Concretes
             await _context.SaveChangesAsync();
         }
 
-        public virtual async void Add(T entity)
+        public virtual async void AddAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
             SaveAsync();
         }
 
-        public virtual async void AddRange(ICollection<T> entities)
+        public virtual async void AddRangeAsync(ICollection<T> entities)
         {
             await _context.Set<T>().AddRangeAsync(entities);
             SaveAsync();
@@ -43,18 +43,18 @@ namespace Project.DAL.Repositories.Concretes
             return await _context.Set<T>().AnyAsync(expression);
         }
 
-        public virtual void Delete(T entity)
+        public virtual void DeleteAsync(T entity)
         {
             entity.Status = DataStatus.Deleted;
             entity.DeletedDate = DateTime.Now;
             SaveAsync();
         }
 
-        public virtual void DeleteRange(ICollection<T> entities)
+        public virtual void DeleteRangeAsync(ICollection<T> entities)
         {
             foreach (T entity in entities)
             {
-                Delete(entity);
+                DeleteAsync(entity);
             }
         }
 
@@ -70,22 +70,22 @@ namespace Project.DAL.Repositories.Concretes
             SaveAsync();
         }
 
-        public virtual async Task<T?> Find(int id)
+        public virtual async Task<T?> FindAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public virtual async Task<T?> FindFirstData()
+        public virtual async Task<T?> FindFirstDataAsync()
         {
             return await _context.Set<T>().OrderBy(x => x.CreatedDate).FirstOrDefaultAsync();
         }
 
-        public virtual async Task<T?> FindLastData()
+        public virtual async Task<T?> FindLastDataAsync()
         {
             return await _context.Set<T>().OrderByDescending(x => x.CreatedDate).FirstOrDefaultAsync();
         }
 
-        public virtual async Task<T?> FirstOrDefault(Expression<Func<T, bool>> expression)
+        public virtual async Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> expression)
         {
             return await _context.Set<T>().FirstOrDefaultAsync(expression);
         }
@@ -115,21 +115,27 @@ namespace Project.DAL.Repositories.Concretes
             return _context.Set<T>().Select(expression);
         }
 
-        public async Task<X?> SelectViaDTO<X>(Expression<Func<T, X>> expression) where X : class
+        public virtual async Task<X?> SelectViaDTOAsync<X>(Expression<Func<T, X>> expression) where X : class
         {
             return await _context.Set<T>().Select(expression).FirstOrDefaultAsync();
         }
 
-        public void Update(T entity)
+        public virtual async void UpdateAsync(T entity)
         {
             entity.Status = DataStatus.Updated;
             entity.ModifiedDate = DateTime.Now;
+            T toBeUpdated = (await FindAsync(entity.Id))!;
+            _context.Entry(toBeUpdated).CurrentValues.SetValues(entity);
+            SaveAsync();
            
         }
 
-        public void UpdateRange(ICollection<T> entities)
+        public virtual void UpdateRangeAsync(ICollection<T> entities)
         {
-            throw new NotImplementedException();
+            foreach (T entity in entities)
+            {
+                UpdateAsync(entity);
+            }
         }
 
         public virtual IQueryable<T> Where(Expression<Func<T, bool>> expression)
