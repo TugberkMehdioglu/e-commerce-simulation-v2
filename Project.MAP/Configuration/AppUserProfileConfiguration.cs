@@ -15,6 +15,15 @@ namespace Project.MAP.Configuration
             base.Configure(builder);
 
             builder.Ignore(x => x.FullName);
+
+            AppUserProfile adminProfile = new()
+            {
+                Id = "5c8defd5-91f2-4256-9f16-e7fa7546dec4",
+                FirstName = "Tuğberk",
+                LastName = "Mehdioğlu"
+            };
+
+            builder.HasData(adminProfile);
         }
     }
 }

@@ -15,6 +15,21 @@ namespace Project.MAP.Configuration
             base.Configure(builder);
 
             builder.Ignore(x => x.FullAddress);
+
+            Address adminAddress = new()
+            {
+                Name = "Ev",
+                Country = "Türkiye",
+                City = "İstanbul",
+                District = "Kağıthane",
+                NeighborHood = "Çeliktepe",
+                Street = "Şairane",
+                AptNo = 21,
+                Flat = 8,
+                AppUserProfileId = "5c8defd5-91f2-4256-9f16-e7fa7546dec4"
+            };
+
+            builder.HasData(adminAddress);
         }
     }
 }
