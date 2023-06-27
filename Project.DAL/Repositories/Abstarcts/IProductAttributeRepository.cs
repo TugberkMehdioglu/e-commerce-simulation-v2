@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project.DAL.Repositories.Abstarcts
 {
-    public interface IAppUserProfileRepository : IRepository<AppUserProfile>
+    public interface IProductAttributeRepository : IRepository<ProductAttribute>
     {
-        public Task<AppUserProfile?> FindByStringAsync(string Id);
     }
 }
