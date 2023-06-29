@@ -19,4 +19,9 @@
     <ProjectReference Include="..\Project.ENTITIES\Project.ENTITIES.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\productPictures\" />
+    <Folder Include="wwwroot\userPictures\" />
+  </ItemGroup>
+
 </Project>
