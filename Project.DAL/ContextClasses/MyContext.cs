@@ -17,7 +17,7 @@ namespace Project.DAL.ContextClasses
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(builder);//For IdentityUserRole's primary key issue
             builder.ApplyConfigurationsFromAssembly(Assembly.Load("Project.MAP"));
 
             //DataSeed for AppUsers

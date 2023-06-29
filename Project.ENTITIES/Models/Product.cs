@@ -11,7 +11,7 @@ namespace Project.ENTITIES.Models
         public string Name { get; set; } = null!;
         public decimal Price { get; set; }
         public short Stock { get; set; }
-        public string[] ImagePath { get; set; } = null!;
+        public string? ImagePath { get; set; } = null!;
         public string Description { get; set; } = null!;
         public int CategoryId { get; set; }
 

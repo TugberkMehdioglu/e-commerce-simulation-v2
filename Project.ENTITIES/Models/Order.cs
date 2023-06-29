@@ -9,7 +9,7 @@ namespace Project.ENTITIES.Models
     public class Order : BaseEntity
     {
         public int AddressId { get; set; }
-        public string AppUserId { get; set; } = null!;
+        public string? AppUserId { get; set; }
         public decimal TotalPrice { get; set; }
 
 

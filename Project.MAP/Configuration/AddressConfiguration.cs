@@ -18,6 +18,7 @@ namespace Project.MAP.Configuration
 
             Address adminAddress = new()
             {
+                Id = 1,
                 Name = "Ev",
                 Country = "Türkiye",
                 City = "İstanbul",

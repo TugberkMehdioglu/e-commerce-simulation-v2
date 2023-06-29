@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Project.ENTITIES\Project.ENTITIES.csproj" />
+    <ProjectReference Include="..\Project.MAP\Project.MAP.csproj" />
   </ItemGroup>
 
 </Project>
