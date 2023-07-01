@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace Project.MVCUI.Controllers
 {
+    [Route("[Controller]/[Action]")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -13,6 +14,8 @@ namespace Project.MVCUI.Controllers
             _logger = logger;
         }
 
+        [Route("/")]
+        [Route("/Home")]
         public IActionResult Index()
         {
             return View();
