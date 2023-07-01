@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="wwwroot\OuterTools\" />
     <Folder Include="wwwroot\productPictures\" />
     <Folder Include="wwwroot\userPictures\" />
