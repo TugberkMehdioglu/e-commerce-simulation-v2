@@ -1,5 +1,4 @@
-﻿@model SignUpWrapper
-
+﻿
 @{
     Layout = null;
 }
@@ -70,21 +69,13 @@
         <div class="container-fluid">
             <div class="row min-vh-100 flex-center g-0">
                 <div class="col-lg-8 col-xxl-5 py-3 position-relative">
-
-                    @if (ViewBag.message != null)
-                    {
-                        <partial name="_AlertSuccessPartial" model="ViewBag.message"></partial>
-                    }
-
-                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
                     <img class="bg-auth-circle-shape" src="~/OuterTools/assets/img/icons/spot-illustrations/bg-shape.png" alt="" width="250"><img class="bg-auth-circle-shape-2" src="~/OuterTools/assets/img/icons/spot-illustrations/shape-1.png" alt="" width="150">
                     <div class="card overflow-hidden z-index-1">
                         <div class="card-body p-0">
                             <div class="row g-0 h-100">
                                 <div class="col-md-5 text-center bg-card-gradient">
                                     <div class="position-relative p-4 pt-md-5 pb-md-7 light">
-                                        <div class="bg-holder bg-auth-card-shape" style="background-image:url(/OuterTools/assets/img/icons/spot-illustrations/half-circle.png);">
+                                        <div class="bg-holder bg-auth-card-shape" style="background-image:url(~/OuterTools/assets/img/icons/spot-illustrations/half-circle.png);">
                                         </div>
                                         <!--/.bg-holder-->
 
@@ -94,59 +85,18 @@
                                         </div>
                                     </div>
                                     <div class="mt-3 mb-4 mt-md-4 mb-md-5 light">
-                                        <p class="pt-3 text-white">Zaten üye misin ?<br><a class="btn btn-outline-light mt-2 px-4" asp-controller="Home" asp-action="Login">Giriş Yap</a></p>
+                                        <p class="mb-0 mt-4 mt-md-5 fs--1 fw-semi-bold text-white opacity-75"><a class="text-decoration-underline text-white" asp-controller="Home" asp-action="Terms">KKVK Aydınlatma Metni</a> ve <a class="text-decoration-underline text-white" asp-controller="Home" asp-action="Terms">Üyelik Sözleşmesi</a>'ni okuyabilirsin</p>
                                     </div>
                                 </div>
                                 <div class="col-md-7 d-flex flex-center">
                                     <div class="p-4 p-md-5 flex-grow-1">
-                                        <h3>Kayıt Ol</h3>
-                                        <form method="post" id="myForm">
-                                            <div class="form-floating mb-3">
-                                                <input class="form-control" placeholder=" " asp-for="AppUser!.UserName">
-                                                <label class="form-label" asp-for="AppUser!.UserName">Kullanıcı Adı</label>
-                                                <span asp-validation-for="AppUser!.UserName" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <input class="form-control" placeholder=" " asp-for="AppUser!.Email">
-                                                <label class="form-label" asp-for="AppUser!.Email">Email</label>
-                                                <span asp-validation-for="AppUser!.Email" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <input class="form-control" placeholder=" " asp-for="AppUser!.PhoneNumber">
-                                                <label class="form-label" asp-for="AppUser!.PhoneNumber">Cep No</label>
-                                                <span asp-validation-for="AppUser!.PhoneNumber" class="text-danger"></span>
-                                            </div>
-                                            <div class="row gx-2">
-                                                <div class="form-floating mb-3 col-sm-6">
-                                                    <input class="form-control" placeholder=" " asp-for="AppUser!.PasswordHash">
-                                                    <label class="form-label" asp-for="AppUser!.PasswordHash">Şifre</label>
-                                                    <span asp-validation-for="AppUser!.PasswordHash" class="text-danger"></span>
-                                                </div>
-                                                <div class="form-floating mb-3 col-sm-6">
-                                                    <input class="form-control" placeholder=" " asp-for="AppUser!.PasswordHashConfirm">
-                                                    <label class="form-label" asp-for="AppUser!.PasswordHashConfirm">Şifre Tekrar</label>
-                                                    <span asp-validation-for="AppUser!.PasswordHashConfirm" class="text-danger"></span>
-                                                </div>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <input class="form-control" placeholder=" " asp-for="AppUserProfile!.FirstName">
-                                                <label class="form-label" asp-for="AppUserProfile!.FirstName">İsim</label>
-                                                <span asp-validation-for="AppUserProfile!.FirstName" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <input class="form-control" placeholder=" " asp-for="AppUserProfile!.LastName">
-                                                <label class="form-label" asp-for="AppUserProfile!.LastName">Soyisim</label>
-                                                <span asp-validation-for="AppUserProfile!.LastName" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="required"/>
-                                                <label class="form-label" for="required"><a asp-controller="Home" asp-action="Terms">KKVK Aydınlatma Metni</a>'ni ve <a asp-controller="Home" asp-action="Terms">Üyelik Sözleşmesi</a>'ni okudum, onaylıyorum.</label>
-                                                <span style="display:none;" class="text-danger" id="errorMessage">Üyelik sözleşmesini kabul etmelisiniz</span>
-                                            </div>
-                                            <div class="mb-3">
-                                                <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Üye Ol</button>
-                                            </div>
-                                        </form>
+                                        <div class="text-center">
+                                            <img class="d-block mx-auto mb-4" src="~/OuterTools/assets/img/icons/spot-illustrations/16.png" alt="Email" width="100" />
+                                            <h3 class="mb-2">Üyeliğiniz oluşturuldu, mail'lerini kontrol et!</h3>
+                                            <p>
+                                                <strong>@ViewBag.email</strong> adresine aktivasyon mail'i gönderdik. <br class="d-none d-sm-block d-md-none" />Mail'deki linke tıklayarak eposta adresini onaylayabilirsin.
+                                            </p><a class="btn btn-primary btn-sm mt-3" asp-controller="Home" asp-action="Login"><span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4 down-1"></span>Giriş sayfasına dön</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +139,7 @@
                 <div class="d-flex align-items-start">
                     <img class="me-2" src="~/OuterTools/assets/img/icons/left-arrow-from-left.svg" width="20" alt="" />
                     <div class="flex-1">
-                        <h5 class="fs-0">RTL Mode</h5>
+                        <h5 class="fs-0">RTL Modu</h5>
                         <p class="fs--1 mb-0">Diline göre yazı yönünü belirle </p>
                     </div>
                 </div>
@@ -230,36 +180,6 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="~/OuterTools/vendors/list.js/list.min.js"></script>
     <script src="~/OuterTools/assets/js/theme.js"></script>
-
-    <partial name="_ValidationScriptsPartial"></partial>
-
-    <script>
-
-        document.addEventListener("DOMContentLoaded", function(){
-
-            let myForm = document.getElementById("myForm");
-            let checkBox = document.getElementById("required");
-            let checkBoxErrorMessage = document.getElementById("errorMessage");
-
-            myForm.addEventListener("submit", function(event){
-
-                if(!checkBox.checked){
-
-                    event.preventDefault();
-                    checkBoxErrorMessage.style.display = "inline";
-                };
-            });
-
-            checkBox.addEventListener("change", function(){
-
-                if (checkBox.checked){
-
-                    checkBoxErrorMessage.style.display="none";
-                };
-            });
-        });
-
-    </script>
 
 </body>
 
