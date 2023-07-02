@@ -20,6 +20,11 @@ namespace Project.MVCUI.Controllers
             return View();
         }
 
+        public IActionResult Terms()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

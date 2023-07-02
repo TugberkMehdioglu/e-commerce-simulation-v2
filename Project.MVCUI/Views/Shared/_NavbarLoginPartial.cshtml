@@ -15,11 +15,11 @@
                 @*Just Admin does not have profile*@
                 @if (sessionUser != null && sessionUser!.ImagePath != null)
                 {
-                    <img class="rounded-circle" src="~/userpictures/@(sessionUser.ImagePath!)" alt="" />
+                    <img class="rounded-circle" src="~/userpictures/@(sessionUser.ImagePath!)" alt="Resim Yüklenemedi" />
                 }
                 else
                 {
-                    <img class="rounded-circle" src="~/userpictures/empty-profile-pic.JPG" alt="" />
+                    <img class="rounded-circle" src="~/userpictures/empty-profile-pic.JPG" alt="Resim Yüklenemedi" />
                 }
             </div>
         </a>

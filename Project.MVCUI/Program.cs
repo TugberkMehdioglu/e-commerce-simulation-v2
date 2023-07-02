@@ -1,4 +1,6 @@
+using Microsoft.Extensions.FileProviders;
 using Project.BLL.ServiceExtensions;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,23 @@ builder.Services.AddAuthentication();
 builder.Services.AddDbContextService();
 builder.Services.AddIdentityService();
 builder.Services.AddRepositoryManagerServices();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Directory.GetCurrentDirectory()));
+
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Home/Login";
+    options.LogoutPath = new PathString("/Home/LogOut");
+    options.AccessDeniedPath = "/Home/AccessDenied";
+
+    options.Cookie.Name = "DontTuchMe";
+    options.ExpireTimeSpan = TimeSpan.FromDays(30);
+    options.SlidingExpiration = true;
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 
 
