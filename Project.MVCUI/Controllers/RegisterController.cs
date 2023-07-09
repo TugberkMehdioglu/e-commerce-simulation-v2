@@ -36,6 +36,13 @@ namespace Project.MVCUI.Controllers
         {
             if (!ModelState.IsValid) return View(request);
 
+            bool? checkBox = Request.Form.Keys.Contains("checkBox");
+            if (checkBox != true)
+            {
+                ModelState.AddModelErrorWithOutKey("Üyelik sözleşmesini kabul etmelisiniz");
+                return View(request);
+            }
+
             AppUser appUser = _mapper.Map<AppUser>(request.AppUser);
             AppUserProfile appUserProfile = _mapper.Map<AppUserProfile>(request.AppUserProfile);
 
