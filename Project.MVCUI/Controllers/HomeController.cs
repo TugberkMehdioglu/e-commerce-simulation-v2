@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Project.BLL.ManagerServices.Abstracts;
 using Project.BLL.ManagerServices.Concretes;
 using Project.COMMON.Extensions;
@@ -107,7 +108,7 @@ namespace Project.MVCUI.Controllers
 
             string passwordResetToken = await _userManager.GeneratePasswordResetTokenAsync(appUser!);
             string encodedToken = HttpUtility.UrlEncode(passwordResetToken);
-            string passwordResetLink = Url.Action("ResetToken", "Home", new { userId = appUser!.Id, token = encodedToken }, HttpContext.Request.Scheme)!;
+            string passwordResetLink = Url.Action("ResetPassword", "Home", new { userId = appUser!.Id, token = encodedToken }, HttpContext.Request.Scheme)!;
             string emailBody= $@"
   <div style='max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);'>
     <div style='text-align: center;'>
@@ -130,7 +131,7 @@ namespace Project.MVCUI.Controllers
         }
 
         [HttpGet("{userId}/{token}")]
-        public IActionResult ResetToken(string userId, string token)
+        public IActionResult ResetPassword(string userId, string token)
         {
             if(userId == null || token == null)
             {
@@ -138,9 +139,10 @@ namespace Project.MVCUI.Controllers
                 return RedirectToAction(nameof(ForgetPassword));
             }
 
-            string decodedToken = HttpUtility.UrlDecode(token);
+            string encodedToken = HttpUtility.UrlDecode(token);
+
             TempData["userId"] = userId;
-            TempData["token"] = decodedToken;
+            TempData["token"] = encodedToken;
 
             IEnumerable<IdentityError>? errors = HttpContext.Session.GetSession<IEnumerable<IdentityError>>("resetPasswordAlers");
             if(errors != null)
@@ -150,6 +152,40 @@ namespace Project.MVCUI.Controllers
             }
 
             return View();
+        }
+
+        [HttpPost("{userId}/{token}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ForgetPasswordViewModel request)
+        {
+            ModelState.Remove("Email");
+            if (!ModelState.IsValid) return View();
+
+            object? userId = TempData["userId"];
+            object? token = TempData["token"];
+            if(userId == null || token == null)
+            {
+                TempData["resetPasswordAlert"] = "Geçersiz kullanıcı yada zaman aşımı gerçekleşti";
+                return RedirectToAction(nameof(ForgetPassword));
+            }
+
+            AppUser? appUser = await _userManager.FindByIdAsync(userId.ToString());
+            if(appUser == null)
+            {
+                TempData["resetPasswordAlert"] = "Kullanıcı bulunamadı";
+                return RedirectToAction(nameof(ForgetPassword));
+            }
+
+            IdentityResult result = await _userManager.ResetPasswordAsync(appUser, token.ToString(), request.NewPassword);
+            if (!result.Succeeded)
+            {
+                string encodedToken = HttpUtility.UrlEncode(token.ToString()!);
+                HttpContext.Session.SetSession("resetPasswordAlers", result.Errors);
+                return RedirectToAction(nameof(ResetPassword), "Home", new { userId = userId.ToString(), token = encodedToken });
+            }
+
+            TempData["success"] = "Şifreniz başarıyla yenilendi!";
+            return RedirectToAction(nameof(Login));
         }
 
         public async Task LogOut()
