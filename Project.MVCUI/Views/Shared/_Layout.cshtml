@@ -121,67 +121,73 @@
                                 <!-- label-->
                                 @if (User.IsInRole("Admin"))
                                 {
-                                                                    <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                                    <div class="col-auto navbar-vertical-label">
-                                        Admin kısayolları
+                                    <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                                        <div class="col-auto navbar-vertical-label">
+                                            Admin kısayolları
+                                        </div>
+                                        <div class="col ps-0">
+                                            <hr class="mb-0 navbar-vertical-divider" />
+                                        </div>
                                     </div>
-                                    <div class="col ps-0">
-                                        <hr class="mb-0 navbar-vertical-divider" />
-                                    </div>
-                                </div>
-                                <!-- parent pages--><a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="UserList" role="button" aria-expanded="false">
-                                    <div class="d-flex align-items-center">
-                                        <span class="nav-link-icon"><span class="fas fa-users-cog"></span></span><span class="nav-link-text ps-1">Rol Ata</span>
-                                    </div>
-                                </a>
-                                <!-- parent pages--><a class="nav-link dropdown-indicator" href="#categories" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="e-commerce">
-                                    <div class="d-flex align-items-center">
-                                        <span class="nav-link-icon"><span class="fas fa-layer-group"></span></span><span class="nav-link-text ps-1">Kategori</span>
-                                    </div>
-                                </a>
-                                <ul class="nav collapse false" id="categories">
+                                    <!-- parent pages-->
 
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index" aria-expanded="false">
-                                            <div class="d-flex align-items-center">
-                                                <span class="nav-link-text ps-1">Kategoriler</span>
-                                            </div>
-                                        </a>
-                                        <!-- more inner pages-->
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="AddCategory" aria-expanded="false">
-                                            <div class="d-flex align-items-center">
-                                                <span class="nav-link-text ps-1">Kategori Ekle</span>
-                                            </div>
-                                        </a>
-                                        <!-- more inner pages-->
-                                    </li>
-                                </ul>
-                                <!-- parent pages--><a class="nav-link dropdown-indicator" href="#products" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="e-commerce">
-                                    <div class="d-flex align-items-center">
-                                        <span class="nav-link-icon"><span class="fas fa-cube"></span></span><span class="nav-link-text ps-1">Ürün</span>
-                                    </div>
-                                </a>
-                                <ul class="nav collapse false" id="products">
+                                    <a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="UserList" role="button" aria-expanded="false">
+                                        <div class="d-flex align-items-center">
+                                            <span class="nav-link-icon"><span class="fas fa-users-cog"></span></span><span class="nav-link-text ps-1">Rol Ata</span>
+                                        </div>
+                                    </a>
+                                    <!-- parent pages-->
 
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Index" aria-expanded="false">
-                                            <div class="d-flex align-items-center">
-                                                <span class="nav-link-text ps-1">Ürünler</span>
-                                            </div>
-                                        </a>
-                                        <!-- more inner pages-->
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Create" aria-expanded="false">
-                                            <div class="d-flex align-items-center">
-                                                <span class="nav-link-text ps-1">Ürün Ekle</span>
-                                            </div>
-                                        </a>
-                                        <!-- more inner pages-->
-                                    </li>
-                                </ul>
+                                    <a class="nav-link dropdown-indicator" href="#categories" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="e-commerce">
+                                        <div class="d-flex align-items-center">
+                                            <span class="nav-link-icon"><span class="fas fa-layer-group"></span></span><span class="nav-link-text ps-1">Kategori</span>
+                                        </div>
+                                    </a>
+                                    <ul class="nav collapse false" id="categories">
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index" aria-expanded="false">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="nav-link-text ps-1">Kategoriler</span>
+                                                </div>
+                                            </a>
+                                            <!-- more inner pages-->
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="AddCategory" aria-expanded="false">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="nav-link-text ps-1">Kategori Ekle</span>
+                                                </div>
+                                            </a>
+                                            <!-- more inner pages-->
+                                        </li>
+                                    </ul>
+                                    <!-- parent pages-->
+
+                                    <a class="nav-link dropdown-indicator" href="#products" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="e-commerce">
+                                        <div class="d-flex align-items-center">
+                                            <span class="nav-link-icon"><span class="fas fa-cube"></span></span><span class="nav-link-text ps-1">Ürün</span>
+                                        </div>
+                                    </a>
+                                    <ul class="nav collapse false" id="products">
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Index" aria-expanded="false">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="nav-link-text ps-1">Ürünler</span>
+                                                </div>
+                                            </a>
+                                            <!-- more inner pages-->
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Create" aria-expanded="false">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="nav-link-text ps-1">Ürün Ekle</span>
+                                                </div>
+                                            </a>
+                                            <!-- more inner pages-->
+                                        </li>
+                                    </ul>
                                 }
                                 @if (User.HasClaim(x => x.Type == ClaimTypes.Role && x.Value == "Member" || x.Value == "Admin"))
                                 {
