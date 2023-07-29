@@ -1,5 +1,6 @@
 ﻿@using Project.COMMON.Extensions;
 @using Project.MVCUI.Models.ShoppingTools;
+@using System.Security.Claims;
 
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
@@ -118,24 +119,16 @@
                                     </div>
                                 </a>
                                 <!-- label-->
-                                <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                                                    <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                                     <div class="col-auto navbar-vertical-label">
-                                        Kısayollar
+                                        Admin kısayolları
                                     </div>
                                     <div class="col ps-0">
                                         <hr class="mb-0 navbar-vertical-divider" />
                                     </div>
                                 </div>
-                                <!-- parent pages--><a class="nav-link" asp-controller="Profile" asp-action="Details" role="button" aria-expanded="false">
-                                    <div class="d-flex align-items-center">
-                                        <span class="nav-link-icon"><span class="fas fa-user-alt"></span></span><span class="nav-link-text ps-1">Profil</span>
-                                    </div>
-                                </a>
-                                <!-- parent pages--><a class="nav-link" asp-controller="Profile" asp-action="Edit" role="button" aria-expanded="false">
-                                    <div class="d-flex align-items-center">
-                                        <span class="nav-link-icon"><span class="fas fa-user-edit"></span></span><span class="nav-link-text ps-1">Profil Güncelle</span>
-                                    </div>
-                                </a>
                                 <!-- parent pages--><a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="UserList" role="button" aria-expanded="false">
                                     <div class="d-flex align-items-center">
                                         <span class="nav-link-icon"><span class="fas fa-users-cog"></span></span><span class="nav-link-text ps-1">Rol Ata</span>
@@ -189,6 +182,32 @@
                                         <!-- more inner pages-->
                                     </li>
                                 </ul>
+                                }
+                                @if (User.HasClaim(x => x.Type == ClaimTypes.Role && x.Value == "Member" || x.Value == "Admin"))
+                                {
+                                    <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                                        <div class="col-auto navbar-vertical-label">
+                                            Profil işlemleri
+                                        </div>
+                                        <div class="col ps-0">
+                                            <hr class="mb-0 navbar-vertical-divider" />
+                                        </div>
+                                    </div>
+                                    <!-- parent pages-->
+
+                                    <a class="nav-link" asp-controller="Profile" asp-action="Details" role="button" aria-expanded="false">
+                                        <div class="d-flex align-items-center">
+                                            <span class="nav-link-icon"><span class="fas fa-user-alt"></span></span><span class="nav-link-text ps-1">Profil</span>
+                                        </div>
+                                    </a>
+                                    <!-- parent pages-->
+
+                                    <a class="nav-link" asp-controller="Profile" asp-action="Edit" role="button" aria-expanded="false">
+                                        <div class="d-flex align-items-center">
+                                            <span class="nav-link-icon"><span class="fas fa-user-edit"></span></span><span class="nav-link-text ps-1">Profil Güncelle</span>
+                                        </div>
+                                    </a>
+                                }
                             </li>
                         </ul>
                     </div>
