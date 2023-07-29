@@ -13,5 +13,6 @@ namespace Project.DAL.Repositories.Abstarcts
         public Task<(bool, IEnumerable<IdentityError>?)> AddUserAsync(AppUser appUser);
         public Task<(bool, IEnumerable<IdentityError>?)> ChangePasswordAsync(AppUser appUser, string formerPassword, string newPassword);
         public Task<AppUser?> FindByStringAsync(string Id);
+        public Task<AppUser?> GetUserWithProfileAndAddressAsync(string userName);
     }
 }

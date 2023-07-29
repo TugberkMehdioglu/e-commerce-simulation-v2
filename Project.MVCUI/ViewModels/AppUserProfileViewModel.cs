@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Project.ENTITIES.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
@@ -27,5 +28,8 @@ namespace Project.MVCUI.ViewModels
         //Navigation Properties
         [ValidateNever]
         public AppUserViewModel? AppUser { get; set; }
+
+        [ValidateNever]
+        public ICollection<AddressViewModel>? Addresses { get; set; }
     }
 }

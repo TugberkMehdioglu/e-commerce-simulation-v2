@@ -1,0 +1,126 @@
+﻿@model AppUserViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@if (TempData["success"] != null)
+{
+    <div class="col-6 offset-3">
+        <partial name="_AlertSuccessPartial" model="@(TempData["success"]!.ToString())"></partial>
+    </div>
+}
+
+<div class="col-6 offset-3 alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+<div class="card mb-3">
+
+    <div class="card-header position-relative min-vh-25 mb-7">
+        <div class="bg-holder rounded-3 rounded-bottom-0" style="background-image:url(/OuterTools/assets/img/generic/4.jpg);">
+        </div>
+        <!--/.bg-holder-->
+
+        <div class="avatar avatar-5xl avatar-profile"><img class="rounded-circle img-thumbnail shadow-sm" src="~/userpictures/@(Model.AppUserProfile!.ImagePath??"empty-profile-pic.JPG")" width="200" alt="" /></div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-8">
+                <h4 class="mb-1">
+                    @Model.AppUserProfile.FullName<span data-bs-toggle="tooltip" data-bs-placement="right" title="Onaylı"><small class="fa fa-check-circle text-primary" data-fa-transform="shrink-4 down-2"></small></span>
+                </h4>
+                <a class="btn btn-falcon-default btn-sm px-4 mt-3 ms-2" asp-controller="Profile" asp-action="Edit">Düzenle</a>
+                <div class="border-dashed-bottom my-4 d-lg-none"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row g-0">
+    <div class="col-lg-12">
+        <div class="card mb-3">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Detay</h5>
+            </div>
+            <div class="card-body text-justify">
+
+                <div class="mb-0 text-1000 row">
+                    <label for="userName" class="col-form-label col-sm-2">Kullanıcı Adı :</label>
+                    <div class="col-sm-10 d-flex align-content-center">
+                        <input class="form-control" readonly id="userName" value="@Model.UserName" />
+                    </div>
+                </div>
+
+                <div class="mb-0 text-1000 row mt-3">
+                    <label for="email" class="col-form-label col-sm-2">Email :</label>
+                    <div class="col-sm-10 d-flex align-content-center">
+                        <input class="form-control" readonly id="email" value="@Model.Email" />
+                    </div>
+                </div>
+
+                <div class="collapse show mb-0 text-1000 row mt-3" id="profile-intro">
+                    <label for="phone" class="col-form-label col-sm-2">Telefon :</label>
+                    <div class="col-sm-10 d-flex align-content-center">
+                        <input class="form-control" readonly id="phone" value="@Model.PhoneNumber" />
+                    </div>
+                </div>
+
+                <div class="collapse show mb-0 text-1000 row mt-3" id="profile-intro">
+                    <label for="name" class="col-form-label col-sm-2">İsim :</label>
+                    <div class="col-sm-10 d-flex align-content-center">
+                        <input class="form-control" readonly id="name" value="@Model.AppUserProfile.FirstName" />
+                    </div>
+                </div>
+
+                <div class="collapse show mb-0 text-1000 row mt-3" id="profile-intro">
+                    <label for="lastName" class="col-form-label col-sm-2">Soyisim :</label>
+                    <div class="col-sm-10 d-flex align-content-center">
+                        <input class="form-control" readonly id="lastName" value="@Model.AppUserProfile.LastName" />
+                    </div>
+                </div>
+
+
+                @if(Model.AppUserProfile.Addresses?.Count == 0)
+                {
+                    <div class="collapse show mb-0 text-1000 row mt-3" id="profile-intro">
+                        <label for="address" class="col-form-label col-sm-2">Adres :</label>
+                        <div class="col-sm-10 d-flex align-content-center">
+                            <input class="form-control" readonly id="address" value="Mevcut adres bulunmamaktadır, lütfen adres ekleyiniz" />
+                        </div>
+                    </div>
+                }
+                else
+                {
+
+                    <hr class="collapse show" id="profile-intro" />
+                    <h5 class="text-center collapse show" id="profile-intro">Adresler</h5>
+                    <br class="collapse show" id="profile-intro" />
+                    
+                    
+                    List<AddressViewModel> addressesViewModel = Model.AppUserProfile.Addresses!.ToList();
+                    
+
+                    @for (int i = 0; i < addressesViewModel.Count; i++)
+                    {
+                        <div class="collapse show mb-0 text-1000 row mt-3" id="profile-intro">
+                            <label for="address@(i)" class="col-form-label col-sm-2">@addressesViewModel[i].Name :</label>
+                            <div class="col-sm-10 d-flex align-content-center">
+                                <input class="form-control" readonly id="address@(i)" value="@addressesViewModel[i].FullAddress" />
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+            <div class="card-footer bg-light p-0 border-top">
+                <button class="btn btn-link d-block w-100 btn-intro-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#profile-intro" aria-expanded="true" aria-controls="profile-intro"><span class="less">Daha az göster<span class="fas fa-chevron-up ms-2 fs--2"></span></span><span class="full">Hepsini göster<span class="fas fa-chevron-down ms-2 fs--2"></span></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/OuterTools/vendors/glightbox/glightbox.min.js"></script>
+}
+
+@section Css{
+    <link href="~/OuterTools/vendors/glightbox/glightbox.min.css" rel="stylesheet">
+}

@@ -48,5 +48,22 @@ namespace Project.BLL.ManagerServices.Concretes
         }
 
         public async Task<AppUser?> FindByStringAsync(string Id) => await _appUserRepository.FindByStringAsync(Id);
+
+        public async Task<(bool, string?, AppUser?)> GetUserWithProfileAndAddressAsync(string userName)
+        {
+            AppUser? appUser;
+            try
+            {
+                appUser = await _appUserRepository.GetUserWithProfileAndAddressAsync(userName);
+            }
+            catch (Exception exception)
+            {
+                return (false, $"Veritabanı işlemi sırasında hata oluştu, alınan hata => {exception.Message}. İçeriği => {exception.InnerException}", null);
+            }
+
+            if (appUser == null) return (false, "Kullanıcı bulunamadı", null);
+
+            return (true, null, appUser);
+        }
     }
 }
