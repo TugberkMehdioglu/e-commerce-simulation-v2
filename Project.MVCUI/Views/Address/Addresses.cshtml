@@ -1,0 +1,179 @@
+﻿@model List<AddressViewModel>
+@{
+    ViewData["Title"] = "Addresses";
+}
+
+@if (TempData["success"] != null)
+{
+    <div class="col-8 offset-2">
+        <partial name="_AlertSuccessPartial" model=@(TempData["success"]!.ToString())></partial>
+    </div>
+}
+
+<div class="col-8 offset-2" style="visibility:hidden;" id="ajaxDiv">
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row flex-between-end">
+            <div class=" text-center align-self-center">
+                <h3 class="mb-0">Kategoriler</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body pt-0">
+        <div class="tab-content">
+            <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-55d552bf-cdbd-40f9-856d-410188578fda" id="dom-55d552bf-cdbd-40f9-856d-410188578fda">
+                <div id="tableExample2" data-list='{"valueNames":["name","description"],"page":5,"pagination":true}'>
+                    <div class="table-responsive scrollbar">
+                        <table class="table table-hover table-striped fs--1 mb-0" id="myTable">
+                            <thead class="bg-200 text-900 align-middle">
+                                <tr>
+                                    <th class="sort text-center" data-sort="name">Ad</th>
+                                    <th class="sort text-center" data-sort="description">Adres</th>
+                                    <th class="text-center" scope="col"><a class="btn btn-outline-success" asp-controller="Address" asp-action="AddCategory">Adres Oluştur</a></th>
+                                </tr>
+                            </thead>
+                            <tbody class="list">
+                                @foreach (AddressViewModel item in Model)
+                                {
+                                    <tr>
+                                        <td class="name text-center text-800">@item.Name</td>
+                                        <td class="description text-center text-800">@(item.FullAddress ?? "Adres Yok")</td>
+                                        <td class="text-center">
+                                            <div>
+                                                <a asp-controller="Address" asp-action="UpdateAddress" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="Güncelle" class="btn p-0"><span class="text-800 fas fa-edit"></span></a>
+
+                                                <span id="deleteCategoryId" data-id="@item.Id" data-name="@item.Name" data-bs-toggle="modal" data-bs-target="#modal5">
+                                                    <a class="btn p-0 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Sil"><span class="text-800 fas fa-trash-alt"></span></a>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                        <ul class="pagination mb-0"></ul>
+                        <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*------------MODAL------------*@
+<div class="modal fade" id="modal5" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Adres silinsin mi?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModal">Kapat</button>
+                <button type="submit" class="btn btn-danger" id="deleteCategoryButton" data-bs-dismiss="modal">Sil</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*------------MODAL------------*@
+
+@section Scripts{
+    <script src="~/OuterTools/vendors/prism/prism.js"></script>
+
+}
+
+@section Css{
+    <link href="~/OuterTools/vendors/prism/prism-okaidia.css" rel="stylesheet">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+
+        $("#myTable").on("click", "#deleteCategoryId", function () {
+
+            let name = $(this).data("name");
+            let modalBodyText = name + " adresini silmek istediğinize emin misiniz?";
+            $(".modal-body").text(modalBodyText);
+
+            let id = $(this).data("id");
+            let row = $(this).closest("tr");
+
+            // Önceki tıklamalar için kaydedilen olayları temizleyin
+            $("#deleteCategoryButton").off("click");
+            //Önerimdeki $("#deleteCategoryButton").off("click.deleteCategory") kullanımı, sadece belirli bir olayın (.deleteCategory) kaldırılmasını sağlamak için daha spesifik bir şekilde olayları yönetmek içindi. Ancak, $("#deleteCategoryButton").off("click") kullanarak tüm click olaylarını kaldırmanız da aynı sonucu verecektir.
+
+            $("#deleteCategoryButton").click(function () {
+
+                $.ajax({
+
+                    type: "GET",
+                    url: "/Adress/DeleteAddress/" + id,
+                    success: function () {
+
+                        row.hide();
+                        successAlert("Adres başarıyla silindi");
+                    },
+                    error: function (xhr) {
+
+                        var error = xhr.responseJSON.message;
+                        successAlert(error);
+                    }
+                });
+
+            });
+        });
+    });
+    //-------------------------Js Alert---------------------------------
+    function successAlert(message) {
+
+        // Yeni bir div öğesi oluştur
+        let alertDiv = document.createElement("div");
+        alertDiv.classList.add("alert", "alert-success", "d-flex", "align-items-center", "alert-dismissible", "fade", "show");
+        alertDiv.setAttribute("role", "alert");
+
+        // İçeriği oluştur
+        let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "24");
+        svg.setAttribute("height", "24");
+        svg.setAttribute("fill", "currentColor");
+        svg.classList.add("bi", "bi-check-circle-fill");
+        svg.setAttribute("viewBox", "0 0 16 16");
+
+        let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z");
+
+        let span = document.createElement("span");
+        span.classList.add("ms-2");
+        span.textContent = message;
+
+        let button = document.createElement("button");
+        button.setAttribute("type", "button");
+        button.classList.add("btn-close");
+        button.setAttribute("data-bs-dismiss", "alert");
+
+        // Öğeleri birleştir
+        svg.appendChild(path);
+        alertDiv.appendChild(svg);
+        alertDiv.appendChild(span);
+        alertDiv.appendChild(button);
+
+        // Alert'ı belirli bir elementin içine ekleyin
+        let container = document.getElementById("ajaxDiv"); // Container elementin ID'sini buraya yazın
+        container.style.visibility = "visible";
+        container.appendChild(alertDiv);
+    };
+            //----------------------------------------------------------------------
+
+</script>
