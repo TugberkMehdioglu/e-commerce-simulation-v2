@@ -43,6 +43,7 @@
     <link href="~/OuterTools/assets/css/theme.min.css" rel="stylesheet" id="style-default">
     <link href="~/OuterTools/assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
     <link href="~/OuterTools/assets/css/user.min.css" rel="stylesheet" id="user-style-default">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script>
         var isRTL = JSON.parse(localStorage.getItem('isRTL'));
         if (isRTL) {
@@ -111,11 +112,19 @@
                                                 <input class="form-control" id="Email" asp-for="Email" />
                                                 <span asp-validation-for="Email" class="text-danger"></span>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-3" style="position: relative;">
                                                 <div class="d-flex justify-content-between">
                                                     <label class="form-label" for="PasswordHash" asp-for="PasswordHash">Şifre</label>
                                                 </div>
-                                                <input class="form-control" id="PasswordHash" asp-for="PasswordHash" />
+                                                <div class="input-group">
+                                                    <input class="form-control" id="PasswordHash" asp-for="PasswordHash" />
+                                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword" onclick="togglePasswordVisibility()">
+                                                        <i id="eyeIcon" class="bi bi-eye"></i>
+                                                    </button>
+                                                </div>
+@*                                                <a href="#">
+
+                                                </a>*@
                                                 <span asp-validation-for="PasswordHash" class="text-danger"></span>
                                             </div>
                                             <div class="row flex-between-center">
@@ -141,6 +150,25 @@
             </div>
         </div>
     </main>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById("PasswordHash");
+            const eyeIcon = document.getElementById("eyeIcon");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("bi-eye");
+                eyeIcon.classList.add("bi-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("bi-eye-slash");
+                eyeIcon.classList.add("bi-eye");
+            }
+        }
+    </script>
+
+
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
