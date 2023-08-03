@@ -213,11 +213,31 @@
                                             <span class="nav-link-icon"><span class="fas fa-user-edit"></span></span><span class="nav-link-text ps-1">Profil Güncelle</span>
                                         </div>
                                     </a>
-                                    <a class="nav-link" asp-controller="Address" asp-action="Addresses" role="button" aria-expanded="false">
+
+                                    <a class="nav-link dropdown-indicator" href="#adresses" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="e-commerce">
                                         <div class="d-flex align-items-center">
-                                            <span class="nav-link-icon"><span class="fas fa-user-edit"></span></span><span class="nav-link-text ps-1">Adreslerim</span>
+                                            <span class="nav-link-icon"><span class="far fa-building"></span></span><span class="nav-link-text ps-1">Adres</span>
                                         </div>
                                     </a>
+                                    <ul class="nav collapse false" id="adresses">
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-controller="Address" asp-action="Addresses" aria-expanded="false">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="nav-link-text ps-1">Adreslerim</span>
+                                                </div>
+                                            </a>
+                                            <!-- more inner pages-->
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-controller="Address" asp-action="AddAddress" aria-expanded="false">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="nav-link-text ps-1">Adres Ekle</span>
+                                                </div>
+                                            </a>
+                                            <!-- more inner pages-->
+                                        </li>
+                                    </ul>
                                 }
                             </li>
                         </ul>
