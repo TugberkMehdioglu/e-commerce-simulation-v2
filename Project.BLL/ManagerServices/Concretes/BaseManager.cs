@@ -20,13 +20,13 @@ namespace Project.BLL.ManagerServices.Concretes
             _repository = repository;
         }
 
-        public virtual (bool, string?) AddAsync(T entity)
+        public virtual async Task<(bool, string?)> AddAsync(T entity)
         {
             if (entity == null || entity.Status == DataStatus.Deleted) return (false, "Lütfen gerekli alanları doldurun");
 
             try
             {
-                _repository.AddAsync(entity);
+                await _repository.AddAsync(entity);
             }
             catch (Exception exception)
             {
@@ -36,13 +36,13 @@ namespace Project.BLL.ManagerServices.Concretes
             return (true, null);
         }
 
-        public virtual (bool, string?) AddRangeAsync(ICollection<T> entities)
+        public virtual async Task<(bool, string?)> AddRangeAsync(ICollection<T> entities)
         {
             if(entities == null || entities.Count == 0) return (false, "Lütfen gerekli alanları doldurun");
 
             try
             {
-                _repository.AddRangeAsync(entities);
+                await _repository.AddRangeAsync(entities);
             }
             catch (Exception exception)
             {
@@ -57,13 +57,13 @@ namespace Project.BLL.ManagerServices.Concretes
             return await _repository.AnyAsync(expression);
         }
 
-        public virtual (bool, string?) DeleteAsync(T entity)
+        public virtual async Task<(bool, string?)> DeleteAsync(T entity)
         {
             if (entity == null || entity.Status == DataStatus.Deleted) return (false, "Lütfen gerekli alanları doldurun");
 
             try
             {
-                _repository.DeleteAsync(entity);
+                await _repository.DeleteAsync(entity);
             }
             catch (Exception exception)
             {
@@ -73,13 +73,13 @@ namespace Project.BLL.ManagerServices.Concretes
             return (true, null);
         }
 
-        public virtual (bool, string?) DeleteRangeAsync(ICollection<T> entities)
+        public virtual async Task<(bool, string?)> DeleteRangeAsync(ICollection<T> entities)
         {
             if (entities == null || entities.Count == 0) return (false, "Lütfen gerekli alanları doldurun");
 
             try
             {
-                _repository.DeleteRangeAsync(entities);
+                await _repository.DeleteRangeAsync(entities);
             }
             catch (Exception exception)
             {
@@ -89,13 +89,13 @@ namespace Project.BLL.ManagerServices.Concretes
             return (true, null);
         }
 
-        public virtual (bool, string?) Destroy(T entity)
+        public virtual async Task<(bool, string?)> Destroy(T entity)
         {
             if (entity == null || entity.Status == DataStatus.Deleted) return (false, "Lütfen gerekli alanları doldurun");
 
             try
             {
-                _repository.Destroy(entity);
+                await _repository.Destroy(entity);
             }
             catch (Exception exception)
             {
@@ -105,13 +105,13 @@ namespace Project.BLL.ManagerServices.Concretes
             return (true, null);
         }
 
-        public virtual (bool, string?) DestroyRange(ICollection<T> entities)
+        public virtual async Task<(bool, string?)> DestroyRange(ICollection<T> entities)
         {
             if (entities == null || entities.Count == 0) return (false, "Lütfen gerekli alanları doldurun");
 
             try
             {
-                _repository.DestroyRange(entities);
+                await _repository.DestroyRange(entities);
             }
             catch (Exception exception)
             {
@@ -171,13 +171,13 @@ namespace Project.BLL.ManagerServices.Concretes
             return await _repository.SelectViaDTOAsync(expression);
         }
 
-        public virtual (bool, string?) UpdateAsync(T entity)
+        public virtual async Task<(bool, string?)> UpdateAsync(T entity)
         {
             if (entity == null || entity.Status == DataStatus.Deleted) return (false, "Lütfen gerekli alanları doldurun");
 
             try
             {
-                _repository.UpdateAsync(entity);
+                await _repository.UpdateAsync(entity);
             }
             catch (Exception exception)
             {
@@ -187,13 +187,13 @@ namespace Project.BLL.ManagerServices.Concretes
             return (true, null);
         }
 
-        public virtual (bool, string?) UpdateRangeAsync(ICollection<T> entities)
+        public virtual async Task<(bool, string?)> UpdateRangeAsync(ICollection<T> entities)
         {
             if (entities == null || entities.Count == 0) return (false, "Lütfen gerekli alanları doldurun");
 
             try
             {
-                _repository.UpdateRangeAsync(entities);
+                await _repository.UpdateRangeAsync(entities);
             }
             catch (Exception exception)
             {

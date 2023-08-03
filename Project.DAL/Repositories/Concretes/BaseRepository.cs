@@ -21,21 +21,21 @@ namespace Project.DAL.Repositories.Concretes
             _context = context;
         }
 
-        protected async void SaveAsync()
+        protected async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }
 
-        public virtual async void AddAsync(T entity)
+        public virtual async Task AddAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
-            SaveAsync();
+            await SaveAsync();
         }
 
-        public virtual async void AddRangeAsync(ICollection<T> entities)
+        public virtual async Task AddRangeAsync(ICollection<T> entities)
         {
             await _context.Set<T>().AddRangeAsync(entities);
-            SaveAsync();
+            await SaveAsync();
         }
 
         public virtual async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
@@ -43,31 +43,31 @@ namespace Project.DAL.Repositories.Concretes
             return await _context.Set<T>().AnyAsync(expression);
         }
 
-        public virtual void DeleteAsync(T entity)
+        public virtual async Task DeleteAsync(T entity)
         {
             entity.Status = DataStatus.Deleted;
             entity.DeletedDate = DateTime.Now;
-            SaveAsync();
+            await SaveAsync();
         }
 
-        public virtual void DeleteRangeAsync(ICollection<T> entities)
+        public virtual async Task DeleteRangeAsync(ICollection<T> entities)
         {
             foreach (T entity in entities)
             {
-                DeleteAsync(entity);
+                await DeleteAsync(entity);
             }
         }
 
-        public virtual void Destroy(T entity)
+        public virtual async Task Destroy(T entity)
         {
             _context.Set<T>().Remove(entity);
-            SaveAsync();
+            await SaveAsync();
         }
 
-        public virtual void DestroyRange(ICollection<T> entities)
+        public virtual async Task DestroyRange(ICollection<T> entities)
         {
             _context.Set<T>().RemoveRange(entities);
-            SaveAsync();
+            await SaveAsync();
         }
 
         public virtual async Task<T?> FindAsync(int id)
@@ -120,21 +120,21 @@ namespace Project.DAL.Repositories.Concretes
             return await _context.Set<T>().Select(expression).FirstOrDefaultAsync();
         }
 
-        public virtual async void UpdateAsync(T entity)
+        public virtual async Task UpdateAsync(T entity)
         {
             entity.Status = DataStatus.Updated;
             entity.ModifiedDate = DateTime.Now;
             T toBeUpdated = (await FindAsync(entity.Id))!;
             _context.Entry(toBeUpdated).CurrentValues.SetValues(entity);
-            SaveAsync();
+            await SaveAsync();
            
         }
 
-        public virtual void UpdateRangeAsync(ICollection<T> entities)
+        public virtual async Task UpdateRangeAsync(ICollection<T> entities)
         {
             foreach (T entity in entities)
             {
-                UpdateAsync(entity);
+                await UpdateAsync(entity);
             }
         }
 

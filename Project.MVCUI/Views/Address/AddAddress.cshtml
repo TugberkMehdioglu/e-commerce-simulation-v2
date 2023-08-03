@@ -1,0 +1,118 @@
+﻿@model AddressViewModel
+@{
+    ViewData["Title"] = "AddAddress";
+}
+
+<div class="card mb-3 col-8 offset-2">
+
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+    <div class="card-header">
+        <div class="row flex-between-end">
+            <div class=" text-center align-self-center">
+                <h3 class="mb-0">Adres Oluşturma</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body bg-light">
+        <div class="tab-content">
+            <div class="tab-pane preview-tab-pane active p-md-2" role="tabpanel" aria-labelledby="tab-dom-3174a9fa-db90-48e1-8c09-14225a9839bd" id="dom-3174a9fa-db90-48e1-8c09-14225a9839bd">
+                <form method="post">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" placeholder=" " asp-for="Name" />
+                        <label for="Name">Adres Adı</label>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="countrySelect">Ülke :</label>
+                        <select class="form-select" id="countrySelect" asp-for="Country">
+                            <option value="">Ülke seçiniz</option>
+                            <option value="turkey">Türkiye</option>
+                            <option value="italy">İtalya</option>
+                        </select>
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="citySelect">Şehir :</label>
+                        <select class="form-select" disabled id="citySelect" asp-for="City">
+                            <option value="">Sehir seçiniz</option>
+                        </select>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" placeholder=" " asp-for="District" />
+                        <label for="Name">Semt</label>
+                        <span asp-validation-for="District" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" placeholder=" " asp-for="NeighborHood" />
+                        <label for="Name">Mahalle</label>
+                        <span asp-validation-for="NeighborHood" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" placeholder=" " asp-for="Street" />
+                        <label for="Name">Sokak</label>
+                        <span asp-validation-for="Street" class="text-danger"></span>
+                    </div>
+
+                    <div class="row gx-2">
+                        <div class="form-floating mb-3 col-sm-6">
+                            <input class="form-control" placeholder=" " asp-for="AptNo">
+                            <label class="form-label" asp-for="AptNo">Apartman No</label>
+                            <span asp-validation-for="AptNo" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-sm-6">
+                            <input class="form-control" placeholder=" " asp-for="Flat">
+                            <label class="form-label" asp-for="Flat">Daire</label>
+                            <span asp-validation-for="Flat" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                        <button class="btn btn-outline-primary" type="submit">Adres Oluştur</button>
+
+                        <a class="btn btn-outline-warning" asp-controller="Address" asp-action="Addresses"><span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4 down-1"></span>Adres Listesine Dön</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Css{
+    <partial name="_ValidationScriptsPartial"></partial>
+}
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#countrySelect").change(function () {
+            let selectedCountry = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "/Address/GetCities/" + selectedCountry,
+                dataType: "json",
+                success: function (data) {
+                    let citySelect = $("#citySelect");
+                    citySelect.empty();
+                    $.each(data, function (index, city) {
+                        citySelect.append($('<option></option>').attr('value', city).text(city));
+                    });
+                    citySelect.prop("disabled", false);
+                },
+                error: function () {
+                    console.log("Hata oluştu.");
+                }
+            });
+        });
+    });
+
+</script>

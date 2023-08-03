@@ -87,7 +87,7 @@ namespace Project.MVCUI.Controllers
             MailService.SendMailAsync(appUser.Email, message, "TechByGamers | Hesap Aktivasyon");
 
             appUserProfile.Id = appUser.Id;
-            var (success, alert) = _appUserProfileManager.AddAsync(appUserProfile);
+            var (success, alert) = await _appUserProfileManager.AddAsync(appUserProfile);
             if (!success)
             {
                 ModelState.AddModelErrorWithOutKey(alert!);

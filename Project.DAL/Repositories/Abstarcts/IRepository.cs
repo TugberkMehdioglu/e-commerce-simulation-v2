@@ -18,14 +18,14 @@ namespace Project.DAL.Repositories.Abstarcts
         IQueryable<T> GetPassives();
 
         //Modify Commands
-        void AddAsync(T entity);
-        void AddRangeAsync(ICollection<T> entities);
-        void UpdateAsync(T entity);
-        void UpdateRangeAsync(ICollection<T> entities);
-        void DeleteAsync(T entity);
-        void DeleteRangeAsync(ICollection<T> entities);
-        void Destroy(T entity);
-        void DestroyRange(ICollection<T> entities);
+        Task AddAsync(T entity);
+        Task AddRangeAsync(ICollection<T> entities);
+        Task UpdateAsync(T entity);
+        Task UpdateRangeAsync(ICollection<T> entities);
+        Task DeleteAsync(T entity);
+        Task DeleteRangeAsync(ICollection<T> entities);
+        Task Destroy(T entity);
+        Task DestroyRange(ICollection<T> entities);
 
         //Expression Commands
         IQueryable<T> Where(Expression<Func<T, bool>> expression);

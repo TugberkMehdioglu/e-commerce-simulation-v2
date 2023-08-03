@@ -17,14 +17,14 @@ namespace Project.BLL.ManagerServices.Abstracts
         IQueryable<T> GetPassives();
 
         //Modify Commands
-        (bool, string?) AddAsync(T entity);
-        (bool, string?) AddRangeAsync(ICollection<T> entities);
-        (bool, string?) UpdateAsync(T entity);
-        (bool, string?) UpdateRangeAsync(ICollection<T> entities);
-        (bool, string?) DeleteAsync(T entity);
-        (bool, string?) DeleteRangeAsync(ICollection<T> entities);
-        (bool, string?) Destroy(T entity);
-        (bool, string?) DestroyRange(ICollection<T> entities);
+        Task<(bool, string?)> AddAsync(T entity);
+        Task<(bool, string?)> AddRangeAsync(ICollection<T> entities);
+        Task<(bool, string?)> UpdateAsync(T entity);
+        Task<(bool, string?)> UpdateRangeAsync(ICollection<T> entities);
+        Task<(bool, string?)> DeleteAsync(T entity);
+        Task<(bool, string?)> DeleteRangeAsync(ICollection<T> entities);
+        Task<(bool, string?)> Destroy(T entity);
+        Task<(bool, string?)> DestroyRange(ICollection<T> entities);
 
         //Expression Commands
         IQueryable<T> Where(Expression<Func<T, bool>> expression);

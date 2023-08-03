@@ -22,13 +22,13 @@ namespace Project.DAL.Repositories.Concretes
             _signInManager = signInManager;
         }
 
-        public override async void UpdateAsync(AppUser entity)
+        public override async Task UpdateAsync(AppUser entity)
         {
             entity.Status = DataStatus.Updated;
             entity.ModifiedDate = DateTime.Now;
             AppUser toBeUpdated = (await FindByStringAsync(entity.Id))!;
             _context.Entry(toBeUpdated).CurrentValues.SetValues(entity);
-            SaveAsync();
+            await SaveAsync();
         }
 
         public async Task<AppUser?> FindByStringAsync(string Id)
