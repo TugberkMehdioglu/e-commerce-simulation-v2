@@ -10,6 +10,7 @@ using Project.ENTITIES.Models;
 using Project.MVCUI.Extensions;
 using Project.MVCUI.ViewModels;
 using System.Collections.Specialized;
+using System.Net;
 
 namespace Project.MVCUI.Controllers
 {
@@ -33,9 +34,12 @@ namespace Project.MVCUI.Controllers
             string? appUserProfileId = await _appUserManager.Where(x => x.UserName == User.Identity!.Name).Select(x => x.Id).FirstOrDefaultAsync();
 
             List<Address>? addresses = await _addressManager.Where(x => x.Status != DataStatus.Deleted && x.AppUserProfileId == appUserProfileId).ToListAsync();
-            if (addresses == null) return RedirectToAction("AddAddress");//Todo:Add this action
+            if (addresses == null) return RedirectToAction(nameof(AddAddress));
 
             List<AddressViewModel> viewModels = _mapper.Map<List<AddressViewModel>>(addresses);
+
+            //For UpdateAddress action's error
+            if (TempData["error"] != null) ModelState.AddModelErrorWithOutKey(TempData["error"]!.ToString()!);
 
             return View(viewModels);
         }
@@ -78,6 +82,34 @@ namespace Project.MVCUI.Controllers
             }
 
             TempData["success"] = "Adres oluşturuldu";
+            return RedirectToAction(nameof(Addresses));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> UpdateAddress(int id)
+        {
+            Address? address = await _addressManager.FindAsync(id);
+            if (address == null) return RedirectToAction(nameof(Addresses));
+
+            return View(_mapper.Map<AddressViewModel>(address));
+        }
+
+        [HttpPost("{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateAddress(AddressViewModel request)
+        {
+            if (!ModelState.IsValid) return View();
+
+            Address address = _mapper.Map<Address>(request);
+
+            var (isSuccess, error) = await _addressManager.UpdateAsync(address);
+            if (!isSuccess)
+            {
+                TempData["error"] = error;
+                return RedirectToAction(nameof(Addresses));
+            }
+
+            TempData["success"] = "Adres güncellendi";
             return RedirectToAction(nameof(Addresses));
         }
     }
