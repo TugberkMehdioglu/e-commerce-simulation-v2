@@ -1,0 +1,116 @@
+﻿@model AppUserEditWrapper
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@if (TempData["fail"] != null)
+{
+    <div class="col-8 offset-2">
+        <partial name="_AlertFailPartial" model="@TempData["fail"]"></partial>
+    </div>
+}
+
+<div class="col-8 offset-2 text-danger alert alert-danger" asp-validation-summary="ModelOnly" role="alert"></div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-3 btn-reveal-trigger">
+
+            <div class="card-header position-relative min-vh-25 mb-8">
+                <div class="cover-image">
+                    <div class="bg-holder rounded-3 rounded-bottom-0" style="background-image:url(/OuterTools/assets/img/generic/4.jpg);">
+                    </div>
+                </div>
+                <div class="avatar avatar-5xl avatar-profile shadow-sm img-thumbnail rounded-circle">
+                    <div class="h-100 w-100 rounded-circle overflow-hidden position-relative">
+                        <img src="~/userpictures/@(Model.AppUser!.AppUserProfile!.ImagePath??"empty-profile-pic.JPG")" width="200" alt="" data-dz-thumbnail="data-dz-thumbnail" />
+                        <input class="d-none" id="profile-image" type="file" />
+                        <label class="mb-0 overlay-icon d-flex flex-center" for="profile-image"><span class="bg-holder overlay overlay-0"></span><span class="z-index-1 text-white dark__text-white text-center fs--1"><span class="fas fa-camera"></span><span class="d-block">Update</span></span></label>
+                    </div>
+                </div>
+            </div>
+            <a class="btn btn-falcon-default btn-sm mb-3 ms-sm-2 col-sm-2 col-md-4 col-lg-3 col-xl-3 col-xxl-3" asp-controller="Profile" asp-action="Details">Profile geri dön</a>
+            <div class="border-dashed-bottom my-4 d-lg-none"></div>
+
+        </div>
+    </div>
+</div>
+<div class="row g-0">
+    <div class="col-lg-8 pe-lg-2">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="mb-0">Profil Ayarları</h5>
+            </div>
+            <div class="card-body bg-light">
+                <form class="row g-3" method="post">
+
+                    <input type="hidden" asp-for="AppUser!.Id" />
+                    <input type="hidden" asp-for="AppUser!.AppUserProfile!.Id" />
+
+                    <div class="col-lg-6">
+                        <label class="form-label" for="FirstName">İsim</label>
+                        <input class="form-control" id="FirstName" asp-for="AppUser!.AppUserProfile!.FirstName" />
+                        <span asp-validation-for="AppUser!.AppUserProfile!.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label" for="LastName">Soyisim</label>
+                        <input class="form-control" id="LastName" asp-for="AppUser!.AppUserProfile!.LastName" />
+                        <span asp-validation-for="AppUser!.AppUserProfile!.LastName" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label" for="Email">Email</label>
+                        <input class="form-control" id="Email" asp-for="AppUser!.Email" />
+                        <span asp-validation-for="AppUser!.Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label" for="PhoneNumber">Telefon</label>
+                        <input class="form-control" id="PhoneNumber" asp-for="AppUser!.PhoneNumber" />
+                        <span asp-validation-for="AppUser!.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-12">
+                        <label class="form-label" for="UserName">Kullanıcı Adı</label>
+                        <input class="form-control" id="UserName" asp-for="AppUser!.UserName" />
+                        <span asp-validation-for="AppUser!.UserName" class="text-danger"></span>
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-primary" type="submit">Profili Güncelle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 ps-lg-2">
+        <div class="sticky-sidebar">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="mb-0">Şifre Değiştir</h5>
+                </div>
+                <div class="card-body bg-light">
+                    <form asp-controller="Profile" asp-action="ChangePassword" method="post">
+                        <div class="mb-3">
+                            <label class="form-label" for="FormerPassword">Mevcut Şifre</label>
+                            <input class="form-control" id="FormerPassword" asp-for="PasswordChange!.Password" />
+                            <span asp-validation-for="PasswordChange!.Password" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="NewPassword">Yeni Şifre</label>
+                            <input class="form-control" id="NewPassword" asp-for="PasswordChange!.NewPassword" />
+                            <span asp-validation-for="PasswordChange!.NewPassword" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="NewPasswordConfirm">Yeni Şifre Tekrar</label>
+                            <input class="form-control" id="NewPasswordConfirm" asp-for="PasswordChange!.NewPasswordConfirm" />
+                            <span asp-validation-for="PasswordChange!.NewPasswordConfirm" class="text-danger"></span>
+                        </div>
+                        <button class="btn btn-primary d-block w-100" type="submit">Şifre Güncelle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+}

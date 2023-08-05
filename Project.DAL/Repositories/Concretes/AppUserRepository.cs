@@ -67,5 +67,7 @@ namespace Project.DAL.Repositories.Concretes
             .ThenInclude(x => x.Addresses.Where(x => x.Status != DataStatus.Deleted))
             #nullable enable
             .FirstOrDefaultAsync();
+
+        public async Task<AppUser?> GetUserWithProfileAsync(string userName) => await _context.AppUsers!.Where(x => x.Status != DataStatus.Deleted && x.UserName == userName).Include(x => x.AppUserProfile).FirstOrDefaultAsync();
     }
 }

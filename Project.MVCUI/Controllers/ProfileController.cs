@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.BLL.ManagerServices.Abstracts;
 using Project.MVCUI.ViewModels;
+using Project.MVCUI.ViewModels.WrapperClasses;
 
 namespace Project.MVCUI.Controllers
 {
@@ -38,31 +39,18 @@ namespace Project.MVCUI.Controllers
             return View(appUserViewModel);
         }
 
-        // GET: ProfileController/Create
-        public ActionResult Create()
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
-        }
-
-        // POST: ProfileController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            var (isSuccess, error, appUser) = await _appUserManager.GetUserWithProfileAsync(User.Identity!.Name!);
+            if (!isSuccess)
             {
-                return RedirectToAction(nameof(Index));
+                TempData["fail"] = error;
+                return RedirectToAction(nameof(Details));
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: ProfileController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
+            AppUserEditWrapper wrapper = new() { AppUser = _mapper.Map<AppUserViewModel>(appUser) };
+
+            return View(wrapper);
         }
 
         // POST: ProfileController/Edit/5
