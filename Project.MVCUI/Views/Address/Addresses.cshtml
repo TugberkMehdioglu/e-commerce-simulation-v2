@@ -121,7 +121,7 @@
                 $.ajax({
 
                     type: "GET",
-                    url: "/Adress/DeleteAddress/" + id,
+                    url: "/Address/DeleteAddress/" + id,
                     success: function () {
 
                         row.hide();
@@ -130,7 +130,7 @@
                     error: function (xhr) {
 
                         var error = xhr.responseJSON.message;
-                        successAlert(error);
+                        FailAlert(error);
                     }
                 });
 
@@ -177,5 +177,44 @@
         container.appendChild(alertDiv);
     };
             //----------------------------------------------------------------------
+
+    function FailAlert(message){
+
+        // Yeni bir div öğesi oluştur
+        let alertDiv = document.createElement("div");
+        alertDiv.classList.add("alert", "alert-danger", "d-flex", "align-items-center", "alert-dismissible", "fade", "show");
+        alertDiv.setAttribute("role", "alert");
+
+        // İçeriği oluştur
+        let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "24");
+        svg.setAttribute("height", "24");
+        svg.setAttribute("fill", "currentColor");
+        svg.classList.add("bi", "bi-check-circle-fill");
+        svg.setAttribute("viewBox", "0 0 16 16");
+
+        let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z");
+
+        let span = document.createElement("span");
+        span.classList.add("ms-2");
+        span.textContent = message;
+
+        let button = document.createElement("button");
+        button.setAttribute("type", "button");
+        button.classList.add("btn-close");
+        button.setAttribute("data-bs-dismiss", "alert");
+
+        // Öğeleri birleştir
+        svg.appendChild(path);
+        alertDiv.appendChild(svg);
+        alertDiv.appendChild(span);
+        alertDiv.appendChild(button);
+
+        // Alert'ı belirli bir elementin içine ekleyin
+        let container = document.getElementById("ajaxDiv"); // Container elementin ID'sini buraya yazın
+        container.style.visibility = "visible";
+        container.appendChild(alertDiv);
+    };
 
 </script>

@@ -59,12 +59,12 @@ namespace Project.DAL.Repositories.Concretes
             return (true, null);
         }
 
-        
+
         public async Task<AppUser?> GetUserWithProfileAndAddressAsync(string userName) => await _context.AppUsers!
             .Where(x => x.UserName == userName && x.Status != DataStatus.Deleted)
             .Include(x => x.AppUserProfile)
             #nullable disable
-            .ThenInclude(x => x.Addresses)
+            .ThenInclude(x => x.Addresses.Where(x => x.Status != DataStatus.Deleted))
             #nullable enable
             .FirstOrDefaultAsync();
     }

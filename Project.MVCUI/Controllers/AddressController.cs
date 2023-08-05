@@ -31,7 +31,7 @@ namespace Project.MVCUI.Controllers
 
         public async Task<IActionResult> Addresses()
         {
-            string? appUserProfileId = await _appUserManager.Where(x => x.UserName == User.Identity!.Name).Select(x => x.Id).FirstOrDefaultAsync();
+            string? appUserProfileId = await _appUserManager.Where(x => x.UserName == User.Identity!.Name && x.Status != DataStatus.Deleted).Select(x => x.Id).FirstOrDefaultAsync();
 
             List<Address>? addresses = await _addressManager.Where(x => x.Status != DataStatus.Deleted && x.AppUserProfileId == appUserProfileId).ToListAsync();
             if (addresses == null) return RedirectToAction(nameof(AddAddress));
@@ -111,6 +111,18 @@ namespace Project.MVCUI.Controllers
 
             TempData["success"] = "Adres güncellendi";
             return RedirectToAction(nameof(Addresses));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> DeleteAddress(int id)
+        {
+            Address? address = await _addressManager.FindAsync(id);
+            if (address == null) return StatusCode(StatusCodes.Status404NotFound, new { message = "Adres bulunamadı" });
+
+            var (isSuccess, error) = await _addressManager.DeleteAsync(address);
+            if (!isSuccess) return StatusCode(StatusCodes.Status500InternalServerError, new { message = error });
+
+            return Ok("Adres silindi");
         }
     }
 }
