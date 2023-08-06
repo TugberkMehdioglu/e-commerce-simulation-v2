@@ -58,9 +58,9 @@ namespace Project.DAL.Repositories.Concretes
             return (true, null);
         }
 
-        public async Task<(bool, IEnumerable<IdentityError>?)> ChangePasswordAsync(AppUser appUser, string formerPassword, string newPassword)
+        public async Task<(bool, IEnumerable<IdentityError>?)> ChangePasswordAsync(AppUser appUser, string currentPassword, string newPassword)
         {
-            IdentityResult result = await _userManager.ChangePasswordAsync(appUser, formerPassword, newPassword);
+            IdentityResult result = await _userManager.ChangePasswordAsync(appUser, currentPassword, newPassword);
             if (!result.Succeeded) return (false, result.Errors);
 
             await _userManager.UpdateSecurityStampAsync(appUser);

@@ -11,7 +11,7 @@ namespace Project.BLL.ManagerServices.Abstracts
     public interface IAppUserManager : IManager<AppUser>
     {
         public Task<(bool, IEnumerable<IdentityError>?, string?)> AddUserByIdentityAsync(AppUser appUser);
-        public Task<(bool, IEnumerable<IdentityError>?, string?)> ChangePasswordAsync(AppUser appUser, string formerPassword, string newPassword);
+        public Task<(bool, IEnumerable<IdentityError>?, string?)> ChangePasswordAsync(AppUser appUser, string currentPassword, string newPassword);
         public Task<AppUser?> FindByStringAsync(string Id);
         public Task<(bool, string?, AppUser?)> GetUserWithProfileAndAddressAsync(string userName);
         public Task<(bool, string?, AppUser?)> GetUserWithProfileAsync(string userName);

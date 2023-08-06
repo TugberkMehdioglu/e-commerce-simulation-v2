@@ -29,14 +29,14 @@ namespace Project.BLL.ManagerServices.Concretes
             return (false, errors, null);
         }
 
-        public async Task<(bool, IEnumerable<IdentityError>?, string?)> ChangePasswordAsync(AppUser appUser, string formerPassword, string newPassword)
+        public async Task<(bool, IEnumerable<IdentityError>?, string?)> ChangePasswordAsync(AppUser appUser, string currentPassword, string newPassword)
         {
             bool isSuccess;
             IEnumerable<IdentityError>? errors;
 
             try
             {
-                (isSuccess, errors) = await _appUserRepository.ChangePasswordAsync(appUser, formerPassword, newPassword);
+                (isSuccess, errors) = await _appUserRepository.ChangePasswordAsync(appUser, currentPassword, newPassword);
             }
             catch (Exception exception)
             {
