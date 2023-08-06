@@ -15,5 +15,6 @@ namespace Project.BLL.ManagerServices.Abstracts
         public Task<AppUser?> FindByStringAsync(string Id);
         public Task<(bool, string?, AppUser?)> GetUserWithProfileAndAddressAsync(string userName);
         public Task<(bool, string?, AppUser?)> GetUserWithProfileAsync(string userName);
+        public Task<(bool, string?, IEnumerable<IdentityError>?)> EditUserWithOutPictureAsync(AppUser appUser);
     }
 }

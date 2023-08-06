@@ -1,5 +1,6 @@
 ﻿using Project.DAL.ContextClasses;
 using Project.DAL.Repositories.Abstarcts;
+using Project.ENTITIES.Enums;
 using Project.ENTITIES.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,15 @@ namespace Project.DAL.Repositories.Concretes
         public async Task<AppUserProfile?> FindByStringAsync(string Id)
         {
             return await _context.AppUserProfiles!.FindAsync(Id);
+        }
+
+        public override async Task UpdateAsync(AppUserProfile entity)
+        {
+            entity.Status = DataStatus.Updated;
+            entity.ModifiedDate = DateTime.Now;
+            AppUserProfile toBeUpdated = (await FindByStringAsync(entity.Id))!;
+            _context.Entry(toBeUpdated).CurrentValues.SetValues(entity);
+            await SaveAsync();
         }
     }
 }

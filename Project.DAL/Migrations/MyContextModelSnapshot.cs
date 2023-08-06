@@ -52,14 +52,14 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = "4d7b3bc1-f3aa-48ce-b587-5e7dc5557634",
-                            ConcurrencyStamp = "93317a9b-d1b0-4bc6-af52-87061671fa72",
+                            ConcurrencyStamp = "f15f5b85-a1b4-49b1-9fe1-3439fc12e12b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "4d7b3bc1-f3aa-48ce-b587-5e7dc5553134",
-                            ConcurrencyStamp = "d132d8bc-aa7e-40a1-b5a4-0944e88a1b99",
+                            ConcurrencyStamp = "59fc0bcd-1465-4ff0-bab0-ef27b6fe57b7",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         });
@@ -251,7 +251,7 @@ namespace Project.DAL.Migrations
                             AptNo = (byte)21,
                             City = "İstanbul",
                             Country = "Türkiye",
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(2320),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 367, DateTimeKind.Local).AddTicks(5683),
                             District = "Kağıthane",
                             Flat = (byte)8,
                             Name = "Ev",
@@ -342,17 +342,17 @@ namespace Project.DAL.Migrations
                         {
                             Id = "5c8defd5-91f2-4256-9f16-e7fa7546dec4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "22d689fc-48f4-4d8d-8d88-39d376bd5f8c",
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5263),
+                            ConcurrencyStamp = "7b04f8f6-abe4-4e40-b979-1bbc2d128686",
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4875),
                             Email = "Admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAuKjMzP0+4gxkh13C6EoskkZ0N14fNnvBDNsy3TqHp4UpIFleCdcYdjJivCZCkOGw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMT7aRMLn7dDr6f02XeimqYaVJHbu6QzUKCp/RzpBZ7VYe+xPy/gqjfU+Uq52egZew==",
                             PhoneNumber = "05316453125",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "ba0ba9ac-94c9-463d-8f09-9f173ded168e",
+                            SecurityStamp = "74a107fc-4480-4dfe-94a7-df1a5c46267b",
                             Status = 1,
                             TwoFactorEnabled = false,
                             UserName = "Admin"
@@ -361,17 +361,17 @@ namespace Project.DAL.Migrations
                         {
                             Id = "5c8defd5-91f2-4256-9f16-e7fa7546fec5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6aa2dd6e-f1df-40ca-a745-bb0acf2f4d4e",
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5276),
+                            ConcurrencyStamp = "6ae497b5-a77e-4e40-9b1c-6b49564171cb",
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4911),
                             Email = "Member@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedEmail = "MEMBER@GMAIL.COM",
                             NormalizedUserName = "MEMBER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEA6WLQXRL+A20xfEhDX3tvbnI2j2u4fV2bvP+i4fM/cHoBfNPguUN4UCYrG2GwhA8g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGiAfEm+TDt4Enfp1DChEO3fNpYB6U3+Isx3zG9mNHGjfUZjAnwdsZUsjIi+ljpLTA==",
                             PhoneNumber = "05433470423",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eaa2d77a-320f-463f-9ff6-173a7811ca36",
+                            SecurityStamp = "fe252e0e-b6f6-444a-90af-0d058fe27587",
                             Status = 1,
                             TwoFactorEnabled = false,
                             UserName = "Member"
@@ -414,7 +414,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = "5c8defd5-91f2-4256-9f16-e7fa7546dec4",
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(3545),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(460),
                             FirstName = "Tuğberk",
                             LastName = "Mehdioğlu",
                             Status = 1
@@ -456,7 +456,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(3624),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(933),
                             Description = "İşlemci fiyatları, modelleri ve güvenilir işlemci markaları uygun ödeme seçenekleriyle şimdi inceleyin ve hemen satın alın.",
                             Name = "İşlemci",
                             Status = 1
@@ -464,7 +464,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(3628),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(944),
                             Description = "Ekran kartı fiyatları, modelleri ve güvenilir ekran kartı markaları uygun ödeme seçenekleriyle şimdi inceleyin ve hemen satın alın.",
                             Name = "Ekran Kartı",
                             Status = 1
@@ -472,7 +472,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(3629),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(946),
                             Description = "Anakart fiyatları, modelleri ve güvenilir ekran kartı markaları uygun ödeme seçenekleriyle şimdi inceleyin ve hemen satın alın.",
                             Name = "Anakart",
                             Status = 1
@@ -480,7 +480,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(3631),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(949),
                             Description = "Monitör fiyatları, modelleri ve güvenilir ekran kartı markaları uygun ödeme seçenekleriyle şimdi inceleyin ve hemen satın alın.",
                             Name = "Monitör",
                             Status = 1
@@ -488,7 +488,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(3635),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(1070),
                             Description = "SSD fiyatları, modelleri ve güvenilir ekran kartı markaları uygun ödeme seçenekleriyle şimdi inceleyin ve hemen satın alın.",
                             Name = "SSD",
                             Status = 1
@@ -496,7 +496,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(3636),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(1073),
                             Description = "Harici Disk fiyatları, modelleri ve güvenilir ekran kartı markaları uygun ödeme seçenekleriyle şimdi inceleyin ve hemen satın alın.",
                             Name = "Harici Disk",
                             Status = 1
@@ -504,7 +504,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(3636),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(1075),
                             Description = "Bilgisayar Kasası fiyatları, modelleri ve güvenilir ekran kartı markaları uygun ödeme seçenekleriyle şimdi inceleyin ve hemen satın alın.",
                             Name = "Bilgisayar Kasası",
                             Status = 1
@@ -633,7 +633,7 @@ namespace Project.DAL.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5138),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4749),
                             Description = "AMD 3D V-Cache™ teknolojisi, en iyisini talep eden oyuncular için kararlı performans. Bu performansa AMD 3D V-Cache™ teknolojisine sahip bir AMD Ryzen 9 7950X3D işlemci ile ulaşın. PCIe® 5.0 depolama desteği gibi zaman kazandıran bağlantı teknolojileri ve özellikleri, ultra hızlı WiFi® 6E kablosuz bağlantı, 16 çekirdek/32 iş parçacığı ve özel video hızlandırıcılarına1 sahip olan AMD Ryzen™  9 7950X3D işlemci ile içerik üretme deneyiminizi bir üst seviyeye taşıyın. Güç. Performans. Olanak. AMD Socket AM5 anakart, oyuncular için DDR5 belleğin yüksek hızından AMD EXPO™ teknolojisine2 ve PCIe® 5.0'ın sunduğu artırılmış bant genişliğine kadar, 2025 yılına kadar desteklenen yeni özellikler sunuyor.",
                             ImagePath = "7950X3D.jpg",
                             Name = "AMD Ryzen™ 9 7950X3D Soket AM5 4.2GHz 128MB 120W 5nm İşlemci",
@@ -645,7 +645,7 @@ namespace Project.DAL.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5144),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4760),
                             Description = "Intel Core i9 12900K işlemcilerin hibrit performans mimarisi ile bir sonraki seviyeye çıkın1.. Oyun tutkunu, içerik üretici, yayıncı veya günlük kullanıcı olmanız fark etmeksizin istediğiniz yerde ihtiyacınız olan performansa ulaşın. İlginiz alanınız ne olursa olsun istediğiniz her yerde daha fazlasını yapın. Intel Core i9 12900K işlemciler—diğerlerine benzemeyen bir nesil. 12. Nesil Intel® Core™ işlemciler, benzersiz ve yeni hibrit performans mimarisi ile Performans ve Verimlilik çekirdeklerinin (P-çekirdek ve E-çekirdek) eşsiz bir kombinasyonunu sunar. Bu da ne yaparsanız yapın, sezgisel bir şekilde ölçeklenen gerçek kullanım performansı almanızı sağlar.1\r\n \r\nPerformans çekirdeği, Intel'in en yüksek performanslı CPU çekirdeğidir. Ayrıca oyun ve 3D tasarım gibi bilgi işlem bakımından yoğun iş yükleri için tek iş parçacıklı işlem performansını ve yanıt hızını en üst düzeye çıkarmak üzere tasarlanmıştır. Verimlilik çekirdeği, aynı anda yürütülebilecek görevler için çoklu iş parçacığı performansı sunar ve arka plan görevlerinin verimli bir şekilde boşaltılmasını sağlar. Bu sayede çoklu görev çalıştırmayı modern hale getirir.\r\n \r\nIntel, Performans çekirdekleri ve Verimlilik çekirdekleri işletim sistemiyle sorunsuz bir şekilde çalışsın diye Intel® Thread Director'ı doğrudan donanıma dahil etmiştir.2 Çalışma halindeyken otomatik olarak izleyen ve analiz yapan Intel® Thread Director, işletim sistemini yönlendirir ve doğru iş parçacığını doğru zamanda ve doğru çekirdeğe yerleştirmesine yardımcı olur. Ayrıca tüm bunları dinamik bir şekilde yapar, statik kurallar yerine gerçek bilgi işlem ihtiyaçlarını baz alarak planlama ile ilgili yönlendirmeleri değiştirir.\r\n \r\nIntel Core i9 12900K işlemciler, yeni nesil harici grafik kartları ve depolama cihazlarını destekler. Bu cihazlar, PCIe 5.0 ile artan iş hacminden ve DDR5 belleğin daha yüksek hızından ve bant genişliğinden faydalanır.\r\n \r\nIntel Core i9 12900K Soket 1700 işlemcilerin bir diğer standart özelliği olan Intel® Wi-Fi 6E (Gig+), eski cihazların sağlayamadığı özel ve yüksek hızlı kanallar sunar. Intel® Wi-Fi 6E ile girişim olmadan neredeyse üç kat daha hızlı bağlantı deneyimi elde edersiniz3. Bu da evden çalışmak, öğrenmek veya akıcı ve yüksek kaliteli yayınlar ile rahatlamak konusunda daha fazla özgürlük anlamına gelir.\r\n \r\nAyrıca bilgisayarınızı tek bir çift taraflı kablo ile birden fazla 4K ekrana ve diğer aksesuarlara bağlayabilirsiniz. En yenilikçi platformumuz olan 12. Nesil Intel® Core™ işlemci ailesi; en basit, en hızlı ve en güvenilir bağlantı olan Thunderbolt™ 4'ü destekler.\r\n \r\nIntel Core i9 12900K Soket 1700 işlemcilerin standart ve yerleşik özellikleri; gürültü bastırma, otomatik çerçeveleme ve oyun sırasında ağ genişliği ve video çözünürlüğünü optimize etme gibi işlevler sağlar. Bu da size zaman kazandırır ve şu ana kadar sadece hayal edebileceğiniz bir şekilde çoklu görev çalıştırmanızı sağlar.\r\n \r\nMuhteşem oyun oynama, internette gezinme ve yayın deneyimlerinden sıradaki başyapıtınızı üretmeye kadar her şey 12. Nesil Intel® Core™ işlemcilerle mümkün.",
                             ImagePath = "12900K.jpg",
                             Name = "Intel Core i9 12900K Soket 1700 12. Nesil 3.20GHz 30MB Önbellek 10nm İşlemci",
@@ -657,7 +657,7 @@ namespace Project.DAL.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5146),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4763),
                             Description = "Bellek Arayüzü: 384bit\r\n \r\nEkran Kartı Chipset Markası: NVIDIA\r\n \r\nVGA Slot: PCI Express 4.0\r\n \r\nBellek Tipi: GDDR6X\r\n \r\nBellek Kapasitesi: 24GB\r\n \r\nGrafik İşlemci: GeForce RTX 3090 Ti\r\n \r\nDirect X: 12\r\n \r\nOpenGL: 4.6",
                             ImagePath = "3090Ti.jpg",
                             Name = "GIGABYTE GeForce RTX 3090 Ti GAMING 24GB GDDR6X 384Bit Nvidia Ekran Kartı",
@@ -669,7 +669,7 @@ namespace Project.DAL.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5147),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4765),
                             Description = "\r\nSUPRIM ve logosunun konsepti, elmas kristali ve geometrisinden ilham aldı.\r\n \r\nMSI’ın ekran kartlarında ustalığının 20.yılı anısına SUPRIM serisi, prestiji öne çıkaran öğelerle üretildi.\r\n \r\nYüksek kaliteli malzeme ve üretimi öne çıkarmak için köşeler, çizgiler ve düzlemlerin geometrisi kullanıldı. GeForce RTX 40 Serisi ile Güçlendirildi\r\n \r\nNVIDIA® GeForce RTX™ 40 Serisi GPU'lar, DLSS 3 desteğiyle oyuncular ve içerik oluşturucular için hızlının ötesindedir. Bu GPU'lar, hem performansta hem de yapay zeka destekli grafikler açısından büyük bir atılım sağlayan ultra verimli NVIDIA Ada Lovelace mimarisi ile güçlendirilmiştir. Yeni Akış Çoklu İşlemcileri\r\n2 KATA KADAR performans artışı ve güç verimliliği\r\n \r\n4.Nesil Tensor Çekirdekleri\r\n2 KATA KADAR YZ Performansı\r\n \r\n3.Nesil RT Çekirdekleri\r\n2 KATA kadar Ray Tracing performansı. SUPRIM ile daha üstün bir deneyime geçin. Yüksek kaliteli malzeme ve oyun tutkunlarına yönelik özelliklerle tamamen yükseltilmiş bir ekran kartını duyun, görün ve hissedin. TORX FAN 5.0, heatsink üzerine gelen hava basıncını ve miktarını arttıran bir tasarım geliştirmesidir. Bu tasarım ile elde edilen hava akışı, TORX FAN 4.0 tasarımına göre en az %10, aksiyal fanlara göre ise en az %23 daha yoğundur. Her üç fan kanadını birbirine bağlayan bağlantı kemerleri hava akımını heatsink üzerine daha fazla yoğunlaştırır. Her bağlantı kemeri uçlarda içe doğru kıvrılarak türbülansı ve direnci azaltır. Kartın yüzeyinden hafifçe daha yüksek olan fan kapağı, havanın fanlar boyunca akışını rahatlatır. Bu kapak altında yer alan çıkıntılar havanın tekrar içeri girmesini engeller ve hava akışını kararlı tutarken gürültüyü azaltır. Buhar odası, düz yüzeylerde ısıyı sabit tutmak için mükemmel bir yöntemdir. GPU ve VRAM üzerinde yer alan buhar odası, ısıyı Core Pipe borular üzerine yönlendirir. Core Pipe soğutma boruları, mevcut boş alanı en verimli şekilde değerlendirecek şekilde ve en ince hesaplarla üretildi. Kare şeklindeki soğutma boruları GPU taban plakasına tam temas yaparak ısıyı heatsink boyunca dağıtır. Fan motorunun altında ve hava akışının az olduğu noktalarda yer alan dalga yapılı kenarların boyutları tekrar ayarlanarak ek verimlilik sağlandı. Hava akımının daha rahat geçişine olanak tanımak için V kesimli kanatlar stratejik olarak yerleştirildi. Eğim açısının optimize edilmesi ve dalgalanmanın arttırılması ile hava direnci merkeze doğru yönlendirildi. Böylece sıcak hava tıpkı bir namlu gibi hızla dışarı doğru itiliyor. Sağlam metal taban plakası altında yer alan termal yastıklar ek soğutma sunarken hava kanalları ile sıkışan ısının dışarı atılması sağlanır. Sıcaklık nispeten düşük ise aktif soğutma gerekmediği zamanlarda fanlar otomatik olarak durur ve ses tamamen kesilir. Oyun sırasında ısı arttığında fanlar tekrar dönmye başlar. İki set dayanıklı rulman sayesinde TORX FAN’lar yoğun ve uzun oyun seanslarınıza yıllar boyunca dayanır.",
                             ImagePath = "RTX4090.jpg",
                             Name = "MSI GeForce RTX 4090 SUPRIM X 24GB GDDR6X 384Bit DLSS 3 Ekran Kartı",
@@ -681,7 +681,7 @@ namespace Project.DAL.Migrations
                         {
                             Id = 5,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5149),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4770),
                             Description = "En son teknolojiye, yüksek hızlı aktarıma, ultra performansa ve Sektörün ilk M-Vision Panosuna sahip MEG X670E GODLIKE, AMD X670 yonga setinin olağanüstü oyun potansiyelini ortaya çıkarmak için geliştirildi ve turnuvayı bir kez daha yönetmeye hazır. Dokunmatik 4,5 inçlik tam renkli IPS LCD, yalnızca donanım izleme ve hata ayıklama işlevini birleştiren oyun donanımınızın durumunu göstermekle kalmaz, aynı zamanda dokunmatik kontrolle sistemin çalıştırılmasına ve özelleştirilmesine olanak tanır.\r\n \r\nDashbaoard, sistem çalışmasını, OC ayarlamayı, donanım izlemeyi, hata ayıklama işlevini, canlı hava durumunu, sistem saatini, geri sayım sayacını ve dokunmatik kontrol ile çoklu işlevleri destekler. Ayrıca, müstakil mod, bilgisayarınızın çalışması için yeni bir yol sunar. VRM Soğutma: Genişletilimiş Heatsink tasarımı ve bobinler için ek 7W/mK termal yastıklar ile gelişmiş ısı giderimi.\r\n \r\nPCB Soğutma: Birinci sınıf 6 katmanlı sunucu sınıfı baskı devresi tasarımı, 2 oz. kalınlaştırılmış bakır ile ısı giderimini ve kararlılığı arttırır.\r\n \r\nSSD Soğutma: M.2 Shield Frozr, ısıya bağlı yavaşlamayı önler.\r\n \r\nSistem Soğutma: Stratejik olarak yerleştirilen pin başlıkları ve adanmış pompa fanı başlığı ile soğutma sisteminizi rahatça bağlayın ve senkronize edin. MSI PCI Express Steel Armor slotları ağır ekran kartlarına destek sağlamak için anakarta ek lehimlerle sabitlenmiştir. Oyunda her avantaj önemlidir. Bu yüzden Steel Armor aynı zamanda temas noktalarını elektromanyetik sinyal girişimine karşı da korur:\r\n \r\n* x16/x0/x4, x8/x8/x4 destekler\r\n \r\n** MSI SMT (yüzey montaj teknolojisi) güçlü lehimler ile sinyal saflığını arttırır.",
                             ImagePath = "X670E.jpg",
                             Name = "MSI MEG X670E GODLIKE AMD X670 Soket AM5 DDR5 6600MHz(OC) M.2 Anakart",
@@ -693,7 +693,7 @@ namespace Project.DAL.Migrations
                         {
                             Id = 6,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5150),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4772),
                             Description = "AMD WRX80 Ryzen™ Threadripper™ PRO EATX iş istasyonu anakartı. Intel dual 10 G LAN, USB 3.2 Gen 2x2 Type-C girişi, 7 x PCIe 4.0 x16 yuvası, 3 x M.2 PCIe 4.0, ASMB9-iKVM, 2 x U.2 ve 16 güç aşaması\r\n \r\n\r\nAMD sWRX8 soket: AMD Ryzen™ Threadripper™ PRO Serisi İşlemciler için hazır\r\n \r\nUltra hızlı bağlantı seçenekleri: USB 3.2 Gen 2x2 Type-C portu, 10 x USB 3.2 Gen 2 portu, 3 x M.2 PCIe 4.0, HYPER M.2 x16 Gen 4 card ve Intel® X550-AT2 çift 10Gb Ethernet\r\n \r\nASMB9-iKVM ile uzaktan yönetim: Gelişmiş IT verimliliği için donanım düzeyinde daha iyi kontrol sunan bant dışı yönetim olanakları için IPMI mimarisine akıllı özellikler katan BMC yongası\r\n \r\nGüçlü performans: 16 güç aşaması, çoklu GPU desteği ve R-DIMM bellek desteği\r\n \r\nGüvenilir kararlılık: 7/24 güvenilirlik için testlerden geçirildi. Geniş uyumluluk sunar ve üst düzey güvenlik için SafeSlot’a sahiptir\r\n \r\nProfesyonel üretkenlik için üstün güç\r\nASUS Pro WS WRX80E-SAGE SE WIFI en yeni AMD® Ryzen® Threadripper™ Pro serisi işlemcilerin inanılmaz gücünü açığa çıkarmak için geliştirildi. Profesyonel yaratıcılık işleri için güvenilir bir temel oluşturan bu anakart, video düzenleme ve 3D görüntü işleme gibi çok çekirdekli CPU gerektiren görevlerde avantaj sağlıyor. SafeSlot özellikli yedi adet PCIe 4.0 yuvası da en yeni güçlü ekran kartlarıyla olağanüstü performans sağlıyor. Metalik siyah alüminyum çıkıntılar, parlak ayrıntılı paslanmaz çelik siyah file tasarım ve şeffaf duman grisi giriş çıkış korumasıyla, Pro WS WRX80E-SAGE SE WIFI içerik üreticileri için profesyonel ve düşük profilli bir görünüm sunar. Pro WS WRX80E-SAGE SE WIFI’da yüksek performanslı ekran kartları için yedi adet PCIe® 4.0 x16 yuvası yer alıyor. Bu sayede, profesyonel tasarım, modelleme, simülasyon ve görüntü işleme uygulamaları için üstün performans elde edilebiliyor.",
                             ImagePath = "WRX80E-SAGE.jpg",
                             Name = "ASUS PRO WS WRX80E-SAGE SE 3200mhz (OC) M.2 Wi-Fi WRX80 e-ATX Anakart",
@@ -705,7 +705,7 @@ namespace Project.DAL.Migrations
                         {
                             Id = 7,
                             CategoryId = 4,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5151),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4774),
                             Description = "45\" WQHD (3440 x 1440) 21:9 Kavisli (800R) OLED Ekran\r\n \r\n240 Hz Yenileme Hızına Sahip OLED\r\n \r\n0,03 ms (GtG) Tepki Süresi\r\n \r\n1,5M:1 Kontrast Oranı\r\n \r\nNVIDIA® G-SYNC® Uyumlu\r\n \r\nAMD FreeSync™ Premium\r\n \r\n *Bu monitör, Aralık 2022 itibarıyla OLED oyun monitörlerinde en hızlı yenileme hızı ve yanıt süresi olan 240 Hz yenileme hızını ve 0,03 ms'yi destekler.\r\n*Aralık 2022 itibariyle, piyasada 240 Hz yenileme hızına sahip başka OLED monitör yoktur.\r\n*Görüntüler, özelliğin daha iyi anlaşılması için temsili olarak verilmiştir. Asıl kullanım şeklinden farklılık gösterebilir.\r\n**DCI-P3 Tipik %98,5, Minimum %90. Panoramik Oyun Görünümü\r\n \r\nHDR10 ve DCI-P3 %98,5 (Tipik) geniş renk gamına sahip 21:9 WQHD OLED ekran sayesinde, oyuncuların 45 inçlik geniş ekranda kendilerini oyunun merkezindeymiş gibi hissetmelerine yardımcı olabilir.\r\n \r\n*Görüntüler, özelliğin daha iyi anlaşılması için temsili olarak verilmiştir. Asıl kullanım şeklinden farklılık gösterebilir.\r\n ",
                             ImagePath = "LG45.png",
                             Name = "LG 45\" 45GR95QE-B UltraGear 0,03Ms 240Hz WQHD OLED Curved Gaming Monitor",
@@ -717,7 +717,7 @@ namespace Project.DAL.Migrations
                         {
                             Id = 8,
                             CategoryId = 4,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5152),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4777),
                             Description = "49WL95C, tek ekranda iki katına çıkarılmış 27 inç 16:9 QHD piksel alanına sahip bir UltraWide 32:9 Dual QHD (5120x1440) monitördür. 32:9 FHD çözünürlüğe (3840x1080) kıyasla %70 daha fazla pikselle, birden fazla format ve birden fazla katmanla birçok görevi aynı anda gerçekleştirin. Referansları bulun ve ham görüntülerle kullanılmak üzere stok görüntüleri düzenleyin. Küçük resimler, geçerli pencere değiştirilmeden tek bir ekranda görüntülenebilir. Böylece, görüntü planlama aşamasında harcanan zamanı azaltabilirsiniz. Video film şeridini kontrol ederek, videolarınız için kaynak klipleri inceleyebilirsiniz. Pencereleri değiştirmeden, kaynak dosyaların küçük resimlerini görüntüleyebilir ve dosyaları zaman çizelgesine yükleyebilirsiniz. Beş dakikalık bir zaman çizelgesini kontrol edebilir ve kaydırma yapmadan bir düzenleme görevini gerçekleştirebilirsiniz. YouTube videolarında kullanılan müzik klipleri için görevler 1:1 video düzenleme ve bir mix aracı ile tamamlanabilir.",
                             ImagePath = "LG49.jpg",
                             Name = "LG 49\" 49WL95C-WE 32:9, UltraGeniş 5Ms WQHD, HDR10, MaxxAudio® IPS Monitör",
@@ -729,7 +729,7 @@ namespace Project.DAL.Migrations
                         {
                             Id = 9,
                             CategoryId = 5,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5154),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4781),
                             Description = "Kompakt bir M.2 2280 form faktörü ile MP600 PRO LPX, konsolunuza doğrudan kolayca sığar ve hızlı ve kolay bir depolama yükseltmesi için tüm PS5* M.2 performans gereksinimlerini karşılar. İster 4, isterse 40 veya daha fazla oyununuz olsun; konsolunuzun depolama alanını neredeyse tüm oyun kitaplıklarının ihtiyaçlarını karşılayan, devasa 4TB'lık boyuta kadar genişletin. PCIe Gen4 teknolojisiyle 7.100 MB/sn sıralı okuma ve 6.800 MB/sn sıralı yazmaya varan ışık hızında hızlara ulaşarak, büyük oyun dosyalarının daha hızlı ve sorunsuz yüklenmesini sağlayın. Isıyı dağıtmaya ve kısıtlamayı azaltmaya yardımcı olan, önceden takılan düşük profilli alüminyum ısı dağıtıcıyı barındırır. Böylece oyun yoğunluğunuz ne olursa olsun SSD'niz yüksek performansını sürdürür. Sürücünüzün uzun yıllar boyunca en iyi şekilde performans göstermeye devam etmesi için gerekli performans ve dayanıklılığın ideal bir bileşimini sunmak için yüksek yoğunluklu 3D TLC NAND ile donatılmıştır.",
                             ImagePath = "MP600.jpg",
                             Name = "CORSAIR 2TB MP600 PRO LPX Serisi NVMe M.2 SSD (7100MB Okuma / 6800MB Yazma)",
@@ -741,7 +741,7 @@ namespace Project.DAL.Migrations
                         {
                             Id = 10,
                             CategoryId = 5,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5156),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4784),
                             Description = "-",
                             ImagePath = "M480.jpg",
                             Name = "MSI SPATIUM M480 PLAY PCIE 4.0 NVME M.2 2TB SSD (7000MB Okuma / 6850MB Yazma)",
@@ -792,7 +792,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4881),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4215),
                             Name = "Çekirdek Sayısı",
                             ProductId = 1,
                             Status = 1,
@@ -801,7 +801,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4886),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4225),
                             Name = "Frekans Hızı",
                             ProductId = 1,
                             Status = 1,
@@ -810,7 +810,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4888),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4227),
                             Name = "Önbellek",
                             ProductId = 1,
                             Status = 1,
@@ -819,7 +819,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4889),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4229),
                             Name = "İşlemci Markası",
                             ProductId = 1,
                             Status = 1,
@@ -828,7 +828,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4891),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4234),
                             Name = "Soket Tipi",
                             ProductId = 1,
                             Status = 1,
@@ -837,7 +837,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4892),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4236),
                             Name = "İşlemci Hızı",
                             ProductId = 1,
                             Status = 1,
@@ -846,7 +846,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4893),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4238),
                             Name = "Garanti",
                             ProductId = 1,
                             Status = 1,
@@ -855,7 +855,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4894),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4240),
                             Name = "Menşei",
                             ProductId = 1,
                             Status = 1,
@@ -864,7 +864,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4896),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4244),
                             Name = "Çekirdek Sayısı",
                             ProductId = 2,
                             Status = 1,
@@ -873,7 +873,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 10,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4914),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4246),
                             Name = "Frekans Hızı",
                             ProductId = 2,
                             Status = 1,
@@ -882,7 +882,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 11,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4916),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4248),
                             Name = "Önbellek",
                             ProductId = 2,
                             Status = 1,
@@ -891,7 +891,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 12,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4917),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4250),
                             Name = "İşlemci Markası",
                             ProductId = 2,
                             Status = 1,
@@ -900,7 +900,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 13,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4918),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4252),
                             Name = "Soket Tipi",
                             ProductId = 2,
                             Status = 1,
@@ -909,7 +909,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 14,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4919),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4253),
                             Name = "İşlemci Hızı",
                             ProductId = 2,
                             Status = 1,
@@ -918,7 +918,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 15,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4920),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4255),
                             Name = "Garanti",
                             ProductId = 2,
                             Status = 1,
@@ -927,7 +927,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 16,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4921),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4257),
                             Name = "Menşei",
                             ProductId = 2,
                             Status = 1,
@@ -936,7 +936,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 17,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4922),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4259),
                             Name = "Ekran Kartı Chipset Marka",
                             ProductId = 3,
                             Status = 1,
@@ -945,7 +945,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 18,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4923),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4261),
                             Name = "Grafik İşlemci",
                             ProductId = 3,
                             Status = 1,
@@ -954,7 +954,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 19,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4925),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4344),
                             Name = "Çekirdek Hızı Maks.",
                             ProductId = 3,
                             Status = 1,
@@ -963,7 +963,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 20,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4925),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4346),
                             Name = "Çekirdek Hücre Sayısı",
                             ProductId = 3,
                             Status = 1,
@@ -972,7 +972,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 21,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4926),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4348),
                             Name = "Bellek Tipi",
                             ProductId = 3,
                             Status = 1,
@@ -981,7 +981,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 22,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4927),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4350),
                             Name = "Bellek Kapasitesi",
                             ProductId = 3,
                             Status = 1,
@@ -990,7 +990,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 23,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4928),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4352),
                             Name = "Bellek Hızı",
                             ProductId = 3,
                             Status = 1,
@@ -999,7 +999,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 24,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4929),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4354),
                             Name = "Bellek Arayüzü",
                             ProductId = 3,
                             Status = 1,
@@ -1008,7 +1008,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 25,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4929),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4356),
                             Name = "Ekran Kartı Chipset Marka",
                             ProductId = 4,
                             Status = 1,
@@ -1017,7 +1017,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 26,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4930),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4358),
                             Name = "Grafik İşlemci",
                             ProductId = 4,
                             Status = 1,
@@ -1026,7 +1026,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 27,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4931),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4360),
                             Name = "Çekirdek Hızı Maks.",
                             ProductId = 4,
                             Status = 1,
@@ -1035,7 +1035,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 28,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4932),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4361),
                             Name = "Çekirdek Hücre Sayısı",
                             ProductId = 4,
                             Status = 1,
@@ -1044,7 +1044,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 29,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4933),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4363),
                             Name = "Bellek Tipi",
                             ProductId = 4,
                             Status = 1,
@@ -1053,7 +1053,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 30,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4933),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4365),
                             Name = "Bellek Kapasitesi",
                             ProductId = 4,
                             Status = 1,
@@ -1062,7 +1062,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 31,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4935),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4367),
                             Name = "Bellek Hızı",
                             ProductId = 4,
                             Status = 1,
@@ -1071,7 +1071,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 32,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4936),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4370),
                             Name = "Bellek Arayüzü",
                             ProductId = 4,
                             Status = 1,
@@ -1080,7 +1080,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 33,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4937),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4371),
                             Name = "Soket Tipi",
                             ProductId = 5,
                             Status = 1,
@@ -1089,7 +1089,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 34,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4939),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4373),
                             Name = "Ram Tipi",
                             ProductId = 5,
                             Status = 1,
@@ -1098,7 +1098,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 35,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4939),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4375),
                             Name = "Anakart Markası",
                             ProductId = 5,
                             Status = 1,
@@ -1107,7 +1107,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 36,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4940),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4377),
                             Name = "Anakart Chipseti",
                             ProductId = 5,
                             Status = 1,
@@ -1116,7 +1116,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 37,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4941),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4378),
                             Name = "Anakart Yapı",
                             ProductId = 5,
                             Status = 1,
@@ -1125,7 +1125,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 38,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4942),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4380),
                             Name = "Ram Slot Sayısı",
                             ProductId = 5,
                             Status = 1,
@@ -1134,7 +1134,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 39,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4945),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4386),
                             Name = "Maks. Ram Desteği",
                             ProductId = 5,
                             Status = 1,
@@ -1143,7 +1143,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 40,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4945),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4387),
                             Name = "Desteklenen Ram Hızı",
                             ProductId = 5,
                             Status = 1,
@@ -1152,7 +1152,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 41,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4946),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4389),
                             Name = "Soket Tipi",
                             ProductId = 6,
                             Status = 1,
@@ -1161,7 +1161,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 42,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4947),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4391),
                             Name = "Ram Tipi",
                             ProductId = 6,
                             Status = 1,
@@ -1170,7 +1170,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 43,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4948),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4393),
                             Name = "Anakart Markası",
                             ProductId = 6,
                             Status = 1,
@@ -1179,7 +1179,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 44,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4949),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4394),
                             Name = "Maks. Ram Desteği",
                             ProductId = 6,
                             Status = 1,
@@ -1188,7 +1188,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 45,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4950),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4396),
                             Name = "Anakart Yapı",
                             ProductId = 6,
                             Status = 1,
@@ -1197,7 +1197,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 46,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4950),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4398),
                             Name = "Ram Slot Sayısı",
                             ProductId = 6,
                             Status = 1,
@@ -1206,7 +1206,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 47,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4952),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4399),
                             Name = "Maks. Ram Hızı (O.C.)",
                             ProductId = 6,
                             Status = 1,
@@ -1215,7 +1215,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 48,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4953),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4401),
                             Name = "Desteklenen Ram Hızı",
                             ProductId = 6,
                             Status = 1,
@@ -1224,7 +1224,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 49,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4953),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4403),
                             Name = "Yenileme Hızı",
                             ProductId = 7,
                             Status = 1,
@@ -1233,7 +1233,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 50,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4954),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4404),
                             Name = "Ekran Boyutu",
                             ProductId = 7,
                             Status = 1,
@@ -1242,7 +1242,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 51,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4955),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4406),
                             Name = "Çözünürlük (Piksel)",
                             ProductId = 7,
                             Status = 1,
@@ -1251,7 +1251,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 52,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4956),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4408),
                             Name = "Görüntü Formatı",
                             ProductId = 7,
                             Status = 1,
@@ -1260,7 +1260,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 53,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4957),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4410),
                             Name = "Ekran Renk",
                             ProductId = 7,
                             Status = 1,
@@ -1269,7 +1269,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 54,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4957),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4412),
                             Name = "Piksel Aralığı",
                             ProductId = 7,
                             Status = 1,
@@ -1278,7 +1278,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 55,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4958),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4414),
                             Name = "İzleme Açısı",
                             ProductId = 7,
                             Status = 1,
@@ -1287,7 +1287,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 56,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4959),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4415),
                             Name = "Sync Teknolojisi",
                             ProductId = 7,
                             Status = 1,
@@ -1296,7 +1296,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 57,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4960),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4417),
                             Name = "Yerel açı oranı",
                             ProductId = 8,
                             Status = 1,
@@ -1305,7 +1305,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 58,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4961),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4419),
                             Name = "Yenileme yanıt süresi",
                             ProductId = 8,
                             Status = 1,
@@ -1314,7 +1314,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 59,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4961),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4421),
                             Name = "Panel tipi",
                             ProductId = 8,
                             Status = 1,
@@ -1323,7 +1323,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 60,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4962),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4423),
                             Name = "En boy oranı",
                             ProductId = 8,
                             Status = 1,
@@ -1332,7 +1332,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 61,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4963),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4425),
                             Name = "Ekran parlaklığı (tipik)",
                             ProductId = 8,
                             Status = 1,
@@ -1341,7 +1341,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 62,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4964),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4426),
                             Name = "Görüntüleme teknolojisi",
                             ProductId = 8,
                             Status = 1,
@@ -1350,7 +1350,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 63,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4965),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4428),
                             Name = "HD türü",
                             ProductId = 8,
                             Status = 1,
@@ -1359,7 +1359,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 64,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4965),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4430),
                             Name = "Kontrast oranı",
                             ProductId = 8,
                             Status = 1,
@@ -1368,7 +1368,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 65,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4966),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4432),
                             Name = "Standart bağlantı",
                             ProductId = 9,
                             Status = 1,
@@ -1377,7 +1377,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 66,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(4967),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4434),
                             Name = "Donanım şifreleme",
                             ProductId = 9,
                             Status = 1,
@@ -1386,7 +1386,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 67,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5000),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4435),
                             Name = "TBW sınıfı",
                             ProductId = 9,
                             Status = 1,
@@ -1395,7 +1395,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 68,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5003),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4437),
                             Name = "NVMe",
                             ProductId = 9,
                             Status = 1,
@@ -1404,7 +1404,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 69,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5004),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4438),
                             Name = "Sıralı okuma hızı (CDM)",
                             ProductId = 9,
                             Status = 1,
@@ -1413,7 +1413,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 70,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5005),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4440),
                             Name = "Hafıza tipi",
                             ProductId = 9,
                             Status = 1,
@@ -1422,7 +1422,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 71,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5005),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4442),
                             Name = "SSD form faktörü",
                             ProductId = 9,
                             Status = 1,
@@ -1431,7 +1431,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 72,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5006),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4443),
                             Name = "Sıralı yazma hızı (CDM)",
                             ProductId = 9,
                             Status = 1,
@@ -1440,7 +1440,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 73,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5007),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4445),
                             Name = "Standart bağlantı",
                             ProductId = 10,
                             Status = 1,
@@ -1449,7 +1449,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 74,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5008),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4447),
                             Name = "Donanım şifreleme",
                             ProductId = 10,
                             Status = 1,
@@ -1458,7 +1458,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 75,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5009),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4449),
                             Name = "TBW sınıfı",
                             ProductId = 10,
                             Status = 1,
@@ -1467,7 +1467,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 76,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5010),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4451),
                             Name = "NVMe",
                             ProductId = 10,
                             Status = 1,
@@ -1476,7 +1476,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 77,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5011),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4453),
                             Name = "Sıralı okuma hızı (CDM)",
                             ProductId = 10,
                             Status = 1,
@@ -1485,7 +1485,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 78,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5012),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4454),
                             Name = "Hafıza tipi",
                             ProductId = 10,
                             Status = 1,
@@ -1494,7 +1494,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 79,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5012),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4456),
                             Name = "SSD form faktörü",
                             ProductId = 10,
                             Status = 1,
@@ -1503,7 +1503,7 @@ namespace Project.DAL.Migrations
                         new
                         {
                             Id = 80,
-                            CreatedDate = new DateTime(2023, 6, 30, 7, 50, 27, 564, DateTimeKind.Local).AddTicks(5013),
+                            CreatedDate = new DateTime(2023, 8, 6, 15, 27, 30, 368, DateTimeKind.Local).AddTicks(4458),
                             Name = "Sıralı yazma hızı (CDM)",
                             ProductId = 10,
                             Status = 1,

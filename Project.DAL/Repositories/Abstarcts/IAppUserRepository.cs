@@ -15,5 +15,6 @@ namespace Project.DAL.Repositories.Abstarcts
         public Task<AppUser?> FindByStringAsync(string Id);
         public Task<AppUser?> GetUserWithProfileAndAddressAsync(string userName);
         public Task<AppUser?> GetUserWithProfileAsync(string userName);
+        public Task<(bool, IEnumerable<IdentityError>?)> EditUserWithOutPictureAsync(AppUser appUser);
     }
 }

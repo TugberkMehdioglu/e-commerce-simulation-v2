@@ -22,13 +22,24 @@ namespace Project.DAL.Repositories.Concretes
             _signInManager = signInManager;
         }
 
-        public override async Task UpdateAsync(AppUser entity)
+        public async Task<(bool, IEnumerable<IdentityError>?)> EditUserWithOutPictureAsync(AppUser appUser)
         {
-            entity.Status = DataStatus.Updated;
-            entity.ModifiedDate = DateTime.Now;
-            AppUser toBeUpdated = (await FindByStringAsync(entity.Id))!;
-            _context.Entry(toBeUpdated).CurrentValues.SetValues(entity);
-            await SaveAsync();
+            AppUser newUser = await _userManager.FindByIdAsync(appUser.Id);
+            newUser.Email = appUser.Email;
+            newUser.UserName = appUser.UserName;
+            newUser.PhoneNumber = appUser.PhoneNumber;
+            newUser.ModifiedDate = DateTime.Now;
+            newUser.Status = DataStatus.Updated;
+
+            IdentityResult result = await _userManager.UpdateAsync(newUser);
+            if (!result.Succeeded) return (false, result.Errors);
+
+            IdentityResult securtiyStampResult = await _userManager.UpdateSecurityStampAsync(newUser);
+            if (!securtiyStampResult.Succeeded) return (false, securtiyStampResult.Errors);
+
+            await _signInManager.SignOutAsync();//Because SecurityStamp updated
+            await _signInManager.SignInAsync(newUser, true);
+            return (true, null);
         }
 
         public async Task<AppUser?> FindByStringAsync(string Id)
