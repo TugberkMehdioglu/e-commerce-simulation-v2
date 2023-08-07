@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Project.ENTITIES.Models;
+using Project.MVCUI.Areas.Admin.AdminViewModels;
 using Project.MVCUI.ViewModels;
 
 namespace Project.MVCUI.Mapping
@@ -11,6 +12,7 @@ namespace Project.MVCUI.Mapping
             CreateMap<AppUser, AppUserViewModel>().ReverseMap();
             CreateMap<AppUserProfile, AppUserProfileViewModel>().ReverseMap();
             CreateMap<Address, AddressViewModel>().ReverseMap();
+            CreateMap<Category, CategoryViewModel>().ReverseMap();
             
         }
     }
