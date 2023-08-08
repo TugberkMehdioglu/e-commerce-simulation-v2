@@ -1,0 +1,39 @@
+﻿@model RoleViewModel
+@{
+    ViewData["Title"] = "AddRole";
+}
+
+<div class="card mb-3 col-md-8 offset-md-2">
+
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+    <div class="card-header">
+        <div class="row flex-between-end">
+            <div class=" text-center align-self-center">
+                <h3 class="mb-0">Rol Ekleme Sayfası</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body bg-light">
+        <div class="tab-content">
+            <div class="tab-pane preview-tab-pane active p-md-2" role="tabpanel" aria-labelledby="tab-dom-3174a9fa-db90-48e1-8c09-14225a9839bd" id="dom-3174a9fa-db90-48e1-8c09-14225a9839bd">
+                <form method="post">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" placeholder=" " asp-for="Name" />
+                        <label for="Name">Rol Adı</label>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                        <button class="btn btn-outline-primary" type="submit">Rol Oluştur</button>
+
+                        <a class="btn btn-outline-warning" asp-area="Admin" asp-controller="Role" asp-action="Index"><span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4 down-1"></span>Rol Listesine Dön</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+}

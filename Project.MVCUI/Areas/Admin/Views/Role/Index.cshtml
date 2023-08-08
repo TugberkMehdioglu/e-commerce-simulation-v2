@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (TempData["success"] != null)
+{
+    <div class="col-8 offset-2">
+        <partial name="_AlertSuccessPartial" model="@TempData["success"]"></partial>
+    </div>
+}
+else if (ViewBag.error != null)
+{
+    <div class="col-8 offset-2">
+        <partial name="_AlertFailPartial" model="@ViewBag.error"></partial>
+    </div>
+}
+
+<div class="col-8 offset-2" style="visibility:hidden;" id="ajaxDiv">
+</div>
+
+<div class="card mb-3">
+    <div class="card-header border-bottom">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3>Rol Listesi</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body pt-0">
+        <div class="tab-content">
+            <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-312a89cb-2fd5-4046-8ae2-510e67420d0a" id="dom-312a89cb-2fd5-4046-8ae2-510e67420d0a">
+                <div class="table-responsive scrollbar">
+                    <table class="table table-hover table-striped overflow-hidden" id="myTable">
+                        <thead>
+                            <tr class="align-middle">
+                                <th scope="col" class="text-center text-1000">Ad</th>
+                                <th scope="col" class="text-center text-1000"><a asp-area="Admin" asp-controller="Role" asp-action="AddRole" class="btn btn-outline-success">Rol Oluştur</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (RoleViewModel item in Model)
+                            {
+                                <tr class="align-middle">
+                                    <td class="text-nowrap text-800 text-center">@item.Name</td>
+                                    <td class="text-nowrap text-800 text-center">
+                                        <a asp-area="Admin" asp-controller="Role" asp-action="UpdateRole" asp-route-id="@item.Id" class="btn btn-outline-warning">Güncelle</a>
+                                        <a id="deleteCategoryId" data-name="@item.Name" data-id="@item.Id" data-bs-toggle="modal" data-bs-target="#modal5" class="btn btn-outline-danger mx-2">Sil</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*------------MODAL------------*@
+<div class="modal fade" id="modal5" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Rol silinsin mi?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModal">Kapat</button>
+                <button type="submit" class="btn btn-danger" id="deleteCategoryButton" data-bs-dismiss="modal">Sil</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*------------MODAL------------*@
+
+@section Css{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+
+        $("#myTable").on("click", "#deleteCategoryId", function () {
+
+            let name = $(this).data("name");
+            let modalBodyText = name + " rolünü silmek istediğinize emin misiniz?";
+            $(".modal-body").text(modalBodyText);
+
+            let id = $(this).data("id");
+            let row = $(this).closest("tr");
+
+            // Önceki tıklamalar için kaydedilen olayları temizleyin
+            $("#deleteCategoryButton").off("click");
+            //Önerimdeki $("#deleteCategoryButton").off("click.deleteCategory") kullanımı, sadece belirli bir olayın (.deleteCategory) kaldırılmasını sağlamak için daha spesifik bir şekilde olayları yönetmek içindi. Ancak, $("#deleteCategoryButton").off("click") kullanarak tüm click olaylarını kaldırmanız da aynı sonucu verecektir.
+
+            $("#deleteCategoryButton").click(function () {
+
+                $.ajax({
+
+                    type: "GET",
+                    url: "/Admin/Role/DeleteRole/" + id,
+                    success: function () {
+
+                        row.hide();
+                        successAlert("Rol başarıyla silindi");
+                    },
+                    error: function (xhr) {
+
+                        var error = xhr.responseJSON.message;
+                        FailAlert(error);
+                    }
+                });
+
+            });
+        });
+    });
+    //-------------------------Js Alert---------------------------------
+    function successAlert(message) {
+
+        // Yeni bir div öğesi oluştur
+        let alertDiv = document.createElement("div");
+        alertDiv.classList.add("alert", "alert-success", "d-flex", "align-items-center", "alert-dismissible", "fade", "show");
+        alertDiv.setAttribute("role", "alert");
+
+        // İçeriği oluştur
+        let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "24");
+        svg.setAttribute("height", "24");
+        svg.setAttribute("fill", "currentColor");
+        svg.classList.add("bi", "bi-check-circle-fill");
+        svg.setAttribute("viewBox", "0 0 16 16");
+
+        let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z");
+
+        let span = document.createElement("span");
+        span.classList.add("ms-2");
+        span.textContent = message;
+
+        let button = document.createElement("button");
+        button.setAttribute("type", "button");
+        button.classList.add("btn-close");
+        button.setAttribute("data-bs-dismiss", "alert");
+
+        // Öğeleri birleştir
+        svg.appendChild(path);
+        alertDiv.appendChild(svg);
+        alertDiv.appendChild(span);
+        alertDiv.appendChild(button);
+
+        // Alert'ı belirli bir elementin içine ekleyin
+        let container = document.getElementById("ajaxDiv"); // Container elementin ID'sini buraya yazın
+        container.style.visibility = "visible";
+        container.appendChild(alertDiv);
+    };
+            //----------------------------------------------------------------------
+
+    function FailAlert(message) {
+
+        // Yeni bir div öğesi oluştur
+        let alertDiv = document.createElement("div");
+        alertDiv.classList.add("alert", "alert-danger", "d-flex", "align-items-center", "alert-dismissible", "fade", "show");
+        alertDiv.setAttribute("role", "alert");
+
+        // İçeriği oluştur
+        let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "24");
+        svg.setAttribute("height", "24");
+        svg.setAttribute("fill", "currentColor");
+        svg.classList.add("bi", "bi-check-circle-fill");
+        svg.setAttribute("viewBox", "0 0 16 16");
+
+        let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z");
+
+        let span = document.createElement("span");
+        span.classList.add("ms-2");
+        span.textContent = message;
+
+        let button = document.createElement("button");
+        button.setAttribute("type", "button");
+        button.classList.add("btn-close");
+        button.setAttribute("data-bs-dismiss", "alert");
+
+        // Öğeleri birleştir
+        svg.appendChild(path);
+        alertDiv.appendChild(svg);
+        alertDiv.appendChild(span);
+        alertDiv.appendChild(button);
+
+        // Alert'ı belirli bir elementin içine ekleyin
+        let container = document.getElementById("ajaxDiv"); // Container elementin ID'sini buraya yazın
+        container.style.visibility = "visible";
+        container.appendChild(alertDiv);
+    };
+
+</script>

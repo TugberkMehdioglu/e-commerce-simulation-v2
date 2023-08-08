@@ -188,6 +188,31 @@
                                             <!-- more inner pages-->
                                         </li>
                                     </ul>
+
+                                    <a class="nav-link dropdown-indicator" href="#roles" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="e-commerce">
+                                        <div class="d-flex align-items-center">
+                                            <span class="nav-link-icon"><span class="fas fa-map-signs"></span></span><span class="nav-link-text ps-1">Rol</span>
+                                        </div>
+                                    </a>
+                                    <ul class="nav collapse false" id="roles">
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="Admin" asp-controller="Role" asp-action="Index" aria-expanded="false">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="nav-link-text ps-1">Roller</span>
+                                                </div>
+                                            </a>
+                                            <!-- more inner pages-->
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="Admin" asp-controller="Role" asp-action="AddRole" aria-expanded="false">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="nav-link-text ps-1">Rol Ekle</span>
+                                                </div>
+                                            </a>
+                                            <!-- more inner pages-->
+                                        </li>
+                                    </ul>
                                 }
                                 @if (User.HasClaim(x => x.Type == ClaimTypes.Role && x.Value == "Member" || x.Value == "Admin"))
                                 {
