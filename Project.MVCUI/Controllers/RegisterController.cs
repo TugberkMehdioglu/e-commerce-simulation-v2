@@ -19,13 +19,15 @@ namespace Project.MVCUI.Controllers
         private readonly IAppUserProfileManager _appUserProfileManager;
         private readonly IMapper _mapper;
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public RegisterController(IAppUserManager appUserManager, IAppUserProfileManager appUserProfileManager, IMapper mapper, UserManager<AppUser> userManager)
+        public RegisterController(IAppUserManager appUserManager, IAppUserProfileManager appUserProfileManager, IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _appUserManager = appUserManager;
             _appUserProfileManager = appUserProfileManager;
             _mapper = mapper;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult SignUp()
@@ -100,6 +102,8 @@ namespace Project.MVCUI.Controllers
                 ModelState.AddModelErrorListWithOutKey(result.Errors);
                 return View(request);
             }
+
+            await _signInManager.SignOutAsync();
 
             return RedirectToAction(nameof(RegistrationOk), "Register", new { email = appUser.Email });
         }

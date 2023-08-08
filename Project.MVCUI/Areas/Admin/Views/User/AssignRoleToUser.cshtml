@@ -1,0 +1,54 @@
+﻿@model List<AssignRoleToUserViewModel>
+@{
+    ViewData["Title"] = "AssignRoleToUser";
+}
+
+<div class="card mb-3 col-8 offset-2">
+
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+    <div class="card-header">
+        <div class="row flex-between-end">
+            <div class=" text-center align-self-center">
+                <h3 class="mb-0">Rol Atama Sayfası</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body bg-light">
+        <div class="tab-content">
+            <div class="tab-pane preview-tab-pane active p-md-2" role="tabpanel" aria-labelledby="tab-dom-3174a9fa-db90-48e1-8c09-14225a9839bd" id="dom-3174a9fa-db90-48e1-8c09-14225a9839bd">
+                <form method="post">
+                    <div>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <div class="form-check mb-2 d-flex justify-content-center">
+
+                                <input class="form-check-input" type="checkbox" asp-for="@Model[i].Exist" id="{@i}Exist">
+                                <label class="form-check-label ms-1" for="{@i}Exist">
+                                    @Model[i].Name
+                                </label>
+
+                                <input type="hidden" asp-for="@Model[i].Id">
+                                <input type="hidden" asp-for="@Model[i].Name">
+
+                            </div>
+                        }
+                    </div>
+
+
+                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                        <button class="btn btn-outline-primary" type="submit">Rol Ata</button>
+
+                        <a class="btn btn-outline-warning" asp-area="Admin" asp-controller="User" asp-action="Index"><span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4 down-1"></span>Kullanıcı Listesine Dön</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+
+}
