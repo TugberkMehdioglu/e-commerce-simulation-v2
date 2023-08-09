@@ -38,5 +38,20 @@ namespace Project.MVCUI.Areas.Admin.Controllers
 
             return View(productViewModels);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Details(int id)
+        {
+            var (isSuccess, error, product) = await _productManager.GetActiveProductWithAttributeAndCategoryAsync(id);
+            if (!isSuccess)
+            {
+                TempData["fail"] = error;
+                return RedirectToAction(nameof(Index), "Product", new { Area = "Admin" });
+            }
+
+            ProductViewModel productViewModel = _mapper.Map<ProductViewModel>(product);
+            //Todo: Buranın view'sunda anakart yazan yerin yönlendirmesini sipariş sayfasında o kategori seçilmiş şekilde yönlendir
+            return View(productViewModel);
+        }
     }
 }

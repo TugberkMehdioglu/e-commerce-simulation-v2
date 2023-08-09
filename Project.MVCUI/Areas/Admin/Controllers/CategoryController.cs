@@ -39,12 +39,12 @@ namespace Project.MVCUI.Areas.Admin.Controllers
             }
             : new CategoryWrapper()
             {
-                Category = await _categoryManager.Where(x => x.Id == id && x.Status != DataStatus.Deleted).Select(x => new CategoryViewModel()
+                Categories = await _categoryManager.Where(x => x.Id == id && x.Status != DataStatus.Deleted).Select(x => new CategoryViewModel()
                 {
                     Id = x.Id,
                     Name = x.Name,
                     Description = x.Description
-                }).FirstOrDefaultAsync()
+                }).ToListAsync()
             };
             //Todo: Buranın view'undaki ürünleri action'ını oluştur ProductController'da.
             return View(wrapper);

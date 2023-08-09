@@ -34,5 +34,8 @@ namespace Project.MVCUI.Areas.Admin.AdminViewModels
 
         [ValidateNever]
         public CategoryViewModel? Category { get; set; }
+
+        [ValidateNever]
+        public ICollection<ProductAttributeViewModel>? ProductAttributes { get; set; }
     }
 }
