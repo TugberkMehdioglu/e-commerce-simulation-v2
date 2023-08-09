@@ -9,5 +9,7 @@ namespace Project.BLL.ManagerServices.Abstracts
 {
     public interface IProductManager : IManager<Product>
     {
+        public Task<(bool, string?, List<Product>?)> GetCategoriesActiveProductsAsync(int categoryId);
+        public Task<(bool, string?, List<Product>?)> GetActiveProductsWithCategory();
     }
 }

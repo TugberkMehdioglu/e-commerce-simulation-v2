@@ -1,5 +1,7 @@
-﻿using Project.DAL.ContextClasses;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.DAL.ContextClasses;
 using Project.DAL.Repositories.Abstarcts;
+using Project.ENTITIES.Enums;
 using Project.ENTITIES.Models;
 using System;
 using System.Collections.Generic;
@@ -14,5 +16,9 @@ namespace Project.DAL.Repositories.Concretes
         public ProductRepository(MyContext context) : base(context)
         {
         }
+
+        public async Task<List<Product>> GetCategoriesActiveProductsAsync(int categoryId) => await _context.Products!.Where(x => x.CategoryId == categoryId && x.Status != DataStatus.Deleted).Include(x => x.Category).ToListAsync();
+
+        public async Task<List<Product>> GetActiveProductsWithCategory() => await _context.Products!.Where(x => x.Status != DataStatus.Deleted).Include(x => x.Category).ToListAsync();
     }
 }

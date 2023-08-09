@@ -1,5 +1,4 @@
-﻿@model CategoryWrapper
-
+﻿@model List<ProductViewModel>
 @{
     ViewData["Title"] = "Index";
 }
@@ -11,42 +10,66 @@
     </div>
 }
 
+@if (TempData["fail"] != null)
+{
+    <div class="col-8 offset-2">
+        <partial name="_AlertFailPartial" model="@(TempData["fail"]!.ToString())"></partial>
+    </div>
+}
+
 <div class="col-8 offset-2" style="visibility:hidden;" id="ajaxDiv">
 </div>
 
 <div class="card mb-3">
     <div class="card-header">
         <div class="row flex-between-end">
+
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
             <div class=" text-center align-self-center">
-                <h3 class="mb-0">Kategoriler</h3>
+                <h3 class="mb-0">Ürünler</h3>
             </div>
         </div>
     </div>
     <div class="card-body pt-0">
         <div class="tab-content">
             <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-55d552bf-cdbd-40f9-856d-410188578fda" id="dom-55d552bf-cdbd-40f9-856d-410188578fda">
-                <div id="tableExample2" data-list='{"valueNames":["name","description"],"page":10,"pagination":true}'>
+                <div id="tableExample2" data-list='{"valueNames":["image","name","price","category","stock"],"page":5,"pagination":true}'>
                     <div class="table-responsive scrollbar">
                         <table class="table table-hover table-striped fs--1 mb-0" id="myTable">
                             <thead class="bg-200 text-900 align-middle">
                                 <tr>
+                                    <th class="sort text-center" data-sort="image">Resim</th>
                                     <th class="sort text-center" data-sort="name">Ad</th>
-                                    <th class="sort text-center" data-sort="description">Açıklama</th>
-                                    <th class="text-center" scope="col"><a class="btn btn-outline-success" asp-area="Admin" asp-controller="Category" asp-action="AddCategory">Kategori Oluştur</a></th>
+                                    <th class="sort text-center" data-sort="price">Fiyat</th>
+                                    <th class="sort text-center" data-sort="category">Kategorisi</th>
+                                    <th class="sort text-center" data-sort="stock">Stok</th>
+                                    <th class="text-center" scope="col"><a class="btn btn-outline-success" asp-area="Admin" asp-controller="Product" asp-action="Create">Ürün Oluştur</a></th>
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                @foreach (CategoryViewModel item in Model.Categories!)
+                                @foreach (ProductViewModel item in Model)
                                 {
-                                    <tr>
+                                    <tr class="align-middle">
+                                        <td class="image text-center text-800">
+                                            @if (item.ImagePath != null)
+                                            {
+                                                <img lass="rounded-circle" src="~/productPictures/@(item.ImagePath!)" alt="Resim Görüntülenemiyor" style="height:100px; width:100px;" />
+                                            }
+                                            else
+                                            {
+                                                <img class="rounded-circle" src="~/productPictures/no-image-icon.png" alt="Resim Görüntülenemiyor" style="height:100px; width:100px;" />
+                                            }
+                                        </td>
                                         <td class="name text-center text-800">@item.Name</td>
-                                        <td class="description text-center text-800">@(item.Description ?? "Açıklaması Yok")</td>
+                                        <td class="price text-center text-800">@item.Price.ToString("C2")</td>
+                                        <td class="category text-center text-800">@item.Category!.Name</td>
+                                        <td class="stock text-center text-800">@item.Stock Adet</td>
                                         <td class="text-center">
                                             <div>
-                                                <a asp-area="Admin" asp-controller="Product" asp-action="Index" asp-route-categoryId="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="Ürünlerine Gözat" class="btn p-0 me-2"><span class="text-800 fas fa-eye"></span></a>
+                                                <a asp-area="Admin" asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="İncele" class="btn p-0 me-2"><span class="text-800 fas fa-eye"></span></a>
 
-
-                                                <a asp-area="Admin" asp-controller="Category" asp-action="UpdateCategory" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="Güncelle" class="btn p-0"><span class="text-800 fas fa-edit"></span></a>
+                                                <a asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="Güncelle" class="btn p-0"><span class="text-800 fas fa-edit"></span></a>
 
                                                 <span id="deleteCategoryId" data-id="@item.Id" data-name="@item.Name" data-bs-toggle="modal" data-bs-target="#modal5">
                                                     <a class="btn p-0 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Sil"><span class="text-800 fas fa-trash-alt"></span></a>
@@ -103,13 +126,12 @@
 
     $(document).ready(function () {
 
-
-
         $("#myTable").on("click", "#deleteCategoryId", function () {
 
             let name = $(this).data("name");
-            let modalBodyText = name + " kategorisini silmek istediğinize emin misiniz?";
+            let modalBodyText = name + " ürününü silmek istediğinize emin misiniz?";
             $(".modal-body").text(modalBodyText);
+
 
             let id = $(this).data("id");
             let row = $(this).closest("tr");
@@ -123,15 +145,14 @@
                 $.ajax({
 
                     type: "GET",
-                    url: "/Admin/Category/DeleteCategory/" + id,
+                    url: "/Admin/Product/Delete/" + id,
                     success: function () {
 
                         row.hide();
-                        successAlert("Kategori başarıyla silindi");
+                        successAlert("Ürün başarıyla silindi");
                     },
-                    error: function (xhr) {
+                    error: function (error) {
 
-                        let error = xhr.responseJSON.message;
                         FailAlert(error);
                     }
                 });
@@ -178,8 +199,7 @@
         container.style.visibility = "visible";
         container.appendChild(alertDiv);
     };
-            //----------------------------------------------------------------------
-
+    //----------------------------------------------------------------------
 
     function FailAlert(message) {
 

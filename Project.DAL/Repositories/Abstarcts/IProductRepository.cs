@@ -9,5 +9,7 @@ namespace Project.DAL.Repositories.Abstarcts
 {
     public interface IProductRepository : IRepository<Product>
     {
+        public Task<List<Product>> GetCategoriesActiveProductsAsync(int categoryId);
+        public Task<List<Product>> GetActiveProductsWithCategory();
     }
 }
