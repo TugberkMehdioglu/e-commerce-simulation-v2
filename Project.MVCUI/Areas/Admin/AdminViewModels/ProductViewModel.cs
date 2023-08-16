@@ -32,10 +32,14 @@ namespace Project.MVCUI.Areas.Admin.AdminViewModels
         public string Description { get; set; } = null!;
         public IFormFile? Image { get; set; }
 
+        [Display(Name = "Kategori")]
+        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
+        public int CategoryID { get; set; }
+
         [ValidateNever]
         public CategoryViewModel? Category { get; set; }
 
         [ValidateNever]
-        public ICollection<ProductAttributeViewModel>? ProductAttributes { get; set; }
+        public List<ProductAttributeViewModel>? ProductAttributes { get; set; }
     }
 }

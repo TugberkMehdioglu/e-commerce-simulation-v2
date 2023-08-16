@@ -1,0 +1,239 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+@section Css{
+    <style>
+
+        .was-validated, .form-control:valid {
+            border-color: none !important;
+            background-image: none !important;
+        }
+
+            .was-validated .form-control:valid, .form-control.is-valid {
+                border-color: silver !important;
+            }
+
+                .was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+                    border-color: silver !important;
+                    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+                }
+
+            .was-validated .form-select:valid, .form-select.is-valid {
+                border-color: silver !important;
+            }
+
+                .was-validated .form-select:valid:focus, .form-select.is-valid:focus {
+                    border-color: silver !important; 
+                    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+                }
+
+                .was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"], .form-select.is-valid:not([multiple]):not([size]), .form-select.is-valid:not([multiple])[size="1"] {
+                    background-image: none !important;
+                }
+
+    </style>
+}
+
+<div class="card mb-3 col-md-8 offset-md-2">
+
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+    <div class="card-header">
+        <div class="row flex-between-end">
+            <div class=" text-center align-self-center">
+                <h3 class="mb-0">Ürün Ekleme Sayfası</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body bg-light">
+        <div class="tab-content">
+            <div class="tab-pane preview-tab-pane active p-md-2" role="tabpanel" aria-labelledby="tab-dom-3174a9fa-db90-48e1-8c09-14225a9839bd" id="dom-3174a9fa-db90-48e1-8c09-14225a9839bd">
+                <form method="post" enctype="multipart/form-data">
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" placeholder=" " asp-for="Name" />
+                        <label for="Name">Ürün Adı</label>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" placeholder=" " asp-for="Price" />
+                        <label for="Price">Fiyat</label>
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" placeholder=" " asp-for="Stock" />
+                        <label for="Stock">Stok</label>
+                        <span asp-validation-for="Stock" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder=" " asp-for="Description"></textarea>
+                        <label for="Stock">Açıklama</label>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" asp-for="CategoryID" asp-items="@TempData["categorySelectList"] as SelectList">
+                            <option value="">Ürünün kategorisini seçiniz</option>
+                        </select>
+                        <label for="floatingSelect">Kategorisini Seçiniz</label>
+                        <span asp-validation-for="CategoryID" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Image" class="form-label">Ürün Resmi :</label>
+                        <input class="form-control form-control-lg" type="file" asp-for="Image" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+
+                    <br />
+                    <h3 class="text-center">Ürün Özellikleri</h3>
+                    <br />
+
+                    <div id="inputContainer">
+                        <div class="input-group row g-2 d-flex align-items-center">
+                            <div class="form-floating mb-3 col">
+                                <input class="form-control dynamic" id="floatingInput" placeholder=" " asp-for="@Model.ProductAttributes![0].Name" required minlength="2">
+                                <label for="floatingInput">Özellik Adı</label>
+                                <div class="invalid-feedback">
+                                    2 ile 100 karakter arasında olmalıdır
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3 col">
+                                <input class="form-control dynamic" id="floatingInput" placeholder=" " asp-for="@Model.ProductAttributes![0].Value" required minlength="2">
+                                <label for="floatingInput">Değeri</label>
+                                <div class="invalid-feedback">
+                                    Değer alanı en az 2 karakter olmalıdır
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-1 col-md-2 col-sm-3 col-3 text-center">
+                                <span class="btn btn-sm btn-success" id="increment">+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                        <button class="btn btn-outline-primary" type="submit">Ürün Ekle</button>
+
+                        <a class="btn btn-outline-warning" asp-area="Admin" asp-controller="Product" asp-action="Index"><span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4 down-1"></span>Ürün Listesine Dön</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+
+    <script>
+
+        $(document).ready(function () {
+            const addButton = $("#addInput");
+            const inputContainer = $("#inputContainer");
+            let inputCount = $(".input-group").length;
+
+            $("#inputContainer").on("click", "[id = delete]", function () {
+
+                $(this).closest(".input-group").remove();
+                inputCount--;
+                rebindInputs();
+            });
+
+            function rebindInputs() {
+                let count = 0;
+                $(document).find(".dynamic").each(function (index, element) {
+
+                    const inputName = $(element).attr("name");
+
+                    if (inputName.includes("Name")) {
+                        $(element).attr("name", "ProductAttributes[" + count + "]" + ".Name");
+                    }
+                    else {
+                        $(element).attr("name", "ProductAttributes[" + count + "]" + ".Value");
+                        count++;
+                    }
+
+                });
+            };
+
+            //For dynamic buttons
+            $("#inputContainer").on("click", "[id = increment]", function () {
+                const newInputContainer = $("<div>").addClass("input-group row g-2 d-flex align-items-center");
+
+                const floatContainer1 = $("<div>").addClass("form-floating mb-3 col");
+                newInputContainer.append(floatContainer1);
+
+                const newAttribute = $("<input>").addClass("form-control dynamic");
+                newAttribute.attr("name", "ProductAttributes[" + inputCount + "]" + ".Name");
+                newAttribute.attr("id", "floatingInput[" + inputCount + "]");
+                newAttribute.attr("placeholder", " ");
+                newAttribute.attr("required", true);
+                newAttribute.attr("minlength", 2);
+                floatContainer1.append(newAttribute);
+
+                const newLabel = $("<label>");
+                newLabel.attr("for", "floatingInput[" + inputCount + "]");
+                newLabel.html("Özelliki Adı")
+                floatContainer1.append(newLabel);
+
+                const attributeValidationMessage = $("<div>").addClass("invalid-feedback");
+                attributeValidationMessage.text("Özellik Adı alanı en az 2 karakter olmalıdır");
+                floatContainer1.append(attributeValidationMessage);
+
+                const floatContainer2 = $("<div>").addClass("form-floating mb-3 col");
+                newInputContainer.append(floatContainer2);
+
+                const newValue = $("<input>").addClass("form-control dynamic");
+                newValue.attr("name", "ProductAttributes[" + inputCount + "]" + ".Value");
+                newValue.attr("id", "floatingInput2[" + inputCount + "]");
+                newValue.attr("placeholder", " ");
+                newValue.attr("required", true);
+                newValue.attr("minlength", 2);
+                floatContainer2.append(newValue);
+
+                const newLabel2 = $("<label>");
+                newLabel2.attr("for", "floatingInput2[" + inputCount + "]");
+                newLabel2.html("Değeri")
+                floatContainer2.append(newLabel2);
+
+                const attributeValidationMessage2 = $("<div>").addClass("invalid-feedback");
+                attributeValidationMessage2.text("Değer alanı en az 2 karakter olmalıdır");
+                floatContainer2.append(attributeValidationMessage2);
+
+                const floatContainer3 = $("<div>").addClass("mb-3 col-lg-2 col-md-3 col-sm-4 col-4 text-center");
+                newInputContainer.append(floatContainer3);
+
+                const incrementButton = $("<span>").addClass("btn btn-sm btn-success");
+                incrementButton.attr("id", "increment");
+                incrementButton.html("+");
+                floatContainer3.append(incrementButton);
+
+                const removeButton = $("<span>").addClass("btn btn-sm btn-danger ms-1");
+                removeButton.attr("id", "delete");
+                removeButton.html("-");
+                floatContainer3.append(removeButton);
+
+                inputContainer.append(newInputContainer);
+
+                inputCount++;
+            });
+
+
+            $("form").submit(function (event) {
+                if (!this.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                this.classList.add('was-validated');
+            });
+
+        });
+
+    </script>
+}
