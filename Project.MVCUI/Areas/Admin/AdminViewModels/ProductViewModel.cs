@@ -25,6 +25,7 @@ namespace Project.MVCUI.Areas.Admin.AdminViewModels
         [DataType(DataType.Text)]
         public short Stock { get; set; }
         public string? ImagePath { get; set; }
+        public string? FormerImagePath { get; set; }
 
         [Display(Name = "Ürün açıklaması")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]

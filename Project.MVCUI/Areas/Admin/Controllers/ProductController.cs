@@ -121,5 +121,30 @@ namespace Project.MVCUI.Areas.Admin.Controllers
             TempData["success"] = "Ürün başarıyla eklendi";
             return RedirectToAction(nameof(Index), "Product", new { Area = "Admin" });
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var (isSuccess, error, product) = await _productManager.GetActiveProductWithAttributeAndCategoryAsync(id);
+            if (!isSuccess)
+            {
+                ModelState.AddModelErrorWithOutKey(error!);
+                return RedirectToAction(nameof(Index), "Product", new { Area = "Admin" });
+            }
+
+            ProductViewModel productViewModel = _mapper.Map<ProductViewModel>(product);
+            productViewModel.FormerName = product!.Name;
+            productViewModel.FormerImagePath = product.ImagePath;
+
+            List<CategoryViewModel> categories = await _categoryManager.GetActives().Select(x => new CategoryViewModel()
+            {
+                Id = x.Id,
+                Name = x.Name
+            }).ToListAsync();
+
+            TempData["categorySelectList"] = new SelectList(categories, nameof(CategoryViewModel.Id), nameof(CategoryViewModel.Name), nameof(productViewModel.CategoryID));
+
+            return View(productViewModel);
+        }
     }
 }

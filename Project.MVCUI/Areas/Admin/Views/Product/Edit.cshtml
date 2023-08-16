@@ -1,0 +1,75 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="card mb-3 col-8 offset-2">
+
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+    <div class="card-header">
+        <div class="row flex-between-end">
+            <div class=" text-center align-self-center">
+                <h3 class="mb-0">Ürün Güncelleme Sayfası</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body bg-light">
+        <div class="tab-content">
+            <div class="tab-pane preview-tab-pane active p-md-2" role="tabpanel" aria-labelledby="tab-dom-3174a9fa-db90-48e1-8c09-14225a9839bd" id="dom-3174a9fa-db90-48e1-8c09-14225a9839bd">
+                <form method="post" enctype="multipart/form-data">
+
+                    <input type="hidden" asp-for="FormerImagePath" />
+                    <input type="hidden" asp-for="FormerName" />
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" placeholder=" " asp-for="Name" />
+                        <label for="Name">Ürün Adı</label>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" placeholder=" " asp-for="Price" />
+                        <label for="Price">Fiyat</label>
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" placeholder=" " asp-for="Stock" />
+                        <label for="Stock">Stok</label>
+                        <span asp-validation-for="Stock" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" asp-for="CategoryID" asp-items="@TempData["categorySelectList"] as SelectList">
+                            <option value="">Lütfen kategori seçiniz</option>
+                        </select>
+                        <label for="floatingSelect">Kategorisini Seçiniz</label>
+                        <span asp-validation-for="CategoryID" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 d-flex justify-content-center">
+                        <a href="~/productPictures/@(Model.ImagePath??"no-image-icon.png")" data-gallery="gallery-2">
+                            <img class="img-fluid rounded" src="~/productPictures/@(Model.ImagePath??"no-image-icon.png")" alt="" width="300" />
+                        </a>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Image" class="form-label">Ürün Resmi :</label>
+                        <input class="form-control form-control-lg" type="file" asp-for="Image" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                        <button class="btn btn-outline-primary" type="submit">Ürün Güncelle</button>
+
+                        <a class="btn btn-outline-warning" asp-area="Admin" asp-controller="Product" asp-action="Index"><span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4 down-1"></span>Ürün Listesine Dön</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+    <script src="~/OuterTools/vendors/glightbox/glightbox.min.js"></script>
+}
+@section Css{
+    <link href="~/OuterTools/vendors/glightbox/glightbox.min.css" rel="stylesheet" />
+}
