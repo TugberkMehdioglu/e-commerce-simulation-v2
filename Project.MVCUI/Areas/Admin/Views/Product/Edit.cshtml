@@ -3,7 +3,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<div class="card mb-3 col-8 offset-2">
+<div class="card mb-3 col-md-8 offset-md-2">
 
     <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
@@ -39,6 +39,11 @@
                         <span asp-validation-for="Stock" class="text-danger"></span>
                     </div>
                     <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder=" " asp-for="Description"></textarea>
+                        <label for="Stock">Açıklama</label>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
                         <select class="form-select" id="floatingSelect" aria-label="Floating label select example" asp-for="CategoryID" asp-items="@TempData["categorySelectList"] as SelectList">
                             <option value="">Lütfen kategori seçiniz</option>
                         </select>
@@ -55,6 +60,44 @@
                         <input class="form-control form-control-lg" type="file" asp-for="Image" />
                         <span asp-validation-for="Image" class="text-danger"></span>
                     </div>
+
+                    <br />
+                    <h3 class="text-center">Ürün Özellikleri</h3>
+                    <br />
+
+                    <div class="col-8 offset-2" style="visibility:hidden;" id="ajaxDiv">
+                    </div>
+
+                    <div id="inputContainer">
+                        @for (int i = 0; i < Model.ProductAttributes!.Count; i++)
+                        {
+                            <input type="hidden" asp-for="@Model.ProductAttributes[i].Id"/>
+                            <input type="hidden" asp-for="@Model.ProductAttributes[i].ProductId"/>
+
+                            <div class="input-group row g-2 d-flex align-items-center">
+                                <div class="form-floating mb-3 col">
+                                    <input class="form-control dynamic" id="floatingInput" placeholder=" " asp-for="@Model.ProductAttributes[i].Name" data-id="@Model.ProductAttributes[i].Id" required minlength="2">
+                                    <label for="floatingInput">Özellik Adı</label>
+                                    <div class="invalid-feedback">
+                                        2 ile 100 karakter arasında olmalıdır
+                                    </div>
+                                </div>
+                                <div class="form-floating mb-3 col">
+                                    <input class="form-control dynamic" id="floatingInput" placeholder=" " asp-for="@Model.ProductAttributes[i].Value" data-id="@Model.ProductAttributes[i].Id" required minlength="2">
+                                    <label for="floatingInput">Değeri</label>
+                                    <div class="invalid-feedback">
+                                        Değer alanı en az 2 karakter olmalıdır
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-lg-2 col-md-3 col-sm-4 col-4 text-center">
+                                    <span class="btn btn-sm btn-success" id="increment">+</span>
+                                    <span class="btn btn-sm btn-danger" id="delete">-</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+
                     <div class="d-grid gap-2 col-6 mx-auto mt-3">
                         <button class="btn btn-outline-primary" type="submit">Ürün Güncelle</button>
 
@@ -66,10 +109,286 @@
     </div>
 </div>
 
+
+@section Css{
+    <link href="~/OuterTools/vendors/glightbox/glightbox.min.css" rel="stylesheet" />
+
+    <style>
+
+        .was-validated, .form-control:valid {
+            border-color: none !important;
+            background-image: none !important;
+        }
+
+            .was-validated .form-control:valid, .form-control.is-valid {
+                border-color: silver !important;
+            }
+
+                .was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+                    border-color: silver !important;
+                    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+                }
+
+            .was-validated .form-select:valid, .form-select.is-valid {
+                border-color: silver !important;
+            }
+
+                .was-validated .form-select:valid:focus, .form-select.is-valid:focus {
+                    border-color: silver !important;
+                    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+                }
+
+                .was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"], .form-select.is-valid:not([multiple]):not([size]), .form-select.is-valid:not([multiple])[size="1"] {
+                    background-image: none !important;
+                }
+
+    </style>
+}
+
 @section Scripts{
     <partial name="_ValidationScriptsPartial"></partial>
     <script src="~/OuterTools/vendors/glightbox/glightbox.min.js"></script>
-}
-@section Css{
-    <link href="~/OuterTools/vendors/glightbox/glightbox.min.css" rel="stylesheet" />
+
+    <script>
+
+        $(document).ready(function () {
+            const addButton = $("#addInput");
+            const inputContainer = $("#inputContainer");
+            let inputCount = $(".input-group").length;
+
+
+            $("#inputContainer").on("click", "[id = delete]", function () {
+
+                //--------------------------------------
+                const inputGroups = $(".input-group");
+
+                let validInputGroupsCount = 0;
+
+                inputGroups.each(function () {
+                    const dataId = $(this).find(".dynamic").data("id");
+                    if (dataId !== undefined) {
+                        validInputGroupsCount++;
+                    }
+                });
+                //--------------------------------------
+
+                let selectedAttributeId = $(this).closest(".input-group").find(".dynamic").data("id");
+
+                if (inputCount <= 1) {
+
+                    FailAlert("Ürünün en az 1 adet özelliği bulunmak zorundadır");
+                    return;
+                }
+                else if (validInputGroupsCount <= 1 && selectedAttributeId != undefined) {
+
+                    FailAlert("Ürünün önceden kaydedilmiş en az 1 adet özelliği bulunmak zorundadır");
+                    return;
+                }
+                else if (selectedAttributeId === undefined) {
+
+                    $(this).closest(".input-group").remove();
+                    inputCount--;
+                    rebindInputs();
+                    return;
+                }
+                else{
+
+                    $.ajax({
+
+                        type: "GET",
+                        url: "/Admin/Product/DeleteAttribute/" + selectedAttributeId,
+                        success: function (xhr) {
+
+                            $(this).closest(".input-group").remove();
+                            inputCount--;
+                            rebindInputs();
+                            successAlert(xhr.message);
+                        },
+                        error: function (xhr) {
+
+                            let error = xhr.responseJSON.message;
+                            FailAlert(error);
+                        }
+                    });
+                }
+            });
+
+            function rebindInputs() {
+                let count = 0;
+                $(document).find(".dynamic").each(function (index, element) {
+
+                    const inputName = $(element).attr("name");
+
+                    if (inputName.includes("Name")) {
+                        $(element).attr("name", "ProductAttributes[" + count + "]" + ".Name");
+                    }
+                    else {
+                        $(element).attr("name", "ProductAttributes[" + count + "]" + ".Value");
+                        count++;
+                    }
+
+                });
+            };
+
+            //For dynamic buttons
+            $("#inputContainer").on("click", "[id = increment]", function () {
+                const newInputContainer = $("<div>").addClass("input-group row g-2 d-flex align-items-center");
+
+                const floatContainer1 = $("<div>").addClass("form-floating mb-3 col");
+                newInputContainer.append(floatContainer1);
+
+                const newAttribute = $("<input>").addClass("form-control dynamic");
+                newAttribute.attr("name", "ProductAttributes[" + inputCount + "]" + ".Name");
+                newAttribute.attr("id", "floatingInput[" + inputCount + "]");
+                newAttribute.attr("placeholder", " ");
+                newAttribute.attr("required", true);
+                newAttribute.attr("minlength", 2);
+                floatContainer1.append(newAttribute);
+
+                const newLabel = $("<label>");
+                newLabel.attr("for", "floatingInput[" + inputCount + "]");
+                newLabel.html("Özelliki Adı")
+                floatContainer1.append(newLabel);
+
+                const attributeValidationMessage = $("<div>").addClass("invalid-feedback");
+                attributeValidationMessage.text("Özellik Adı alanı en az 2 karakter olmalıdır");
+                floatContainer1.append(attributeValidationMessage);
+
+                const floatContainer2 = $("<div>").addClass("form-floating mb-3 col");
+                newInputContainer.append(floatContainer2);
+
+                const newValue = $("<input>").addClass("form-control dynamic");
+                newValue.attr("name", "ProductAttributes[" + inputCount + "]" + ".Value");
+                newValue.attr("id", "floatingInput2[" + inputCount + "]");
+                newValue.attr("placeholder", " ");
+                newValue.attr("required", true);
+                newValue.attr("minlength", 2);
+                floatContainer2.append(newValue);
+
+                const newLabel2 = $("<label>");
+                newLabel2.attr("for", "floatingInput2[" + inputCount + "]");
+                newLabel2.html("Değeri")
+                floatContainer2.append(newLabel2);
+
+                const attributeValidationMessage2 = $("<div>").addClass("invalid-feedback");
+                attributeValidationMessage2.text("Değer alanı en az 2 karakter olmalıdır");
+                floatContainer2.append(attributeValidationMessage2);
+
+                const floatContainer3 = $("<div>").addClass("mb-3 col-lg-2 col-md-3 col-sm-4 col-4 text-center");
+                newInputContainer.append(floatContainer3);
+
+                const incrementButton = $("<span>").addClass("btn btn-sm btn-success");
+                incrementButton.attr("id", "increment");
+                incrementButton.html("+");
+                floatContainer3.append(incrementButton);
+
+                const removeButton = $("<span>").addClass("btn btn-sm btn-danger ms-1");
+                removeButton.attr("id", "delete");
+                removeButton.html("-");
+                floatContainer3.append(removeButton);
+
+                const hiddenInput = $("<input>");
+                hiddenInput.attr("type", "hidden");
+                hiddenInput.attr("name", "ProductAttributes[" + inputCount + "].ProductId");
+                hiddenInput.attr("value", @Model.Id);
+                floatContainer2.append(hiddenInput);
+
+                inputContainer.append(newInputContainer);
+
+                inputCount++;
+            });
+
+
+            $("form").submit(function (event) {
+                if (!this.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                this.classList.add('was-validated');
+            });
+
+        });
+
+        //-------------------------Js Alert---------------------------------
+        function successAlert(message) {
+
+            // Yeni bir div öğesi oluştur
+            let alertDiv = document.createElement("div");
+            alertDiv.classList.add("alert", "alert-success", "d-flex", "align-items-center", "alert-dismissible", "fade", "show");
+            alertDiv.setAttribute("role", "alert");
+
+            // İçeriği oluştur
+            let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("width", "24");
+            svg.setAttribute("height", "24");
+            svg.setAttribute("fill", "currentColor");
+            svg.classList.add("bi", "bi-check-circle-fill");
+            svg.setAttribute("viewBox", "0 0 16 16");
+
+            let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", "M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z");
+
+            let span = document.createElement("span");
+            span.classList.add("ms-2");
+            span.textContent = message;
+
+            let button = document.createElement("button");
+            button.setAttribute("type", "button");
+            button.classList.add("btn-close");
+            button.setAttribute("data-bs-dismiss", "alert");
+
+            // Öğeleri birleştir
+            svg.appendChild(path);
+            alertDiv.appendChild(svg);
+            alertDiv.appendChild(span);
+            alertDiv.appendChild(button);
+
+            // Alert'ı belirli bir elementin içine ekleyin
+            let container = document.getElementById("ajaxDiv"); // Container elementin ID'sini buraya yazın
+            container.style.visibility = "visible";
+            container.appendChild(alertDiv);
+        };
+        //----------------------------------------------------------------------
+
+
+        function FailAlert(message) {
+
+            // Yeni bir div öğesi oluştur
+            let alertDiv = document.createElement("div");
+            alertDiv.classList.add("alert", "alert-danger", "d-flex", "align-items-center", "alert-dismissible", "fade", "show");
+            alertDiv.setAttribute("role", "alert");
+
+            // İçeriği oluştur
+            let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("width", "24");
+            svg.setAttribute("height", "24");
+            svg.setAttribute("fill", "currentColor");
+            svg.classList.add("bi", "bi-check-circle-fill");
+            svg.setAttribute("viewBox", "0 0 16 16");
+
+            let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", "M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z");
+
+            let span = document.createElement("span");
+            span.classList.add("ms-2");
+            span.textContent = message;
+
+            let button = document.createElement("button");
+            button.setAttribute("type", "button");
+            button.classList.add("btn-close");
+            button.setAttribute("data-bs-dismiss", "alert");
+
+            // Öğeleri birleştir
+            svg.appendChild(path);
+            alertDiv.appendChild(svg);
+            alertDiv.appendChild(span);
+            alertDiv.appendChild(button);
+
+            // Alert'ı belirli bir elementin içine ekleyin
+            let container = document.getElementById("ajaxDiv"); // Container elementin ID'sini buraya yazın
+            container.style.visibility = "visible";
+            container.appendChild(alertDiv);
+        };
+
+    </script>
 }
