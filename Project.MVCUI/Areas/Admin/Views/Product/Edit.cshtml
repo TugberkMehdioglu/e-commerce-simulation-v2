@@ -161,7 +161,8 @@
 
                 //--------------------------------------
                 const inputGroups = $(".input-group");
-
+                const attributeInputsContainer = $(this);
+                let selectedAttributeId = $(this).closest(".input-group").find(".dynamic").data("id");
                 let validInputGroupsCount = 0;
 
                 inputGroups.each(function () {
@@ -172,8 +173,7 @@
                 });
                 //--------------------------------------
 
-                let selectedAttributeId = $(this).closest(".input-group").find(".dynamic").data("id");
-
+               
                 if (inputCount <= 1) {
 
                     FailAlert("Ürünün en az 1 adet özelliği bulunmak zorundadır");
@@ -199,7 +199,7 @@
                         url: "/Admin/Product/DeleteAttribute/" + selectedAttributeId,
                         success: function (xhr) {
 
-                            $(this).closest(".input-group").remove();
+                            attributeInputsContainer.closest(".input-group").remove();
                             inputCount--;
                             rebindInputs();
                             successAlert(xhr.message);
