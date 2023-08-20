@@ -12,5 +12,6 @@ namespace Project.BLL.ManagerServices.Abstracts
         public Task<(bool, string?, List<Product>?)> GetCategoriesActiveProductsAsync(int categoryId);
         public Task<(bool, string?, List<Product>?)> GetActiveProductsWithCategory();
         public Task<(bool, string?, Product?)> GetActiveProductWithAttributeAndCategoryAsync(int id);
+        public Task<(bool, string?, List<Product>?)> GetActiveProductsWithCategory(string searchInProductName);
     }
 }

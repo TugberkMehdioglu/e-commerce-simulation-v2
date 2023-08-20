@@ -17,6 +17,7 @@
     </div>
 }
 
+
 <div class="col-8 offset-2" style="visibility:hidden;" id="ajaxDiv">
 </div>
 
@@ -31,8 +32,8 @@
             </div>
 
             <div class="mx-auto mt-3 w-50">
-                <form class="position-relative">
-                    <input class="form-control rounded-pill" type="search" placeholder="Ürünlerde ara..."/>
+                <form method="get" asp-area="Admin" asp-controller="Product" asp-action="SearchProducts">
+                    <input class="form-control rounded-pill" type="search" placeholder="Ürünlerde ismine göre ara..." name="item" id="searchProduct"/>
                 </form>
             </div>
         </div>
@@ -54,6 +55,14 @@
                                 </tr>
                             </thead>
                             <tbody class="list">
+
+                                @if (ViewBag.alert != null)
+                                {
+                                    <div class="col-8 offset-2">
+                                        <partial name="_AlertWarningPartial" model="@ViewBag.alert"></partial>
+                                    </div>
+                                }
+
                                 @foreach (ProductViewModel item in Model)
                                 {
                                     <tr class="align-middle">
@@ -166,6 +175,7 @@
             });
         });
     });
+
     //-------------------------Js Alert---------------------------------
     function successAlert(message) {
 

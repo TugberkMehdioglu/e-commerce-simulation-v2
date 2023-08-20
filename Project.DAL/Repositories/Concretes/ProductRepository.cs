@@ -22,5 +22,7 @@ namespace Project.DAL.Repositories.Concretes
         public async Task<List<Product>> GetActiveProductsWithCategory() => await _context.Products!.Where(x => x.Status != DataStatus.Deleted).Include(x => x.Category).ToListAsync();
 
         public async Task<Product?> GetActiveProductWithAttributeAndCategoryAsync(int id) => await _context.Products!.Where(x => x.Id == id && x.Status != DataStatus.Deleted).Include(x => x.ProductAttributes.Where(x => x.Status != DataStatus.Deleted)).Include(x => x.Category).FirstOrDefaultAsync();
+
+        public async Task<List<Product>> GetActiveProductsWithCategory(string searchInProductName) => await _context.Products!.Where(x => x.Name.ToLower().Contains(searchInProductName.ToLower()) && x.Status != DataStatus.Deleted).Include(x => x.Category).ToListAsync();
     }
 }

@@ -48,6 +48,35 @@ namespace Project.MVCUI.Areas.Admin.Controllers
             return View(productViewModels);
         }
 
+        [HttpGet("{item?}")]
+        public async Task<IActionResult> SearchProducts(string? item)
+        {
+            var (isSuccess, error, products) = string.IsNullOrWhiteSpace(item) ? await _productManager.GetActiveProductsWithCategory() : await _productManager.GetActiveProductsWithCategory(item);
+
+            List<ProductViewModel> productViewModels = _mapper.Map<List<ProductViewModel>>(products);
+
+            if (!isSuccess)
+            {
+                ModelState.AddModelErrorWithOutKey(error!);
+                return View(nameof(Index), productViewModels);
+            }
+            if(products!.Count == 0)
+            {
+                var (success, errorr, allProducts) = await _productManager.GetActiveProductsWithCategory();
+                if (!success)
+                {
+                    ModelState.AddModelErrorWithOutKey(errorr!);
+                    return View(nameof(Index), productViewModels);
+                }
+
+                List<ProductViewModel> productViewModels2 = _mapper.Map<List<ProductViewModel>>(allProducts);
+                ViewBag.alert = "Bu isimde bir ürün bulunamadı";
+                return View(nameof(Index), productViewModels2);
+            }
+            
+            return View(nameof(Index), productViewModels);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Details(int id)
         {

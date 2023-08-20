@@ -66,5 +66,19 @@ namespace Project.BLL.ManagerServices.Concretes
 
             return (true, null, product);
         }
+        public async Task<(bool, string?, List<Product>?)> GetActiveProductsWithCategory(string searchInProductName)
+        {
+            List<Product> products;
+            try
+            {
+                products = await _productRepository.GetActiveProductsWithCategory(searchInProductName);
+            }
+            catch (Exception exception)
+            {
+                return (false, $"Veritabanı işlemi sırasında hata oluştu, alınan hata => {exception.Message}. İçeriği => {exception.InnerException}", null);
+            }
+
+            return (true, null, products);
+        }
     }
 }
