@@ -101,6 +101,8 @@ namespace Project.MVCUI.Areas.Admin.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> DeleteUser(string id)
         {
+            if (id == "5c8defd5-91f2-4256-9f16-e7fa7546dec4") return StatusCode(StatusCodes.Status403Forbidden, new { message = "Bu kullanıcı silinemez" });
+
             AppUser? appUser = await _userManager.FindByIdAsync(id);
             if (appUser == null) return StatusCode(StatusCodes.Status404NotFound, new { message = "Kullanıcı bulunamadı" });
 

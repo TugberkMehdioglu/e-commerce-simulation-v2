@@ -61,9 +61,12 @@
                                             <div>
                                                 <a class="btn p-0 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Role Ata/Sil" asp-area="Admin" asp-controller="User" asp-action="AssignRoleToUser" asp-route-id="@item.Id"><span class="text-800 bi-clipboard-check"></span></a>
 
-                                                <span id="deleteCategoryId" data-id="@item.Id" data-name="@item.UserName" data-bs-toggle="modal" data-bs-target="#modal5">
-                                                    <a class="btn p-0 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Kullanıcıyı Sil"><span class="text-800 fas fa-trash-alt"></span></a>
-                                                </span>
+                                                @if(item.UserName != "Admin")
+                                                {
+                                                    <span id="deleteCategoryId" data-id="@item.Id" data-name="@item.UserName" data-bs-toggle="modal" data-bs-target="#modal5">
+                                                        <a class="btn p-0 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Kullanıcıyı Sil"><span class="text-800 fas fa-trash-alt"></span></a>
+                                                    </span>
+                                                }
                                             </div>
                                         </td>
                                     </tr>
