@@ -10,7 +10,7 @@
 @if (TempData["fail"] != null)
 {
     <div class="col-6 offset-3">
-        <partial name="_AlertFailPartial" model="@(TempData["fail"]!.ToString())"></partial>
+        <partial name="_AlertWarningPartial" model="@(TempData["fail"]!.ToString())"></partial>
     </div>
 }
 

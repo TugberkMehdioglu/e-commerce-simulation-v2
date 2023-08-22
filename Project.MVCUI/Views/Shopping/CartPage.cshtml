@@ -1,0 +1,77 @@
+﻿@model Cart
+@{
+    ViewData["Title"] = "CartPage";
+}
+
+@if (TempData["success"] != null)
+{
+    <div class="col-6 offset-3">
+        <partial name="_AlertSuccessPartial" model="@(TempData["success"]!.ToString())"></partial>
+    </div>
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <div class="row justify-content-between">
+            <div class="col-md-auto">
+                <h5 class="mb-3 mb-md-0">Sepetim (@Model.TotalItemCount)</h5>
+            </div>
+            <div class="col-md-auto"><a class="btn btn-sm btn-outline-secondary border-300 me-2" asp-controller="Shopping" asp-action="Index"> <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Alışverişe Devam Et</a><a class="btn btn-sm btn-primary" asp-controller="Shopping" asp-action="ConfirmOrder">Siparişi Tamamla</a></div>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="row gx-card mx-0 bg-200 text-900 fs--1 fw-semi-bold">
+            <div class="col-9 col-md-8 py-2">Ürünlerim</div>
+            <div class="col-3 col-md-4">
+                <div class="row">
+                    <div class="col-md-8 py-2 d-none d-md-block text-center">Adet</div>
+                    <div class="col-12 col-md-4 text-end py-2">Fiyat</div>
+                </div>
+            </div>
+        </div>
+        @foreach (CartItem item in Model.Basket)
+        {
+            <div class="row gx-card mx-0 align-items-center border-bottom border-200">
+                <div class="col-8 py-3">
+                    <div class="d-flex align-items-center">
+                        <a asp-controller="Shopping" asp-action="ProductDetail" asp-route-id="@item.ID"><img class="img-fluid rounded-1 me-3 d-none d-md-block" src="~/productPictures/@(item.ImagePath??"no-image-icon.png")" alt="" style="max-width:60px;" /></a>
+                        <div class="flex-1">
+                            <h5 class="fs-0"><a class="text-900" asp-controller="Shopping" asp-action="ProductDetail" asp-route-id="@item.ID">@item.Name</a></h5>
+                            <div class="fs--2 fs-md--1"><a class="text-danger" asp-controller="Shopping" asp-action="DeleteProductWithAllAmountFromCart" asp-route-id="@item.ID">Sepetten sil</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 py-3">
+                    <div class="row align-items-center">
+                        <div class="col-md-8 d-flex justify-content-end justify-content-md-center order-1 order-md-0">
+                            <div>
+                                <div class="input-group input-group-sm flex-nowrap" data-quantity="data-quantity">
+                                    <a class="btn btn-sm btn-outline-secondary border-300 px-2" data-type="minus" asp-controller="Shopping" asp-action="DeleteFromCart" asp-route-id="@item.ID">-</a>
+                                    <input class="form-control text-center px-2 input-spin-none" type="number" min="1" value="@item.Amount" aria-label="Amount (to the nearest dollar)" style="width: 50px" />
+                                    <a class="btn btn-sm btn-outline-secondary border-300 px-2" data-type="plus" asp-controller="Shopping" asp-action="AddToCart" asp-route-id="@item.ID" asp-route-categoryID="null" asp-route-pageNumber="null" asp-route-from="cart">+</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">@item.SubTotal.ToString("C2")</div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="row fw-bold gx-card mx-0">
+            <div class="col-9 col-md-8 py-2 text-end text-900">Toplam</div>
+            <div class="col px-0">
+                <div class="row gx-card mx-0">
+                    <div class="col-md-8 py-2 d-none d-md-block text-center">@Model.TotalItemCount (ürün)</div>
+                    <div class="col-12 col-md-4 text-end py-2">@Model.TotalPrice.ToString("C2")</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer bg-light d-flex justify-content-end">
+        <div class="col-md-auto"><a class="btn btn-sm btn-outline-secondary border-300 me-2" asp-controller="Shopping" asp-action="Index"> <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span>Alışverişe Devam Et</a><a class="btn btn-sm btn-primary" asp-controller="Shopping" asp-action="ConfirmOrder">Siparişi Tamamla</a></div>
+    </div>
+
+</div>

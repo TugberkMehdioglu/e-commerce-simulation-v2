@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.BLL.ManagerServices.Abstracts;
+using Project.COMMON.Extensions;
 using Project.ENTITIES.Enums;
+using Project.ENTITIES.Models;
 using Project.MVCUI.Areas.Admin.AdminViewModels;
+using Project.MVCUI.Models.ShoppingTools;
 using Project.MVCUI.ViewModels.WrapperClasses;
 
 namespace Project.MVCUI.Controllers
@@ -78,6 +81,44 @@ namespace Project.MVCUI.Controllers
             ProductViewModel productViewModel = _mapper.Map<ProductViewModel>(product);
 
             return View(productViewModel);
+        }
+
+        public IActionResult CartPage()
+        {
+            Cart? basket = HttpContext.Session.GetSession<Cart>("cart");
+            if (basket == null)
+            {
+                TempData["fail"] = "Sepetinizde ürün bulunmamaktadır";
+                return Redirect(nameof(Index));
+            }
+
+            return View(basket);
+        }
+
+
+        [HttpGet("{id}/{categoryID?}/{pageNumber?}/{from?}")]
+        public async Task<IActionResult> AddToCart(int id, int? categoryID, int? pageNumber, string? from)
+        {
+            Product? toBeAdded = await _productManager.FindAsync(id);
+            if (toBeAdded == null) return RedirectToAction(nameof(Index), "Product", new { Area = "" });
+
+            Cart? basket = HttpContext.Session.GetSession<Cart>("cart");
+            if (basket == null) basket = new Cart();
+
+            CartItem cartItem = new()
+            {
+                ID = toBeAdded.Id,
+                Name = toBeAdded.Name,
+                Price = toBeAdded.Price,
+                ImagePath = toBeAdded.ImagePath
+            };
+            basket.AddToBasket(cartItem);
+            HttpContext.Session.SetSession("cart", basket);
+
+            TempData["success"] = "Ürün sepete eklendi";
+            if (from != null && from == "cart") return RedirectToAction(nameof(CartPage));
+            else if (from != null && from == "ProductDetail") return RedirectToAction(nameof(ProductDetail), new { id });
+            else return RedirectToAction(nameof(Index), new { categoryID, pageNumber });
         }
     }
 }
