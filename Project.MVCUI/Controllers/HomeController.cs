@@ -28,13 +28,6 @@ namespace Project.MVCUI.Controllers
             _appUserProfileManager = appUserProfileManager;
         }
 
-        [Route("/")]
-        [Route("/Home")]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public IActionResult Login()
         {
             return View();

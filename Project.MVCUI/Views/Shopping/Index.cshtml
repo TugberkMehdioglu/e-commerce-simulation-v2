@@ -1,0 +1,120 @@
+﻿@model ShoppingListWrapper
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Css{
+    <link href="~/outertools/vendors/swiper/swiper-bundle.min.css" rel="stylesheet" />
+}
+
+@if (TempData["fail"] != null)
+{
+    <div class="col-6 offset-3">
+        <partial name="_AlertFailPartial" model="@(TempData["fail"]!.ToString())"></partial>
+    </div>
+}
+
+@if (TempData["success"] != null)
+{
+    <div class="col-6 offset-3">
+        <partial name="_AlertSuccessPartial" model="@(TempData["success"]!.ToString())"></partial>
+    </div>
+}
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="mx-auto">
+            <div class="list-group list-group-horizontal-sm">
+                @foreach (CategoryViewModel item in Model.Categories!)
+                {
+                    <a class="list-group-item list-group-item-action @(item.Id == ViewBag.CategoryID ? "active" : "") d-flex align-items-center justify-content-center" asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@item.Id">@item.Name</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div class="row gx-2 align-items-center mx-auto">
+                    <nav class="d-flex justify-content-center mt-3">
+                        <ul class="pagination">
+                            @for (int page = 1; page <= ViewBag.totalPagesCount; page++)
+                            {
+                                <li class="page-item @(page == ViewBag.pageNumber ? "active" : "")">
+                                    <a class="page-link" asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@(ViewBag.CategoryID??"null")" asp-route-pageNumber="@(page)">@(page)</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row">
+
+            @foreach (ProductViewModel item in Model.Products!)
+            {
+                <div class="mb-4 col-md-6 col-lg-4">
+                    <div class="border rounded-1 h-100 d-flex flex-column justify-content-between pb-3">
+                        <div class="overflow-hidden">
+                            <div class="position-relative rounded-top overflow-hidden d-flex align-items-center justify-content-center">
+                                <a class="d-block" asp-controller="Shopping" asp-action="ProductDetail" asp-route-id="@item.Id"><img class="img-fluid rounded-top" src="~/productPictures/@(item.ImagePath??"no-image-icon.png")" alt="Resim Yüklenemedi" style="max-width:300px; max-height:300px;" /></a>
+                            </div>
+                            <div class="p-3">
+                                <h5 class="fs-0"><a class="text-dark" asp-controller="Shopping" asp-action="ProductDetail" asp-route-id="@item.Id">@item.Name</a></h5>
+                                <p class="fs--1 mb-3"><a class="text-500" asp-controller="Shopping" asp-action="ShoppingList" asp-route-categoryID="@item.CategoryID">@item.Category!.Name</a></p>
+                                <h5 class="fs-md-2 text-warning mb-0 d-flex align-items-center mb-3">
+                                    @item.Price.ToString("C2")
+                                </h5>
+                                <p class="fs--1 mb-1">
+                                    Stok: @if (item.Stock > 19)
+                                    {
+                                        <strong class="text-success">Var</strong>
+                                    }
+                                    else if (item.Stock > 0)
+                                    {
+                                        <strong class="text-warning">Acele et tükeniyor</strong>
+                                    }
+                                    else
+                                    {
+                                        <strong class="text-danger">Tükendi</strong>
+                                    }
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mx-auto px-3">
+                            <div class="mt-2"><a class="btn btn-sm btn-primary d-lg-block mt-lg-2" href="@Url.Action("AddToCart", "Shopping", new{categoryID=ViewBag.CategoryID??"null", pageNumber=ViewBag.pageNumber??"null", id=item.Id}, Context.Request.Scheme)"><span class="fas fa-cart-plus"> </span><span class="ms-2 d-none d-md-inline-block">Sepete Ekle</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+    <div class="card-footer bg-light d-flex justify-content-center">
+        <div>
+            <nav class="d-flex justify-content-center mt-3">
+                <ul class="pagination">
+                    @for (int page = 1; page <= ViewBag.totalPagesCount; page++)
+                    {
+                        <li class="page-item @(page == ViewBag.pageNumber ? "active" : "")">
+                            <a class="page-link" asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@(ViewBag.CategoryID??"null")" asp-route-pageNumber="@(page)">@(page)</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/OuterTools/vendors/swiper/swiper-bundle.min.js"></script>
+}
