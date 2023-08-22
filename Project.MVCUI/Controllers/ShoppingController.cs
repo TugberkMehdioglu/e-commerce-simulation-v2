@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.BLL.ManagerServices.Abstracts;
 using Project.ENTITIES.Enums;
@@ -12,11 +13,13 @@ namespace Project.MVCUI.Controllers
     {
         private readonly IProductManager _productManager;
         private readonly ICategoryManager _categoryManager;
+        private readonly IMapper _mapper;
 
-        public ShoppingController(IProductManager productManager, ICategoryManager categoryManager)
+        public ShoppingController(IProductManager productManager, ICategoryManager categoryManager, IMapper mapper)
         {
             _productManager = productManager;
             _categoryManager = categoryManager;
+            _mapper = mapper;
         }
 
         [Route("/")]
@@ -60,6 +63,21 @@ namespace Project.MVCUI.Controllers
             ViewBag.pageNumber = pageNumber;
 
             return View(wrapper);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ProductDetail(int id)
+        {
+            var (isSuccess, error, product) = await _productManager.GetActiveProductWithAttributeAndCategoryAsync(id);
+            if (!isSuccess)
+            {
+                TempData["fail"] = error;
+                return RedirectToAction(nameof(Index));
+            }
+
+            ProductViewModel productViewModel = _mapper.Map<ProductViewModel>(product);
+
+            return View(productViewModel);
         }
     }
 }

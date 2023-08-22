@@ -13,5 +13,6 @@ namespace Project.DAL.Repositories.Abstarcts
         public Task<List<Product>> GetActiveProductsWithCategory();
         public Task<Product?> GetActiveProductWithAttributeAndCategoryAsync(int id);
         public Task<List<Product>> GetActiveProductsWithCategory(string searchInProductName);
+        public Task<Product?> GetActiveProductWithCategory(int id);
     }
 }

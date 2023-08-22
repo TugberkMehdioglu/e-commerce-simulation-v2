@@ -1,0 +1,97 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "ProductDetail";
+}
+
+@if (TempData["success"] != null)
+{
+    <div class="col-6 offset-3">
+        <partial name="_AlertSuccessPartial" model="@(TempData["success"]!.ToString())"></partial>
+    </div>
+}
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0 text-center">
+
+                <a href="~/productPictures/@(Model.ImagePath??"no-image-icon.png")" data-gallery="gallery-2">
+                    <img class="img-fluid" src="~/productPictures/@(Model.ImagePath??"no-image-icon.png")" alt="" width="400px;" height="100px;" />
+                </a>
+
+            </div>
+            <div class="col-lg-6">
+
+                <h5>@Model.Name</h5><a class="fs--1 mb-2 d-block" asp-controller="Shopping" asp-action="Index" asp-route-categoryID=@Model.CategoryID>@Model.Category!.Name</a>
+
+                <p class="fs--1">@Model.Category!.Description</p>
+
+                <h4 class="d-flex align-items-center">
+                    <span class="text-warning me-2">@Model.Price.ToString("C2")</span><span class="me-1 fs--1 text-500"></span>
+                </h4>
+                @if (Model.Stock > 30)
+                {
+                    <p class="fs--1">Stok: <strong class="text-success">Var!</strong></p>
+
+                }
+                else if (Model.Stock > 0)
+                {
+                    <p class="fs--1">Stok: <strong class="text-warning">Acele et tükeniyor!</strong></p>
+                }
+                else
+                {
+                    <p class="fs--1">Stok: <strong class="text-danger">Tükendi!</strong></p>
+                }
+
+                <div class="row">
+                    <div class="col-auto pe-0">
+                        <div class="input-group input-group-sm" data-quantity="data-quantity">
+                            <button class="btn btn-sm btn-outline-secondary border-300" data-field="input-quantity" data-type="minus">-</button>
+                            <input class="form-control text-center input-quantity input-spin-none" type="number" min="1" value="1" aria-label="Amount (to the nearest dollar)" style="max-width: 50px" />
+                            <button class="btn btn-sm btn-outline-secondary border-300" data-field="input-quantity" data-type="plus">+</button>
+                        </div>
+                    </div>
+                    <div class="col-auto px-2 px-md-3"><a class="btn btn-sm btn-primary" asp-controller="Shopping" asp-action="AddToCart" asp-route-id="@Model.Id" asp-route-categoryID="null" asp-route-pageNumber="null" asp-route-from="ProductDetail"><span class="fas fa-cart-plus me-sm-2"></span><span class="d-none d-sm-inline-block">Sepete Ekle</span></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="overflow-hidden mt-4">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item"><a class="nav-link px-2 px-md-3 active" id="specifications-tab" data-bs-toggle="tab" href="#tab-specifications" role="tab" aria-controls="tab-specifications" aria-selected="false">Teknik Özellikler</a></li>
+                        <li class="nav-item"><a class="nav-link ps-0" id="description-tab" data-bs-toggle="tab" href="#tab-description" role="tab" aria-controls="tab-description" aria-selected="true">Ürün Açıklaması</a></li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="tab-specifications" role="tabpanel" aria-labelledby="specifications-tab">
+                            <table class="table fs--1 mt-3">
+                                <tbody>
+                                    @foreach (ProductAttributeViewModel item in Model.ProductAttributes!)
+                                    {
+                                        <tr>
+                                            <td class="bg-100" style="width: 30%;">@item.Name</td>
+                                            <td>@item.Value</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="tab-description" role="tabpanel" aria-labelledby="description-tab">
+                            <div class="mt-3">
+                                @Model.Description
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/OuterTools/vendors/glightbox/glightbox.min.js"></script>
+}
+
+@section Css{
+    <link href="~/OuterTools/vendors/glightbox/glightbox.min.css" rel="stylesheet" />
+}
