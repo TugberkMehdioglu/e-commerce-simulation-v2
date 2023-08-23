@@ -21,6 +21,24 @@
     </div>
 }
 
+<div class="row">
+    <div class="col-lg-12 mb-0">
+        <div class="swiper-container theme-slider" data-swiper='{"autoplay":true,"spaceBetween":5,"loop":true,"loopedSlides":5,"slideToClickedSlide":true}'>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="4"><img class="rounded-1 img-fluid" src="~/carouselPictures/kampanya.jpg" alt="" /></a></div>
+                <div class="swiper-slide"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="3"><img class="rounded-1 img-fluid" src="~/carouselPictures/callof.jpg" alt="" /></a></div>
+                <div class="swiper-slide"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="1"><img class="rounded-1 img-fluid" src="~/carouselPictures/islemci.jpg" alt="" /></a></div>
+                <div class="swiper-slide"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="3"><img class="rounded-1 img-fluid" src="~/carouselPictures/anakart.jpg" alt="" /></a></div>
+            </div>
+            <div class="swiper-nav">
+                <div class="swiper-button-next swiper-button-white"></div>
+                <div class="swiper-button-prev swiper-button-white"> </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="card mb-3">
     <div class="card-body">
         <div class="mx-auto">
@@ -33,26 +51,7 @@
         </div>
     </div>
 </div>
-<div class="card mb-3">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-6 offset-3">
-                <div class="row gx-2 align-items-center mx-auto">
-                    <nav class="d-flex justify-content-center mt-3">
-                        <ul class="pagination">
-                            @for (int page = 1; page <= ViewBag.totalPagesCount; page++)
-                            {
-                                <li class="page-item @(page == ViewBag.pageNumber ? "active" : "")">
-                                    <a class="page-link" asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@(ViewBag.CategoryID??"null")" asp-route-pageNumber="@(page)">@(page)</a>
-                                </li>
-                            }
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="card mb-3">
     <div class="card-body">
         <div class="row">
