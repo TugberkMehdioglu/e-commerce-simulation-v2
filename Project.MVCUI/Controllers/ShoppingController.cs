@@ -27,8 +27,8 @@ namespace Project.MVCUI.Controllers
 
         [Route("/")]
         [Route("/Home")]
-        [HttpGet("{categoryID?}/{pageNumber?}/{pageSize?}")]
-        public async Task<IActionResult> Index(int? categoryID, int pageNumber = 1, int pageSize = 9)
+        [HttpGet("{categoryID?}/{search?}/{selectSort?}/{pageNumber?}/{pageSize?}")]
+        public async Task<IActionResult> Index(int? categoryID, string? search, string? selectSort, int pageNumber = 1, int pageSize = 9)
         {
             int totalItemsCount;
             if (categoryID.HasValue)
@@ -36,21 +36,22 @@ namespace Project.MVCUI.Controllers
                 ViewBag.CategoryID = categoryID;
                 totalItemsCount = await _productManager.GetActives().Where(x => x.CategoryId == categoryID).CountAsync();
             }
+            else if (search != null)
+            {
+                totalItemsCount = await _productManager.GetActives().Where(x => x.Name.ToLower().Contains(search.ToLower())).CountAsync();
+            }
             else totalItemsCount = await _productManager.GetActives().CountAsync();
 
-            ShoppingListWrapper wrapper = new()
-            {
-                Products = categoryID.HasValue ? await _productManager.GetActives().Include(x => x.Category).Where(x => x.Category.Id == categoryID).Skip((pageNumber - 1) * pageSize).Take(pageSize).Select(x => new ProductViewModel()
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    ImagePath = x.ImagePath,
-                    Price = x.Price,
-                    Stock = x.Stock,
-                    Category = new CategoryViewModel() { Id = x.Category.Id, Name = x.Category.Name }
-                }).ToListAsync()
 
-                : await _productManager.GetActives().Include(x => x.Category).Skip((pageNumber - 1) * pageSize).Take(pageSize).Select(x => new ProductViewModel()
+            ShoppingListWrapper wrapper = new();
+            
+            if (categoryID.HasValue)
+            {
+                IQueryable<Product> query = _productManager.GetActives().Include(x => x.Category).Where(x => x.Category.Id == categoryID);
+
+                query = SortProducts(query, selectSort);
+
+                wrapper.Products = await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).Select(x => new ProductViewModel()
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -58,14 +59,60 @@ namespace Project.MVCUI.Controllers
                     Price = x.Price,
                     Stock = x.Stock,
                     Category = new CategoryViewModel() { Id = x.Category.Id, Name = x.Category.Name }
-                }).ToListAsync()
-            };
+                }).ToListAsync();
+            }
+            else if (search != null)
+            {
+                IQueryable<Product> query = _productManager.GetActives().Where(x => x.Name.ToLower().Contains(search.ToLower())).Include(x => x.Category);
+
+                query = SortProducts(query, selectSort);
+
+                wrapper.Products = await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).Select(x => new ProductViewModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    ImagePath = x.ImagePath,
+                    Price = x.Price,
+                    Stock = x.Stock,
+                    Category = new CategoryViewModel() { Id = x.Category.Id, Name = x.Category.Name }
+                }).ToListAsync();
+            }
+            else
+            {
+                IQueryable<Product> query = _productManager.GetActives().Include(x => x.Category);
+
+                query = SortProducts(query, selectSort);
+
+                wrapper.Products = await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).Select(x => new ProductViewModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    ImagePath = x.ImagePath,
+                    Price = x.Price,
+                    Stock = x.Stock,
+                    Category = new CategoryViewModel() { Id = x.Category.Id, Name = x.Category.Name }
+                }).ToListAsync();
+            }
 
             wrapper.Categories = await _categoryManager.GetActives().Select(x => new CategoryViewModel() { Id = x.Id, Name = x.Name }).ToListAsync();
+
             ViewBag.totalPagesCount = (int)Math.Ceiling((double)totalItemsCount / pageSize);
             ViewBag.pageNumber = pageNumber;
+            ViewBag.totalItemsCount = totalItemsCount;
 
             return View(wrapper);
+        }
+
+        public IQueryable<Product> SortProducts(IQueryable<Product> query, string? sort)
+        {
+            if(sort!=null) ViewBag.selectedSort = sort;
+
+            if (sort == null) return query;
+            else if (sort == "eyu") return query.OrderBy(x => x.CreatedDate);
+            else if (sort == "edf") return query.OrderBy(x => x.Price);
+            else if (sort == "eyf") return query.OrderByDescending(x => x.Price);
+            else if (sort == "aaz") return query.OrderBy(x => x.Name);
+            else return query.OrderByDescending(x => x.Name);
         }
 
         [HttpGet("{id}")]

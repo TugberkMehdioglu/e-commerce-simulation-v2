@@ -52,9 +52,70 @@
     </div>
 </div>
 
+
 <div class="card mb-3">
     <div class="card-body">
         <div class="row">
+
+            <div class="align-items-center row mb-4 text-center">
+
+                <div class="col-md-2 mb-3 mb-md-0">@ViewBag.totalItemsCount ürün bulundu</div>
+                @{
+                    string sort = ViewBag.selectedSort;
+                }
+                <div class="col-md-5">
+                    <select class="form-select" id="productSort">
+                        @if (sort == "eyu")
+                        {
+                            <option value="eyu" selected>En Yeni Ürünler</option>
+                        }
+                        else
+                        {
+                            <option value="eyu">En Yeni Ürünler</option>
+                        }
+                        @if (sort == "edf")
+                        {
+                            <option value="edf" selected>En Düşük Fiyat</option>
+                        }
+                        else
+                        {
+                            <option value="edf">En Düşük Fiyat</option>
+                        }
+                        @if (sort == "eyf")
+                        {
+                            <option value="eyf" selected>En Yüksek Fiyat</option>
+                        }
+                        else
+                        {
+                            <option value="eyf">En Yüksek Fiyat</option>
+                        }
+                        @if (sort == "aaz")
+                        {
+                            <option value="aaz" selected>Ürün Adına Göre A > Z</option>
+                        }
+                        else
+                        {
+                            <option value="aaz">Ürün Adına Göre A > Z</option>
+                        }
+                        @if (sort == "aza")
+                        {
+                            <option value="aza" selected>Ürün Adına Göre Z > A</option>
+                        }
+                        else
+                        {
+                            <option value="aza">Ürün Adına Göre Z > A</option>
+                        }
+                       
+                    </select>
+                </div>
+
+                <div class="col-md-5 mt-3 mt-md-0">
+                    <form method="get" asp-route-categoryID="null">
+                        <input type="search" class="form-control rounded-pill" placeholder="Ürünlerde ara" name="search" id="search" />
+                    </form>
+                </div>
+            </div>
+
 
             @foreach (ProductViewModel item in Model.Products!)
             {
@@ -104,7 +165,7 @@
                     @for (int page = 1; page <= ViewBag.totalPagesCount; page++)
                     {
                         <li class="page-item @(page == ViewBag.pageNumber ? "active" : "")">
-                            <a class="page-link" asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@(ViewBag.CategoryID??"null")" asp-route-pageNumber="@(page)">@(page)</a>
+                            <a class="page-link" asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@(ViewBag.CategoryID??"null")" asp-route-pageNumber="@(page)" asp-route-selectSort="@(ViewBag.selectedSort??"null")">@(page)</a>
                         </li>
                     }
                 </ul>
@@ -116,4 +177,27 @@
 
 @section Scripts{
     <script src="~/OuterTools/vendors/swiper/swiper-bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#productSort").change(function () {
+                let selectedSort = $(this).val();
+                let search = $("#search").val();
+                let url;
+
+                if (selectedSort == null && ViewBag.selectedSort != null) {
+                    url = "/Shopping/Index?categoryID=" + @(ViewBag.CategoryID ?? "null") + "&selectSort=" + @ViewBag.selectedSort + "&search=" + search;
+                }
+                else {
+                    url = "/Shopping/Index?categoryID=" + @(ViewBag.CategoryID ?? "null") + "&selectSort=" + selectedSort + "&search=" + search;
+                }
+                window.location.href = url;
+            });
+        });
+
+    </script>
+
 }
