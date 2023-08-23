@@ -120,5 +120,49 @@ namespace Project.MVCUI.Controllers
             else if (from != null && from == "ProductDetail") return RedirectToAction(nameof(ProductDetail), new { id });
             else return RedirectToAction(nameof(Index), new { categoryID, pageNumber });
         }
+
+        [HttpGet("{id}")]
+        public IActionResult DeleteFromCart(int id)
+        {
+            Cart? basket = HttpContext.Session.GetSession<Cart>("cart");
+            if (basket == null) return RedirectToAction(nameof(Index));
+
+            if (!basket.Basket.Any(x => x.ID == id)) return RedirectToAction(nameof(Index));
+
+            basket.RemoveFromBasket(id);
+            if (!basket.Basket.Any())
+            {
+                HttpContext.Session.Remove("cart");
+                TempData["fail"] = "Sepetinizde ürün bulunmamaktadır";
+                return RedirectToAction(nameof(Index));
+            }
+
+            HttpContext.Session.SetSession("cart", basket);
+
+            TempData["success"] = "Ürün sepetten silindi";
+            return RedirectToAction(nameof(CartPage));
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult DeleteProductWithAllAmountFromCart(int id)
+        {
+            Cart? basket = HttpContext.Session.GetSession<Cart>("cart");
+            if (basket == null) return RedirectToAction(nameof(Index));
+
+            if (!basket.Basket.Any(x => x.ID == id)) return RedirectToAction(nameof(Index));
+
+            basket.RemoveItemWithAllAmountFromBasket(id);
+            if (!basket.Basket.Any())
+            {
+                HttpContext.Session.Remove("cart");
+                TempData["fail"] = "Sepetinizde ürün bulunmamaktadır";
+                return RedirectToAction(nameof(Index));
+            }
+
+            HttpContext.Session.SetSession("cart", basket);
+
+            TempData["success"] = "Ürün sepetten silindi";
+            return RedirectToAction(nameof(CartPage));
+        }
     }
 }
