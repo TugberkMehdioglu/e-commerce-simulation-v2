@@ -38,16 +38,18 @@ namespace Project.MVCUI.Controllers
             }
             else if (search != null)
             {
+                ViewBag.search = search;
                 totalItemsCount = await _productManager.GetActives().Where(x => x.Name.ToLower().Contains(search.ToLower())).CountAsync();
             }
             else totalItemsCount = await _productManager.GetActives().CountAsync();
 
 
             ShoppingListWrapper wrapper = new();
-            
+            IQueryable<Product> query;
+
             if (categoryID.HasValue)
             {
-                IQueryable<Product> query = _productManager.GetActives().Include(x => x.Category).Where(x => x.Category.Id == categoryID);
+                query = _productManager.GetActives().Include(x => x.Category).Where(x => x.Category.Id == categoryID);
 
                 query = SortProducts(query, selectSort);
 
@@ -63,7 +65,7 @@ namespace Project.MVCUI.Controllers
             }
             else if (search != null)
             {
-                IQueryable<Product> query = _productManager.GetActives().Where(x => x.Name.ToLower().Contains(search.ToLower())).Include(x => x.Category);
+                query = _productManager.GetActives().Where(x => x.Name.ToLower().Contains(search.ToLower())).Include(x => x.Category);
 
                 query = SortProducts(query, selectSort);
 
@@ -79,7 +81,7 @@ namespace Project.MVCUI.Controllers
             }
             else
             {
-                IQueryable<Product> query = _productManager.GetActives().Include(x => x.Category);
+                query = _productManager.GetActives().Include(x => x.Category);
 
                 query = SortProducts(query, selectSort);
 

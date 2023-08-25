@@ -20,37 +20,39 @@
         <partial name="_AlertSuccessPartial" model="@(TempData["success"]!.ToString())"></partial>
     </div>
 }
-
-<div class="row">
-    <div class="col-lg-12 mb-0">
-        <div class="swiper-container theme-slider" data-swiper='{"autoplay":true,"spaceBetween":5,"loop":true,"loopedSlides":5,"slideToClickedSlide":true}'>
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="4"><img class="rounded-1 img-fluid" src="~/carouselPictures/kampanya.jpg" alt="" /></a></div>
-                <div class="swiper-slide"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="3"><img class="rounded-1 img-fluid" src="~/carouselPictures/callof.jpg" alt="" /></a></div>
-                <div class="swiper-slide"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="1"><img class="rounded-1 img-fluid" src="~/carouselPictures/islemci.jpg" alt="" /></a></div>
-                <div class="swiper-slide"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="3"><img class="rounded-1 img-fluid" src="~/carouselPictures/anakart.jpg" alt="" /></a></div>
+<div class="text-center">
+    <div class="row">
+        <div class="col-lg-12 mb-0">
+            <div class="swiper-container theme-slider" data-swiper='{"autoplay":true,"spaceBetween":5,"loop":true,"loopedSlides":5,"slideToClickedSlide":true}'>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="4"><img class="rounded-1 img-fluid" src="~/carouselPictures/kampanya.jpg" alt="" /></a></div>
+                    <div class="swiper-slide"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="3"><img class="rounded-1 img-fluid" src="~/carouselPictures/callof.jpg" alt="" /></a></div>
+                    <div class="swiper-slide"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="1"><img class="rounded-1 img-fluid" src="~/carouselPictures/islemci.jpg" alt="" /></a></div>
+                    <div class="swiper-slide"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="3"><img class="rounded-1 img-fluid" src="~/carouselPictures/anakart.jpg" alt="" /></a></div>
+                </div>
+                <div class="swiper-nav">
+                    <div class="swiper-button-next swiper-button-white"></div>
+                    <div class="swiper-button-prev swiper-button-white"> </div>
+                </div>
             </div>
-            <div class="swiper-nav">
-                <div class="swiper-button-next swiper-button-white"></div>
-                <div class="swiper-button-prev swiper-button-white"> </div>
+        </div>
+    </div>
+
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="mx-auto">
+                <div class="list-group list-group-horizontal-sm">
+                    @foreach (CategoryViewModel item in Model.Categories!)
+                    {
+                        <a class="list-group-item list-group-item-action @(item.Id == ViewBag.CategoryID ? "active" : "") d-flex align-items-center justify-content-center" asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@item.Id">@item.Name</a>
+                    }
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="card mb-3">
-    <div class="card-body">
-        <div class="mx-auto">
-            <div class="list-group list-group-horizontal-sm">
-                @foreach (CategoryViewModel item in Model.Categories!)
-                {
-                    <a class="list-group-item list-group-item-action @(item.Id == ViewBag.CategoryID ? "active" : "") d-flex align-items-center justify-content-center" asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@item.Id">@item.Name</a>
-                }
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <div class="card mb-3">
@@ -111,7 +113,7 @@
 
                 <div class="col-md-5 mt-3 mt-md-0">
                     <form method="get" asp-route-categoryID="null">
-                        <input type="search" class="form-control rounded-pill" placeholder="Ürünlerde ara" name="search" id="search" />
+                        <input type="search" class="form-control rounded-pill" placeholder="Ürünlerde ara" name="search" id="search" value="@(ViewBag.search ?? "")" />
                     </form>
                 </div>
             </div>
@@ -185,14 +187,15 @@
 
             $("#productSort").change(function () {
                 let selectedSort = $(this).val();
-                let search = $("#search").val();
+                let search = '@(ViewBag.search ?? "")';
+                let searchInput = $("#search").val();
                 let url;
 
-                if (selectedSort == null && ViewBag.selectedSort != null) {
-                    url = "/Shopping/Index?categoryID=" + @(ViewBag.CategoryID ?? "null") + "&selectSort=" + @ViewBag.selectedSort + "&search=" + search;
+                if (search != "" && searchInput != "") {
+                    url = "/Shopping/Index?categoryID=" + @(ViewBag.CategoryID ?? "null") + "&selectSort=" + selectedSort + "&search=" + search;
                 }
                 else {
-                    url = "/Shopping/Index?categoryID=" + @(ViewBag.CategoryID ?? "null") + "&selectSort=" + selectedSort + "&search=" + search;
+                    url = "/Shopping/Index?categoryID=" + @(ViewBag.CategoryID ?? "null") + "&selectSort=" + selectedSort;
                 }
                 window.location.href = url;
             });
