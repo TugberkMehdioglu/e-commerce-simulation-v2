@@ -51,7 +51,7 @@
                             <button class="btn btn-sm btn-outline-secondary border-300" data-field="input-quantity" data-type="plus">+</button>
                         </div>
                     </div>
-                    <div class="col-auto px-2 px-md-3"><a class="btn btn-sm btn-primary" asp-controller="Shopping" asp-action="AddToCart" asp-route-id="@Model.Id" asp-route-categoryID="null" asp-route-pageNumber="null" asp-route-from="ProductDetail"><span class="fas fa-cart-plus me-sm-2"></span><span class="d-none d-sm-inline-block">Sepete Ekle</span></a></div>
+                    <div class="col-auto px-2 px-md-3"><a id="addToCartBtn" class="btn btn-sm btn-primary" asp-controller="Shopping" asp-action="AddToCart" asp-route-id="@Model.Id" asp-route-categoryID="null" asp-route-pageNumber="null" asp-route-from="ProductDetail"><span class="fas fa-cart-plus me-sm-2"></span><span class="d-none d-sm-inline-block">Sepete Ekle</span></a></div>
                 </div>
             </div>
         </div>
@@ -90,8 +90,36 @@
 
 @section Scripts{
     <script src="~/OuterTools/vendors/glightbox/glightbox.min.js"></script>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let addToCartBtn = document.getElementById("addToCartBtn");
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener("click", function (e) {
+                    e.preventDefault(); // Önce varsayılan tıklama davranışını engelleyin
+
+                    let quantityInput = document.querySelector(".input-quantity");
+                    if (quantityInput) {
+                        let quantity = quantityInput.value; // Adet bilgisini alın
+
+                        // Sepete Ekle butonunun href özelliğine adet bilgisini ekleyerek yeni bir URL oluşturun
+                        let originalUrl = addToCartBtn.getAttribute("href");
+                        let updatedUrl = originalUrl + "?quantity=" + quantity;
+
+                        // Oluşturulan URL ile sayfayı yönlendirin
+                        window.location.href = updatedUrl;
+                    }
+                });
+            }
+        });
+
+    </script>
+
 }
 
 @section Css{
     <link href="~/OuterTools/vendors/glightbox/glightbox.min.css" rel="stylesheet" />
+
+    
 }

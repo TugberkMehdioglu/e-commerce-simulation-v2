@@ -145,8 +145,8 @@ namespace Project.MVCUI.Controllers
         }
 
 
-        [HttpGet("{id}/{categoryID?}/{pageNumber?}/{from?}")]
-        public async Task<IActionResult> AddToCart(int id, int? categoryID, int? pageNumber, string? from)
+        [HttpGet("{id}/{categoryID?}/{pageNumber?}/{from?}/{quantity?}")]
+        public async Task<IActionResult> AddToCart(int id, int? categoryID, int? pageNumber, string? from, short? quantity)
         {
             Product? toBeAdded = await _productManager.FindAsync(id);
             if (toBeAdded == null) return RedirectToAction(nameof(Index), "Product", new { Area = "" });
@@ -161,6 +161,8 @@ namespace Project.MVCUI.Controllers
                 Price = toBeAdded.Price,
                 ImagePath = toBeAdded.ImagePath
             };
+            if (quantity.HasValue && quantity > 0 && quantity <= toBeAdded.Stock) cartItem.Amount = quantity.Value;
+
             basket.AddToBasket(cartItem);
             HttpContext.Session.SetSession("cart", basket);
 

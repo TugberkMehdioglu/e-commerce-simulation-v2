@@ -26,7 +26,8 @@ namespace Project.MVCUI.Models.ShoppingTools
         {
             if (_basket.ContainsKey(item.ID))
             {
-                _basket[item.ID].Amount += 1;
+                if (item.Amount > 1) _basket[item.ID].Amount += item.Amount;
+                else _basket[item.ID].Amount += 1;
                 return;
             }
 
