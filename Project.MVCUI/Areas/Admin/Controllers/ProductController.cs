@@ -88,7 +88,7 @@ namespace Project.MVCUI.Areas.Admin.Controllers
             }
 
             ProductViewModel productViewModel = _mapper.Map<ProductViewModel>(product);
-            //Todo: Buranın view'sunda anakart yazan yerin yönlendirmesini sipariş sayfasında o kategori seçilmiş şekilde yönlendir
+
             return View(productViewModel);
         }
 

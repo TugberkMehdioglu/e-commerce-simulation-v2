@@ -38,8 +38,7 @@ namespace Project.MVCUI.Controllers
             if(!isSuccess)
             {
                 TempData["fail"] = error;
-                return RedirectToAction("Index", "Home");
-                //Todo: ShoppingList Action'ı ve View'sunu yazıp, yönlendirmeyi oraya ver.
+                return RedirectToAction("Index", "Shopping");
             }
 
             AppUserViewModel appUserViewModel = _mapper.Map<AppUserViewModel>(appUser);

@@ -46,7 +46,7 @@ namespace Project.MVCUI.Areas.Admin.Controllers
                     Description = x.Description
                 }).ToListAsync()
             };
-            //Todo: Buranın view'undaki ürünleri action'ını oluştur ProductController'da.
+
             return View(wrapper);
         }
 
