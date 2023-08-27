@@ -49,6 +49,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseStatusCodePagesWithReExecute("/Home/Error");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

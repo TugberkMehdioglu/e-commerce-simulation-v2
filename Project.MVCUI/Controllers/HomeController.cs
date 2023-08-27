@@ -191,5 +191,10 @@ namespace Project.MVCUI.Controllers
         {
             return View();
         }
+
+        public IActionResult Error()
+        {
+            return View();
+        }
     }
 }
