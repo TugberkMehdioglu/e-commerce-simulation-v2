@@ -49,7 +49,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseStatusCodePagesWithReExecute("/Home/Error");
+app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode=404");//Sadece 404'de yonlendir
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
