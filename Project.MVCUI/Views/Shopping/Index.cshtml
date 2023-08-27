@@ -187,7 +187,7 @@
 
             $("#productSort").change(function () {
                 let selectedSort = $(this).val();
-                let search = '@(ViewBag.search ?? "")';
+                let search = '@(ViewBag.search ?? "")';//Js'de c# kodunun düzgün çalışması için '' içine eklendi
                 let searchInput = $("#search").val();
                 let url;
 
