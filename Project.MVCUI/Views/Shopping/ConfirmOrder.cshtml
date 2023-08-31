@@ -1,0 +1,179 @@
+﻿@using Project.COMMON.Extensions
+@model OrderWrapper
+
+@{
+    ViewData["Title"] = "ConfirmOrder";
+    Cart basket = Context.Session.GetSession<Cart>("cart")!;
+    List<AddressViewModel> addresses = Model.AppUser!.AppUserProfile!.Addresses!.ToList();
+}
+
+@if (TempData["error"] != null)
+{
+    <div class="col-md-6 offset-md-3">
+        <partial name="_AlertFailPartial" model="@TempData["error"]"></partial>
+    </div>
+}
+
+<div class="row g-3">
+    <div class="col-xl-4 order-xl-1">
+        <div class="card">
+            <div class="card-header bg-light btn-reveal-trigger d-flex flex-between-center">
+                <h5 class="mb-0">Sipariş Özeti</h5><a class="btn btn-link btn-sm btn-reveal text-600" asp-controller="Shopping" asp-action="CartPage"><span class="fas fa-pencil-alt"></span></a>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless fs--1 mb-0">
+                    @foreach (CartItem item in basket.Basket)
+                    {
+                        <tr class="border-bottom">
+                            <th class="ps-0 pt-0">
+                                @item.Name X @item.Amount
+                            </th>
+                            <th class="pe-0 text-end pt-0">@item.SubTotal.ToString("C2")</th>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="card-footer d-flex justify-content-between bg-light">
+                <div class="fw-semi-bold">Toplam Tutar</div>
+                <div class="fw-bold">@basket.TotalPrice.ToString("C2")</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-8">
+        <form method="post">
+            <div class="card mb-3">
+                <div class="card-header bg-light">
+                    <div class="row flex-between-center">
+                        <div class="col-sm-auto">
+                            <h5 class="mb-2 mb-sm-0">Teslimat Adresi</h5>
+                        </div>
+                        <div class="col-sm-auto"><a class="btn btn-falcon-default btn-sm" asp-controller="Address" asp-action="AddAddress"><span class="fas fa-plus me-2" data-fa-transform="shrink-2"></span>Yeni Adres Ekle </a></div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        @for (int i = 0; i < addresses.Count; i++)
+                        {
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <div class="form-check mb-0 custom-radio radio-select">
+                                    @if (i == 0)
+                                    {
+                                        <input class="form-check-input" id="@addresses[i].Id" type="radio" asp-for="AddressId" value="@addresses[i].Id" checked />
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" id="@addresses[i].Id" type="radio" asp-for="AddressId" value="@addresses[i].Id" />
+                                    }
+                                    <label class="form-check-label mb-0 fw-bold d-block" for="@addresses[i].Id">
+                                        @Model.AppUser!.AppUserProfile!.FullName<span class="radio-select-content">
+                                            <span>
+                                                @addresses[i].Name<br />@addresses[i].NeighborHood Mahallesi @addresses[i].Street Sokak No:@addresses[i].AptNo @if (addresses[i].Flat.HasValue)
+                                                {
+                                                    <span>Daire:@addresses[i].Flat!.Value</span>
+                                                }
+                                                <br />@addresses[i].District / @addresses[i].City / @addresses[i].Country<span class="d-block mb-0 pt-2">@Model.AppUser!.PhoneNumber</span>
+                                            </span>
+                                        </span>
+                                    </label><a class="fs--1" asp-controller="Address" asp-action="UpdateAddress" asp-route-id="@addresses[i].Id">Düzenle</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Ödeme Yöntemi</h5>
+                </div>
+                <div class="card-body">
+
+                    <input type="hidden" asp-for="@Model.AppUser!.AppUserProfile.Addresses" />
+                    <input type="hidden" asp-for="@Model.AppUser!.AppUserProfile.FirstName" />
+                    <input type="hidden" asp-for="@Model.AppUser!.AppUserProfile.LastName" />
+                    <input type="hidden" asp-for="@Model.AppUser!.Id" />
+                    <input type="hidden" asp-for="@Model.AppUser!.Email" />
+                    <input type="hidden" asp-for="@Model.AppUser!.PhoneNumber"/>
+
+                    <div class="form-check mb-0">
+                        <input class="form-check-input" type="radio" value="" id="credit-card" checked="checked" name="payment-method" />
+                        <label class="form-check-label mb-2 fs-1" for="credit-card">
+                            Kredi Kartı
+                        </label>
+                    </div>
+                    <div class="row gx-0 ps-2 mb-4">
+                        <div class="col-sm-8 px-3">
+                            <div class="mb-3">
+                                <label class="form-label ls text-uppercase text-600 fw-semi-bold mb-0" for="PaymentDTO_CardUserName">Kart Sahibinin Adı Soyadı</label>
+                                <input class="form-control" placeholder="Alp Öztekin" asp-for="@Model.CardUserName" />
+                                <span asp-validation-for="@Model.CardUserName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label ls text-uppercase text-600 fw-semi-bold mb-0" for="PaymentDTO_CardNumber">Kart Numarası</label>
+                                <input class="form-control" placeholder="•••• •••• •••• ••••" asp-for="@Model.CardNumber" />
+                                <span asp-validation-for="@Model.CardNumber" class="text-danger"></span>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <label class="form-label ls text-uppercase text-600 fw-semi-bold mb-0" for="PaymentDTO_CardExpiryYear">Son Kullanma Yılı</label>
+                                    <input class="form-control" type="text" placeholder="yyyy" asp-for="@Model.CardExpiryYear" />
+                                    <span asp-validation-for="@Model.CardExpiryYear" class="text-danger"></span>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label ls text-uppercase text-600 fw-semi-bold mb-0" for="PaymentDTO_CardExpiryMonth">Son Kullanma Ayı</label>
+                                    <input class="form-control" type="text" placeholder="aa" asp-for="@Model.CardExpiryMounth" />
+                                    <span asp-validation-for="@Model.CardExpiryMounth" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label ls text-uppercase text-600 fw-semi-bold mb-0" for="PaymentDTO_SecurityNumber">CVV<a class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Günvelik Numarası"><span class="fa fa-question-circle ms-2"></span></a></label>
+                                <input class="form-control" placeholder="123" asp-for="@Model.SecurityNumber" />
+                                <span asp-validation-for="@Model.SecurityNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-4 ps-3 text-center pt-2 d-none d-sm-block">
+                            <div class="rounded-1 p-2 mt-3 bg-100">
+                                <div class="text-uppercase fs--2 fw-bold">Anlaşmalı Şirketlerimiz</div><img src="~/OuterTools/assets/img/icons/icon-payment-methods-grid.png" alt="" width="120" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-dashed-bottom my-5"></div>
+                    <div class="row">
+                        <div class="col-md-7 col-xl-12 col-xxl-7 px-md-3 mb-xxl-0 position-relative">
+                            <div class="d-flex">
+                                <img class="me-3" src="~/OuterTools/assets/img/icons/shield.png" alt="" width="60" height="60" />
+                                <div class="flex-1">
+                                    <h5 class="mb-2">Müşteri Koruma Politikamız</h5>
+                                    <div class="form-check mb-0">
+                                        <input class="form-check-input" id="protection-option-1" type="checkbox" checked="checked" />
+                                        <label class="form-check-label mb-0" for="protection-option-1"> <strong>Tam İade! </strong>Siparişiniz <br class="d-none d-md-block d-lg-none" />sizi ulaşmaz ise.</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="protection-option-2" type="checkbox" checked="checked" />
+                                        <label class="form-check-label mb-0" for="protection-option-2"> <strong>Tam veya Kısmi İade, </strong>ürün anlatıldığı gibi değilse.</label>
+                                    </div><a class="fs--1 ms-3 ps-2" asp-controller="Home" asp-action="Terms">Daha Fazla<span class="fas fa-caret-right ms-1" data-fa-transform="down-2">    </span></a>
+                                </div>
+                            </div>
+                            <div class="vertical-line d-none d-md-block d-xl-none d-xxl-block"> </div>
+                        </div>
+                        <div class="col-md-5 col-xl-12 col-xxl-5 ps-lg-4 ps-xl-2 ps-xxl-5 text-center text-md-start text-xl-center text-xxl-start">
+                            <div class="border-dashed-bottom d-block d-md-none d-xl-block d-xxl-none my-4"></div>
+                            <div class="fs-2 fw-semi-bold">Toplam Tutar: <span class="text-primary">@basket.TotalPrice.ToString("C2")</span></div>
+                            <button class="btn btn-success mt-3 px-5" type="submit">Onayla &amp; Öde</button>
+                            <p class="fs--1 mt-3 mb-0"><strong>Onayla &amp; Öde </strong>butonuna bastığınızda <a asp-controller="Home" asp-action="Terms">Yükümlülük &amp; koşullar</a>'ı kabul etmiş sayılırsınız</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+
+    <partial name="_ValidationScriptsPartial"></partial>
+}

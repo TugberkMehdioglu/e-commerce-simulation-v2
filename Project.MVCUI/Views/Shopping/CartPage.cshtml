@@ -9,6 +9,12 @@
         <partial name="_AlertSuccessPartial" model="@(TempData["success"]!.ToString())"></partial>
     </div>
 }
+else if (TempData["fail"] != null)
+{
+    <div class="col-6 offset-3">
+        <partial name="_AlertWarningPartial" model="@(TempData["fail"]!.ToString())"></partial>
+    </div>
+}
 
 
 <div class="card">
