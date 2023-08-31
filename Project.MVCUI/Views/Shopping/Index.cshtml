@@ -151,7 +151,7 @@
                             </div>
                         </div>
                         <div class="mx-auto px-3">
-                            <div class="mt-2"><a class="btn btn-sm btn-primary d-lg-block mt-lg-2" href="@Url.Action("AddToCart", "Shopping", new{categoryID=ViewBag.CategoryID??"null", pageNumber=ViewBag.pageNumber??"null", id=item.Id}, Context.Request.Scheme)"><span class="fas fa-cart-plus"> </span><span class="ms-2 d-none d-md-inline-block">Sepete Ekle</span></a></div>
+                            <div class="mt-2"><a class="btn btn-sm btn-primary d-lg-block mt-lg-2" href="@Url.Action("ProductDetail", "Shopping", new{id=item.Id}, Context.Request.Scheme)"><span class="fas far fa-eye"> </span><span class="ms-2 d-none d-md-inline-block">Ürünü İncele</span></a></div>
                         </div>
                     </div>
                 </div>
