@@ -12,6 +12,13 @@
 
 <div class="card mb-3">
     <div class="card-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/Home">Anasayfa</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@Model.CategoryID">@Model.Category!.Name</a></li>
+            </ol>
+        </nav>
+        <hr />
         <div class="row">
             <div class="col-lg-6 mb-4 mb-lg-0 text-center">
 
