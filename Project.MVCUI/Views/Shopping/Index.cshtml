@@ -167,7 +167,7 @@
                     @for (int page = 1; page <= ViewBag.totalPagesCount; page++)
                     {
                         <li class="page-item @(page == ViewBag.pageNumber ? "active" : "")">
-                            <a class="page-link" asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@(ViewBag.CategoryID??"null")" asp-route-pageNumber="@(page)" asp-route-selectSort="@(ViewBag.selectedSort??"null")">@(page)</a>
+                            <a class="page-link" asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@(ViewBag.CategoryID??"null")" asp-route-search="null" asp-route-selectSort="@(ViewBag.selectedSort??"null")" asp-route-pageNumber="@(page)">@(page)</a>
                         </li>
                     }
                 </ul>

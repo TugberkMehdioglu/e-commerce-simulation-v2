@@ -47,7 +47,7 @@ namespace Project.MVCUI.Controllers
                 ViewBag.CategoryID = categoryID;
                 totalItemsCount = await _productManager.GetActives().Where(x => x.CategoryId == categoryID).CountAsync();
             }
-            else if (search != null)
+            else if (!string.IsNullOrEmpty(search) && search != "null")
             {
                 ViewBag.search = search;
                 totalItemsCount = await _productManager.GetActives().Where(x => x.Name.ToLower().Contains(search.ToLower())).CountAsync();
@@ -74,7 +74,7 @@ namespace Project.MVCUI.Controllers
                     Category = new CategoryViewModel() { Id = x.Category.Id, Name = x.Category.Name }
                 }).ToListAsync();
             }
-            else if (search != null)
+            else if (!string.IsNullOrEmpty(search) && search != "null")
             {
                 query = _productManager.GetActives().Where(x => x.Name.ToLower().Contains(search.ToLower())).Include(x => x.Category);
 
@@ -118,9 +118,9 @@ namespace Project.MVCUI.Controllers
 
         public IQueryable<Product> SortProducts(IQueryable<Product> query, string? sort)
         {
-            if (sort != null) ViewBag.selectedSort = sort;
+            if (sort != null && sort != "null") ViewBag.selectedSort = sort;
 
-            if (sort == null) return query;
+            if (sort == null || sort == "null") return query;
             else if (sort == "eyu") return query.OrderBy(x => x.CreatedDate);
             else if (sort == "edf") return query.OrderBy(x => x.Price);
             else if (sort == "eyf") return query.OrderByDescending(x => x.Price);
