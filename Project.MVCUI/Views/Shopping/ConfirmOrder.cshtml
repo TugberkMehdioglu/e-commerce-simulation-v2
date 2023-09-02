@@ -113,7 +113,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label ls text-uppercase text-600 fw-semi-bold mb-0" for="PaymentDTO_CardNumber">Kart Numarası</label>
-                                <input class="form-control" placeholder="•••• •••• •••• ••••" asp-for="@Model.CardNumber" />
+                                <input class="form-control" placeholder="•••• •••• •••• ••••" asp-for="@Model.CardNumber" onkeyup="kissMe()" id="hi"/>
                                 <span asp-validation-for="@Model.CardNumber" class="text-danger"></span>
                             </div>
                             <div class="row align-items-center">
@@ -176,4 +176,20 @@
 @section Scripts{
 
     <partial name="_ValidationScriptsPartial"></partial>
+
+    <script>
+
+        function kissMe(){
+
+            let cardNumber = document.getElementById("hi");
+            let cardNumberLength = cardNumber.value.length;
+
+            if(cardNumberLength === 4 || cardNumberLength === 9 || cardNumberLength === 14){
+
+                cardNumber.value += " ";
+            };
+        };
+
+    </script>
+
 }
