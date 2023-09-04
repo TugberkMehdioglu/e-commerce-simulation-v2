@@ -105,6 +105,42 @@ namespace Project.MAP.Configuration
                 new(){Id=78, Name="Hafıza tipi", Value="3D TLC NAND", ProductId=10},
                 new(){Id=79, Name="SSD form faktörü", Value="M.2", ProductId=10},
                 new(){Id=80, Name="Sıralı yazma hızı (CDM)", Value="6800 MB/s", ProductId=10},
+
+                new(){Id=81, Name="Ürünle gelen yazılım", Value="WD Discovery", ProductId=11},
+                new(){Id=82, Name="Şifre koruması", Value="Var", ProductId=11},
+                new(){Id=83, Name="Tak ve kullan", Value="Var", ProductId=11},
+                new(){Id=84, Name="Ürün rengi", Value="Siyah", ProductId=11},
+                new(){Id=85, Name="USB versiyonu", Value="3.2 Gen 1 (3.1 Gen 1)", ProductId=11},
+                new(){Id=86, Name="Thunderbolt teknolojisi", Value="Yok", ProductId=11},
+                new(){Id=87, Name="Çalışma ısısı aralığı", Value="5 - 35 °C", ProductId=11},
+                new(){Id=88, Name="Ağırlık", Value="210 gr", ProductId=11},
+
+                new(){Id=89, Name="Bağlantı Özellikleri", Value="USB 3.0", ProductId=12},
+                new(){Id=90, Name="Garanti", Value="24", ProductId=12},
+                new(){Id=91, Name="Tak ve kullan", Value="Var", ProductId=12},
+                new(){Id=92, Name="Ürün rengi", Value="Siyah", ProductId=12},
+                new(){Id=93, Name="USB versiyonu", Value="3.2 Gen 1 (3.1 Gen 1)", ProductId=12},
+                new(){Id=94, Name="Thunderbolt teknolojisi", Value="Yok", ProductId=12},
+                new(){Id=95, Name="Çalışma ısısı aralığı", Value="5 - 35 °C", ProductId=12},
+                new(){Id=96, Name="Ağırlık", Value="210 gr", ProductId=12},
+
+                new(){Id=97, Name="Fan Boyutu", Value="140mm", ProductId=13},
+                new(){Id=98, Name="Yapı", Value="Full Tower", ProductId=13},
+                new(){Id=99, Name="Güç Kaynağı", Value="Yok", ProductId=13},
+                new(){Id=100, Name="Dahili Fan Sayısı", Value="4", ProductId=13},
+                new(){Id=101, Name="Fan Tipi", Value="ARGB", ProductId=13},
+                new(){Id=102, Name="Anakart Yapı", Value="Extended ATX, ATX, Micro ATX, Mini ITX", ProductId=13},
+                new(){Id=103, Name="Garanti", Value="24", ProductId=13},
+                new(){Id=104, Name="Menşei", Value="Çin", ProductId=13},
+
+                new(){Id=105, Name="Fan Boyutu", Value="140mm", ProductId=14},
+                new(){Id=106, Name="USB 3.0", Value="4 Adet", ProductId=14},
+                new(){Id=107, Name="Güç Kaynağı", Value="Yok", ProductId=14},
+                new(){Id=108, Name="Dahili Fan Sayısı", Value="4", ProductId=14},
+                new(){Id=109, Name="Fan Tipi", Value="LED", ProductId=14},
+                new(){Id=110, Name="Anakart Yapı", Value="ATX", ProductId=14},
+                new(){Id=111, Name="Garanti", Value="24", ProductId=14},
+                new(){Id=112, Name="Ağırlık (kg)", Value="26.8 kg", ProductId=14},
             };
 
             builder.HasData(productAttributes);
