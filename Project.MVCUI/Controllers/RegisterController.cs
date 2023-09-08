@@ -67,7 +67,8 @@ namespace Project.MVCUI.Controllers
             string confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
             //Oluşan token'da özel karakterler veya Url ile uyumsuz karakterler olmasına karşın Encode'ladık, Activation action'ında da Decode'ladık.
             string encodedToken = HttpUtility.UrlEncode(confirmationToken);
-            string confirmationLink = Url.Action("Activation", "Register", new { userId = appUser.Id, token = encodedToken }, HttpContext.Request.Scheme)!;
+            string encodedUserId = HttpUtility.UrlEncode(appUser.Id);
+            string confirmationLink = Url.Action("Activation", "Register", new { userId = encodedUserId, token = encodedToken }, HttpContext.Request.Scheme)!;
             string message = $@"
   <div style='max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);'>
     <div style='text-align: center;'>
@@ -118,7 +119,8 @@ namespace Project.MVCUI.Controllers
         [HttpGet("{userId}/{token}")]
         public async Task<IActionResult> Activation(string userId, string token)
         {
-            AppUser? appUser = await _userManager.FindByIdAsync(userId);
+            string decodedUserId = HttpUtility.UrlDecode(userId);
+            AppUser? appUser = await _userManager.FindByIdAsync(decodedUserId);
             if (appUser == null)
             {
                 ViewBag.message = "Kullanıcı bulunamadı";
