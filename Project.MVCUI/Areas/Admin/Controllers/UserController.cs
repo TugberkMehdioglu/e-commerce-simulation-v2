@@ -12,7 +12,7 @@ namespace Project.MVCUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("[Area]/[Controller]/[Action]")]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -32,7 +32,8 @@ namespace Project.MVCUI.Areas.Admin.Controllers
                 Id = x.Id,
                 UserName = x.UserName,
                 Email = x.Email,
-                PhoneNumber = x.PhoneNumber
+                PhoneNumber = x.PhoneNumber,
+                EmailConfirmed = x.EmailConfirmed
             }).ToListAsync();
 
             foreach (UserViewModel user in users)
@@ -47,7 +48,7 @@ namespace Project.MVCUI.Areas.Admin.Controllers
         public async Task<IActionResult> AssignRoleToUser(string id)
         {
             AppUser appUser = await _userManager.FindByIdAsync(id);
-            if(appUser == null)
+            if (appUser == null)
             {
                 ModelState.AddModelErrorWithOutKey("Kullanıcı bulunamadı");
                 return View();
@@ -66,6 +67,8 @@ namespace Project.MVCUI.Areas.Admin.Controllers
                     Name = role.Name
                 };
                 if (userRoles.Contains(role.Name)) roleViewModel.Exist = true;
+
+                if (role.Name == "Admin" && appUser.Id == "5c8defd5-91f2-4256-9f16-e7fa7546dec4") continue;
 
                 userRolesViewModel.Add(roleViewModel);
             }
@@ -114,6 +117,28 @@ namespace Project.MVCUI.Areas.Admin.Controllers
             }
 
             return Ok(new { message = "Kullnıcı silindi" });
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ConfirmMail(string id)
+        {
+            AppUser appUser = await _userManager.FindByIdAsync(id);
+
+            bool mailConfirm = await _userManager.IsEmailConfirmedAsync(appUser);
+
+            appUser.EmailConfirmed = mailConfirm == true ? false : true;
+
+            IdentityResult result = await _userManager.UpdateAsync(appUser);
+            if (!result.Succeeded)
+            {
+                TempData["fail"] = result.Errors.Select(x => x.Description);
+                return RedirectToAction(nameof(Index), "User", new { Area = "Admin" });
+            }
+            else
+            {
+                TempData["success"] = "Mail onay değişimi gerçekleşti";
+                return RedirectToAction(nameof(Index), "User", new { Area = "Admin" });
+            }
         }
     }
 }

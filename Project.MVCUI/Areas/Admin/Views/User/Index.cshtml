@@ -31,7 +31,7 @@
     <div class="card-body pt-0">
         <div class="tab-content">
             <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-55d552bf-cdbd-40f9-856d-410188578fda" id="dom-55d552bf-cdbd-40f9-856d-410188578fda">
-                <div id="tableExample2" data-list='{"valueNames":["name","email","phone"],"page":5,"pagination":true}'>
+                <div id="tableExample2" data-list='{"valueNames":["name","email","phone","mailconfirm"],"page":10,"pagination":true}'>
                     <div class="table-responsive scrollbar">
                         <table class="table table-hover table-striped fs--1 mb-0" id="myTable">
                             <thead class="bg-200 text-900 align-middle">
@@ -39,8 +39,9 @@
                                     <th class="sort text-center" data-sort="name">Kullanıcı Adı</th>
                                     <th class="text-center">Roller</th>
                                     <th class="sort text-center" data-sort="email">Email</th>
+                                    <th class="sort text-center" data-sort="mailconfirm">Email Onay</th>
                                     <th class="sort text-center" data-sort="phone">Telefon</th>
-                                    <th class="text-center" colspan="2">İşlemler</th>
+                                    <th class="text-center" colspan="3">İşlemler</th>
                                 </tr>
                             </thead>
                             <tbody class="list">
@@ -56,6 +57,7 @@
                                             }
                                         </td>
                                         <td class="email text-center text-800">@item.Email</td>
+                                        <td class="mailconfirm text-center text-800">@item.EmailConfirmed</td>
                                         <td class="phone text-center text-800">@item.PhoneNumber</td>
                                         <td class="text-center">
                                             <div>
@@ -66,6 +68,8 @@
                                                     <span id="deleteCategoryId" data-id="@item.Id" data-name="@item.UserName" data-bs-toggle="modal" data-bs-target="#modal5">
                                                         <a class="btn p-0 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Kullanıcıyı Sil"><span class="text-800 fas fa-trash-alt"></span></a>
                                                     </span>
+
+                                                    <a class="btn p-0 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Mail onayla/onay kaldır" asp-area="Admin" asp-controller="User" asp-action="ConfirmMail" asp-route-id="@item.Id"><span class="text-800 fas fa-at"></span></a>
                                                 }
                                             </div>
                                         </td>
